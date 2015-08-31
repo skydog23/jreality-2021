@@ -54,7 +54,7 @@ import de.jreality.util.CameraUtility;
  *
  */
 public class Graphics3D {
-	//Viewer viewer;
+	Viewer viewer;
 	double aspectRatio = 1.0;
 	SceneGraphComponent theRoot;
 	SceneGraphPath cameraPath;
@@ -76,6 +76,7 @@ public class Graphics3D {
 	 */
 	public Graphics3D(Viewer v, SceneGraphPath sgp)	{
 	 	this( v.getCameraPath(), sgp, CameraUtility.getAspectRatio(v));
+	 	viewer = v;
 	 }
 	 
 //	 public Graphics3D(SceneGraphPath cp, SceneGraphPath sgp)	{
@@ -123,7 +124,11 @@ public class Graphics3D {
 	 */
 	public double[] getCameraToNDC() {
 		if (cameraPath == null) throw new IllegalStateException("No camera path set for this context");
-		return CameraUtility.getCameraToNDC(camera, aspectRatio);
+		return CameraUtility.getCameraToNDC(camera, getAspectRatio());
+	}
+
+	private double getAspectRatio() {
+		return viewer == null ? aspectRatio : CameraUtility.getAspectRatio(viewer);
 	}
 
 	/**
@@ -194,7 +199,8 @@ public class Graphics3D {
 	public double[] getObjectToNDC() {
 		if (camera == null) 
 			throw new IllegalStateException("No camera for this context");
-		return Rn.times(null,CameraUtility.getCameraToNDC(camera, aspectRatio), getObjectToCamera());
+		return Rn.times(null,CameraUtility.getCameraToNDC(camera, 
+				getAspectRatio()), getObjectToCamera());
 	}
 
 	/**
@@ -203,7 +209,7 @@ public class Graphics3D {
 	public double[] getNDCToObject() {
 		if (camera == null) 
 			throw new IllegalStateException("No camera for this context");
-		return Rn.inverse(null, Rn.times(null, CameraUtility.getCameraToNDC(camera, aspectRatio), getObjectToCamera()));
+		return Rn.inverse(null, Rn.times(null, CameraUtility.getCameraToNDC(camera, getAspectRatio()), getObjectToCamera()));
 	}
 
 	/**

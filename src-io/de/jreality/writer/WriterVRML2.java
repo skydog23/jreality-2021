@@ -421,15 +421,15 @@ public class WriterVRML2{
 		hist=hist3;
 		writeMaterial(typ);
 		hist=hist2;
-		out.println(hist+"texture ");
-		hist=hist3;
 		Texture2D tex=dps.getTexture2d();
 		if (tex!=null&&typ==GeoTyp.TEX_FACE){
+			out.println(hist+"texture ");
+			hist=hist3;
 			writeTexture(tex);
 			hist=hist2;
-			out.println(hist+"textureTransform ");
-			hist=hist3;
 			if(!evaluateTextureMatrix)
+				out.println(hist+"textureTransform ");
+				hist=hist3;
 				writeTextureTransform(tex,typ);
 		}
 		hist=histOld;
@@ -647,10 +647,16 @@ public class WriterVRML2{
 			out.println(hist+"Sphere { radius  1}");
 			if(hasShapeNode) closeShapeNode(histOld);
 		}
+		final Matrix xyz2xzy = MatrixBuilder.euclidean().rotateX(Math.PI/2).getMatrix();
+		final Transformation xyz2xzyT = new Transformation(xyz2xzy.getArray());
 		public void visit(Cylinder c) {//done
 			super.visit(c);
 			if ( !dgs.getShowFaces())	return;
 			String histOld= hist;
+			// have to convert coordinate system: jReality has cyl on z-axis; VRML, on y-axis.
+			out.println(""+hist+"Transform { # "+c.getName());
+			writeTrafo(xyz2xzyT);
+			out.println(hist+"children [");
 			boolean hasShapeNode=tryWriteShapeNode(GeoTyp.FACE,null);
 			out.print(hist+"Cylinder { ");
 			out.print("bottom    FALSE ");
@@ -659,6 +665,8 @@ public class WriterVRML2{
 //			out.print("height  2 ");
 			out.println("}");
 			if(hasShapeNode) closeShapeNode(histOld);
+			out.println(""+hist+spacing+"]");			
+			out.println(""+hist+"}");
 		}
 		public void visit(Geometry g) {//done
 			updateShaders(effApp);

@@ -55,6 +55,7 @@ import de.jreality.geometry.HeightFieldFactory;
 import de.jreality.geometry.Primitives;
 import de.jreality.jogl.shader.DefaultPolygonShader;
 import de.jreality.jogl.shader.Texture2DLoaderJOGL;
+import de.jreality.math.Pn;
 import de.jreality.math.Rn;
 import de.jreality.scene.Appearance;
 import de.jreality.scene.ClippingPlane;
@@ -477,6 +478,8 @@ public class JOGLRendererHelper {
 		} else if (faceColors != null && colorBind != PER_VERTEX) {
 			colorBind = PER_FACE;
 			colorLength = GeometryUtility.getVectorLength(faceColors);
+			double[][] fcd = faceColors.toDoubleArrayArray(null);
+//			System.err.println("draw faces:"+sg.getName()+" fc = \n"+Rn.toString(fcd, 10));
 		} else
 			colorBind = PER_PART;
 		// JOGLConfiguration.theLog.log(Level.INFO,"Color binding is
@@ -498,13 +501,14 @@ public class JOGLRendererHelper {
 			nFiber = GeometryUtility.getVectorLength(faceNormals);
 		} else
 			normalBind = PER_PART;
-		// System.err.println("Geom = "+sg.getName()+" normal length = "+nFiber);
-		jr.renderingState.normals4d = (nFiber == 4);
+//		 System.err.println("Geom = "+sg.getName()+" normal length = "+nFiber)
+		boolean doNormals3 = nFiber == 3 && jr.renderingState.currentMetric == Pn.EUCLIDEAN;
+		jr.renderingState.normals4d = !doNormals3; //jr.renderingState.currentMetric != Pn.EUCLIDEAN; //
 		// HACK!!! make sure the vertex shader knows whether the normals are 4d
 		// or 3d
-		gl.glFogf(GL2.GL_FOG_START, nFiber == 4 ? 0.01f : 0f);
-		// if (nFiber == 4)
-		// System.err.println("Rendering 4d normals for "+sg.getName());
+		gl.glFogf(GL2.GL_FOG_START, jr.renderingState.normals4d ? 0.01f : 0f);
+//		if (nFiber == 4)
+//		 System.err.println("Rendering 4d normals for "+sg.getName());
 		DoubleArray da = null;
 		boolean isQuadMesh = false;
 		boolean isRegularDomainQuadMesh = false;
@@ -556,23 +560,23 @@ public class JOGLRendererHelper {
 						if (normalBind == PER_FACE) {
 							if (incr == 0 && j != maxFU) { // ) { //
 								da = faceNormals.item(fnn).toDoubleArray();
-								if (nFiber == 3)
+								if (doNormals3)
 									gl.glNormal3d(da.getValueAt(0),
 											da.getValueAt(1), da.getValueAt(2));
 								else
 									gl.glMultiTexCoord4d(GL.GL_TEXTURE0 + 3,
 											da.getValueAt(0), da.getValueAt(1),
-											da.getValueAt(2), da.getValueAt(3));
+											da.getValueAt(2),(nFiber == 4) ? da.getValueAt(3) : 0.0);
 							}
 						} else if (normalBind == PER_VERTEX) {
 							da = vertexNormals.item(vnn).toDoubleArray();
-							if (nFiber == 3)
+							if (doNormals3)
 								gl.glNormal3d(da.getValueAt(0),
 										da.getValueAt(1), da.getValueAt(2));
 							else
 								gl.glMultiTexCoord4d(GL.GL_TEXTURE0 + 3,
 										da.getValueAt(0), da.getValueAt(1),
-										da.getValueAt(2), da.getValueAt(3));
+										da.getValueAt(2), (nFiber == 4) ? da.getValueAt(3) : 0.0);
 						}
 						if (colorBind == PER_FACE) {
 							if (incr == 0) {
@@ -654,13 +658,13 @@ public class JOGLRendererHelper {
 				}
 				if (normalBind == PER_FACE) {
 					da = faceNormals.item(i).toDoubleArray();
-					if (nFiber == 3)
+					if (doNormals3)
 						gl.glNormal3d(da.getValueAt(0), da.getValueAt(1),
 								da.getValueAt(2));
-					else
+					else 
 						gl.glMultiTexCoord4d(GL.GL_TEXTURE0 + 3,
 								da.getValueAt(0), da.getValueAt(1),
-								da.getValueAt(2), da.getValueAt(3));
+								da.getValueAt(2), (nFiber == 4) ? da.getValueAt(3) : 0.0);
 					// gl.glNormal3d(da.getValueAt(0), da.getValueAt(1), da
 					// .getValueAt(2));
 				}
@@ -673,13 +677,13 @@ public class JOGLRendererHelper {
 					int k = tf.getValueAt(j);
 					if (normalBind == PER_VERTEX) {
 						da = vertexNormals.item(k).toDoubleArray();
-						if (nFiber == 3)
+						if (doNormals3)
 							gl.glNormal3d(da.getValueAt(0), da.getValueAt(1),
 									da.getValueAt(2));
 						else
 							gl.glMultiTexCoord4d(GL.GL_TEXTURE0 + 3,
 									da.getValueAt(0), da.getValueAt(1),
-									da.getValueAt(2), da.getValueAt(3));
+									da.getValueAt(2), (nFiber == 4) ? da.getValueAt(3) : 0.0);
 						// gl.glNormal3d(da.getValueAt(0), da.getValueAt(1), da
 						// .getValueAt(2));
 					}
