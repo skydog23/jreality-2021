@@ -16,11 +16,13 @@ import org.python.util.PythonInterpreter;
 
 import de.jreality.plugin.JRViewer;
 import de.jreality.plugin.basic.View;
+import de.jreality.ui.viewerapp.SelectionEvent;
+import de.jreality.ui.viewerapp.SelectionListener;
 import de.jtem.jrworkspace.plugin.Controller;
 import de.jtem.jrworkspace.plugin.sidecontainer.SideContainerPerspective;
 import de.jtem.jrworkspace.plugin.sidecontainer.template.ShrinkPanelPlugin;
 
-public class PythonConsole extends ShrinkPanelPlugin implements FocusListener {
+public class PythonConsole extends ShrinkPanelPlugin implements FocusListener, SelectionListener {
 
 	private Controller
 		controller = null;
@@ -70,7 +72,7 @@ public class PythonConsole extends ShrinkPanelPlugin implements FocusListener {
 		interpreter.set("textpane", textPane);
 		interpreter.exec("vars = {'C' : c}");
 		interpreter.exec("from console import Console");
-		interpreter.exec("Console(vars, textpane)");
+		interpreter.exec("console = Console(vars, textpane)");
 		consoleBooted = true;
 	}
 	
@@ -88,6 +90,9 @@ public class PythonConsole extends ShrinkPanelPlugin implements FocusListener {
 		super.install(c);
 		this.controller = c;
 		createLayout();
+		c.getPlugin(View.class).getSelectionManager().addSelectionListener(this);
+//		System.setOut(new PrintStream(new ConsolePrintStream(System.out), true));
+//		System.setErr(new PrintStream(new ConsolePrintStream(System.err), true));
 	}
 	
 	public PythonInterpreter getInterpreter() {
@@ -102,7 +107,7 @@ public class PythonConsole extends ShrinkPanelPlugin implements FocusListener {
 		try {
 			PythonInterpreter interpreter = new PythonInterpreter();
 			interpreter.set("__name__", "__main__");
-			URI consoleURI = URI.create("jar:file:lib/jython/console.jar!/console.py");
+			URI consoleURI = URI.create("jar:file:lib/jython_console.jar!/console.py");
 			interpreter.execfile(consoleURI.toURL().openStream());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -113,5 +118,42 @@ public class PythonConsole extends ShrinkPanelPlugin implements FocusListener {
 	public Class<? extends SideContainerPerspective> getPerspectivePluginClass() {
 		return View.class;
 	}
+
+	@Override
+	public void selectionChanged(SelectionEvent e) {
+		if (interpreter == null) {
+			return;
+		}
+		interpreter.set("n", e.getSelection().getLastNode());
+		interpreter.exec("console.locals['N'] = n");
+		interpreter.exec("console.printResult('N')");
+		interpreter.exec("console.enter()");
+	}
+	
+//	private class ConsolePrintStream extends ByteArrayOutputStream {
+//
+//		private PrintStream	
+//			forward = null;
+//		
+//		public ConsolePrintStream(PrintStream forward) {
+//			this.forward = forward;
+//		}
+//		
+//		@Override
+//		public void flush() throws IOException {
+//			super.flush();
+//			String msg = toString();
+//			if (interpreter != null) {
+//				msg = msg.replaceAll("\n", "\\\\n");
+//				String exec = "console.write(\"" + msg + "\")";
+//				interpreter.exec(exec);
+//			}
+//			if (forward != null) {
+//				forward.print(msg);
+//			}
+//			super.reset();
+//		}
+//		
+//	}
 	
 }

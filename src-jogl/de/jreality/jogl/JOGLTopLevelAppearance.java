@@ -6,6 +6,7 @@ import static de.jreality.shader.CommonAttributes.ONE_TEXTURE2D_PER_IMAGE;
 import static de.jreality.shader.CommonAttributes.RENDER_S3;
 import static de.jreality.shader.CommonAttributes.SKY_BOX;
 import static de.jreality.shader.CommonAttributes.USE_OLD_TRANSPARENCY;
+
 import de.jreality.scene.Appearance;
 import de.jreality.scene.data.AttributeEntityUtility;
 import de.jreality.scene.event.AppearanceEvent;

@@ -42,8 +42,8 @@ package de.jreality.jogl;
 import java.util.WeakHashMap;
 import java.util.logging.Level;
 
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
 
 import de.jreality.geometry.SphereUtility;
 import de.jreality.scene.IndexedFaceSet;

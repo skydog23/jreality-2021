@@ -2,7 +2,7 @@ package de.jreality.jogl3.helper;
 
 import java.util.List;
 
-import javax.media.opengl.GL3;
+import com.jogamp.opengl.GL3;
 
 import de.jreality.jogl3.JOGLSceneGraphComponentInstance.RenderableObject;
 import de.jreality.jogl3.glsl.GLShader;

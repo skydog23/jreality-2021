@@ -2,7 +2,7 @@ package de.jreality.jogl3.helper;
 
 import java.nio.FloatBuffer;
 
-import javax.media.opengl.GL3;
+import com.jogamp.opengl.GL3;
 
 import de.jreality.jogl3.light.JOGLDirectionalLightEntity;
 import de.jreality.jogl3.light.JOGLDirectionalLightInstance;

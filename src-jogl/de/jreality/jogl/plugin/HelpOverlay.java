@@ -9,13 +9,13 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
-import javax.media.opengl.GLAutoDrawable;
-import javax.media.opengl.GLEventListener;
-import javax.media.opengl.glu.GLU;
 import javax.swing.KeyStroke;
 
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLEventListener;
+import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.util.gl2.GLUT;
 
 import de.jreality.jogl.JOGLViewer;
@@ -69,8 +69,8 @@ public class HelpOverlay implements GLEventListener {
 		gl.glPushMatrix();
 		gl.glLoadIdentity();
 
-		Dimension size = new Dimension(glDrawable.getWidth(),
-				glDrawable.getHeight());
+		Dimension size = new Dimension(glDrawable.getSurfaceWidth(),
+				glDrawable.getSurfaceHeight());
 		gl.glViewport(0, 0, size.width, size.height);
 
 		// Store enabled state and disable lighting, texture mapping and the

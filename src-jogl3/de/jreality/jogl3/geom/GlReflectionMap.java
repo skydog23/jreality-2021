@@ -1,6 +1,6 @@
 package de.jreality.jogl3.geom;
 
-import javax.media.opengl.GL3;
+import com.jogamp.opengl.GL3;
 
 import de.jreality.jogl3.JOGLTexture2D;
 import de.jreality.jogl3.glsl.GLShader;

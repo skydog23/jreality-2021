@@ -50,9 +50,9 @@ import java.nio.DoubleBuffer;
 import java.nio.IntBuffer;
 import java.util.WeakHashMap;
 
-import javax.media.opengl.DebugGL2;
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.DebugGL2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
 
 import de.jreality.geometry.GeometryUtility;
 import de.jreality.jogl.JOGLRenderer;
@@ -361,6 +361,7 @@ public class GlslPolygonShader extends AbstractPrimitiveShader implements
 			normalBind = PER_FACE;
 		} else
 			normalBind = PER_PART;
+		System.err.println("in GlslPolygonShader: donormals4 = "+doNormals4);
 		renderFaces(sg, alpha, gl, false, colorBind, normalBind, colorLength,
 				vertices, vertexNormals, faceNormals, vertexColors, faceColors,
 				texCoords0, texCoords1, texCoords2, lightMapCoords,

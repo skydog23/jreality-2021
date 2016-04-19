@@ -57,12 +57,13 @@ import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 
-import javax.media.opengl.DefaultGLCapabilitiesChooser;
-import javax.media.opengl.GLAutoDrawable;
-import javax.media.opengl.GLCapabilities;
-import javax.media.opengl.GLContext;
-import javax.media.opengl.GLEventListener;
 import javax.swing.JPanel;
+
+import com.jogamp.opengl.DefaultGLCapabilitiesChooser;
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.GLContext;
+import com.jogamp.opengl.GLEventListener;
 
 import de.jreality.math.Matrix;
 import de.jreality.math.MatrixBuilder;
@@ -95,7 +96,7 @@ abstract public class AbstractViewer implements de.jreality.scene.Viewer,
 	public static final int HARDWARE_BUFFER_STEREO = 4;
 	public static final int LEFT_EYE_STEREO = 5; // <-- New
 	public static final int RIGHT_EYE_STEREO = 6; // <-- New
-	public static final int STEREO_TYPES = 7;
+	public static final int STEREO_TYPES = 4;
 	protected int stereoType = CROSS_EYED_STEREO;
 	protected boolean debug = false;
 

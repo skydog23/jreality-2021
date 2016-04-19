@@ -54,6 +54,10 @@
 	<property name="jni-win32" location="jni/win32" />
 	<property name="jni-win64" location="jni/win64" />
 
+	<path id="jre6.libraryclasspath">
+		<pathelement location="jre6/rt.jar"/>
+	</path>	
+	
 	<path id="backends-share.classpath">
 		<fileset dir="dist">
 			<include name="jReality-core.jar"/>
@@ -67,6 +71,7 @@
 		<fileset dir="lib">
 			<include name="jinput.jar"/>
 			<include name="netutil.jar" />
+			<include name="hidapi-1.1.jar" />
 		</fileset>
 	</path>
 
@@ -100,8 +105,9 @@
 		<path refid="backend.classpath"/>
 		<fileset dir="lib">
 			<include name="antlr-3.4-complete.jar"/>
-			<include name="xstream-1.4.2.jar"/>
-			<include name="xpp3-1.1.4c.jar"/>
+			<include name="xstream-1.4.7.jar"/>
+			<include name="xpp3_min-1.1.4c.jar"/>
+			<include name="xmlpull-1.1.3.1.jar"/>
 			<include name="itextpdf-5.3.2.jar"/>
 		</fileset>
 		<fileset dir="dist">
@@ -156,7 +162,7 @@
 			<include name="*.jar"/>
 		</fileset>
 		<fileset dir="lib">
-			<include name="*.jar"/>
+			<include name="**/*.jar"/>
 		</fileset>
 	</path>
 
@@ -169,7 +175,7 @@
 	
 	<path id="jogl.classpath">
 		<path refid="backend.classpath"/>
-		<fileset dir="lib">
+		<fileset dir="lib/jogamp">
 			<include name="jogl-all.jar"/>
 			<include name="gluegen-rt.jar"/>
 		</fileset>
@@ -177,7 +183,7 @@
 	
 	<path id="jogl3.classpath">
 		<path refid="backend.classpath"/>
-		<fileset dir="lib">
+		<fileset dir="lib/jogamp">
 			<include name="jogl-all.jar"/>
 			<include name="gluegen-rt.jar"/>
 		</fileset>
@@ -210,7 +216,7 @@
 			<include name="alex.jar"/>
 			<include name="discreteGroup.jar"/>
 			<include name="junit.jar"/>
-			<include name="jogl-all.jar"/>
+			<include name="jogamp/jogl-all.jar"/>
 		</fileset>
 		<fileset dir="dist">
 			<include name="jReality-io.jar"/>
@@ -234,7 +240,7 @@
 		<path refid="backend.classpath"/>
 		<fileset dir="lib">
 			<include name="smrj.jar"/>
-			<include name="jogl-all.jar"/>
+			<include name="jogamp/jogl-all.jar"/>
 		</fileset>
 		<fileset dir="dist">
 			<include name="jReality-io.jar"/>
@@ -250,11 +256,11 @@
 		<path refid="backend.classpath"/>
 		<fileset dir="lib">
 			<include name="smrj.jar"/>
-			<include name="jogl-all.jar"/>
+			<include name="jogamp/jogl-all.jar"/>
 			<include name="jjack_min.jar"/>
 			<include name="colorpicker.jar"/>
 			<include name="beans.jar"/>
-			<include name="xstream-1.4.2.jar"/>
+			<include name="xstream-1.4.7.jar"/>
 			<include name="jrworkspace.jar"/>
 			<include name="jython-standalone-2.5.3.jar"/>
 		</fileset>
@@ -278,7 +284,7 @@
         <fileset dir="lib">
             <include name="jrworkspace.jar" />
         	<include name="beans.jar" />
-            <include name="jogl-all.jar" />
+            <include name="jogamp/jogl-all.jar" />
             <include name="numericalMethods.jar" />
         </fileset>
 	</path>
@@ -296,7 +302,7 @@
 		<mkdir dir="${build}/core" />
 		<javac source="${source}" target="${target}" excludesfile="excludes.txt" 
 			srcdir="${core}" destdir="${build}/core" 
-			debug="true" includeantruntime="false">
+			debug="true" includeantruntime="false" bootclasspathref="jre6.libraryclasspath">
 		</javac>
 		<copy todir="${build}/core">
 			<fileset dir="${core}">
@@ -311,7 +317,7 @@
 		<mkdir dir="${build}/tools" />
 		<javac source="${source}" target="${target}" excludesfile="excludes.txt" 
 			srcdir="${tools}" destdir="${build}/tools" 
-			debug="true" includeantruntime="false">
+			debug="true" includeantruntime="false" bootclasspathref="jre6.libraryclasspath">
 			<classpath refid="tools.classpath"/>
 		</javac>
 		<copy todir="${build}/tools">
@@ -327,7 +333,7 @@
 		<mkdir dir="${build}/audio" />
 		<javac source="${source}" target="${target}" excludesfile="excludes.txt" 
 			srcdir="${audio}" destdir="${build}/audio" 
-			debug="true" includeantruntime="false">
+			debug="true" includeantruntime="false" bootclasspathref="jre6.libraryclasspath">
 			<classpath refid="audio.classpath"/>
 		</javac>
 		<jar jarfile="${dist}/jReality-audio.jar" basedir="${build}/audio" />
@@ -337,7 +343,7 @@
 		<mkdir dir="${build}/backends-share" />
 		<javac source="${source}" target="${target}" excludesfile="excludes.txt" 
 			srcdir="${backends-share}" destdir="${build}/backends-share" 
-			debug="true" includeantruntime="false">
+			debug="true" includeantruntime="false" bootclasspathref="jre6.libraryclasspath">
 			<classpath refid="backends-share.classpath"/>
 		</javac>
 		<jar jarfile="${dist}/jReality-backends-share.jar" basedir="${build}/backends-share" />
@@ -350,7 +356,7 @@
         <mkdir dir="${build}/swing" />
         <javac source="${source}" target="${target}" excludesfile="excludes.txt" 
         	srcdir="${swing}" destdir="${build}/swing" 
-        	debug="true" includeantruntime="false">
+        	debug="true" includeantruntime="false" bootclasspathref="jre6.libraryclasspath">
         	<exclude name="**/Fake*5.java" if="java6"/>
         	<exclude name="**/Fake*6.java" if="java5"/>
         	<classpath refid="swing.classpath"/>
@@ -393,7 +399,7 @@
 		<mkdir dir="${build}/ui" />
 		<javac source="${source}" target="${target}" excludesfile="excludes.txt" 
 			srcdir="${ui}" destdir="${build}/ui" 
-			debug="true" includeantruntime="false">
+			debug="true" includeantruntime="false" bootclasspathref="jre6.libraryclasspath">
 			<classpath refid="ui.classpath"/>
 		</javac>
 		<copy todir="${build}/ui">
@@ -408,7 +414,7 @@
 		<mkdir dir="${build}/vr" />
 		<javac source="${source}" target="${target}" excludesfile="excludes.txt" 
 			srcdir="${vr}" destdir="${build}/vr" 
-			debug="true" includeantruntime="false">
+			debug="true" includeantruntime="false" bootclasspathref="jre6.libraryclasspath">
 			<classpath refid="vr.classpath"/>
 		</javac>
 		<copy todir="${build}/vr">
@@ -423,7 +429,7 @@
 		<mkdir dir="${build}/examples" />
 		<javac source="${source}" target="${target}" excludesfile="excludes.txt" 
 			srcdir="${examples}" destdir="${build}/examples" 
-			debug="true" includeantruntime="false">
+			debug="true" includeantruntime="false" bootclasspathref="jre6.libraryclasspath">
 			<classpath refid="examples.classpath"/>
 		</javac>
 		<copy todir="${build}/examples">
@@ -439,7 +445,7 @@
 		<mkdir dir="${build}/proxies" />
 		<javac source="${source}" target="${target}" excludesfile="excludes.txt" 
 			srcdir="${proxies}" destdir="${build}/proxies" 
-			debug="true" includeantruntime="false">
+			debug="true" includeantruntime="false" bootclasspathref="jre6.libraryclasspath">
 			<classpath refid="proxies.classpath"/>
 		</javac>
 		<jar jarfile="${dist}/jReality-proxies.jar" basedir="${build}/proxies" />
@@ -449,7 +455,7 @@
 		<mkdir dir="${build}/soft" />
 		<javac source="${source}" target="${target}" excludesfile="excludes.txt" 
 			srcdir="${soft}:${soft-new}" destdir="${build}/soft" 
-			debug="true" includeantruntime="false">
+			debug="true" includeantruntime="false" bootclasspathref="jre6.libraryclasspath">
 			<classpath refid="backend.classpath"/>
 		</javac>
 		<jar jarfile="${dist}/jReality-soft.jar" basedir="${build}/soft" />
@@ -459,7 +465,7 @@
 		<mkdir dir="${build}/jogl" />
 		<javac source="${source}" target="${target}" excludesfile="excludes.txt" 
 			srcdir="${jogl}"  destdir="${build}/jogl" 
-			debug="true" includeantruntime="false">
+			debug="true" includeantruntime="false" bootclasspathref="jre6.libraryclasspath">
 			<classpath refid="jogl.classpath"/>
 		</javac>
 		<copy todir="build/jogl">
@@ -476,7 +482,7 @@
 		<mkdir dir="${build}/jogl3" />
 		<javac source="${source}" target="${target}" excludesfile="excludes.txt" 
 			srcdir="${jogl3}"  destdir="${build}/jogl3" 
-			debug="true" includeantruntime="false">
+			debug="true" includeantruntime="false" bootclasspathref="jre6.libraryclasspath">
 			<classpath refid="jogl3.classpath"/>
 		</javac>
 		<copy todir="build/jogl3">
@@ -493,7 +499,7 @@
 		<mkdir dir="${build}/gpgpu" />
 		<javac source="${source}" target="${target}" excludesfile="excludes.txt" 
 			srcdir="${gpgpu}"  destdir="${build}/gpgpu" 
-			debug="true" includeantruntime="false">
+			debug="true" includeantruntime="false" bootclasspathref="jre6.libraryclasspath">
 			<classpath refid="gpgpu.classpath"/>
 		</javac>
 		<copy todir="build/gpgpu">
@@ -510,7 +516,7 @@
 		<mkdir dir="${build}/swt" />
 		<javac source="${source}" target="${target}" excludesfile="excludes.txt" 
 			srcdir="${swt}"  destdir="${build}/swt" 
-			debug="true" includeantruntime="false">
+			debug="true" includeantruntime="false" bootclasspathref="jre6.libraryclasspath">
 			<classpath refid="swt.classpath"/>
 		</javac>
 		<jar jarfile="${dist}/jReality-swt.jar" basedir="${build}/swt" />
@@ -520,7 +526,7 @@
 		<mkdir dir="${build}/renderman" />
 		<javac source="${source}" target="${target}" excludesfile="excludes.txt" 
 			srcdir="${renderman}" destdir="${build}/renderman" 
-			debug="true" includeantruntime="false">
+			debug="true" includeantruntime="false" bootclasspathref="jre6.libraryclasspath">
 			<classpath refid="backend.classpath"/>
 		</javac>
 		<jar jarfile="${dist}/jReality-renderman.jar" basedir="${build}/renderman" />
@@ -530,7 +536,7 @@
 		<mkdir dir="${build}/sunflow" />
 		<javac source="${source}" target="${target}" excludesfile="excludes.txt" 
 			srcdir="${sunflow}" destdir="${build}/sunflow" 
-			debug="true" includeantruntime="false">
+			debug="true" includeantruntime="false" bootclasspathref="jre6.libraryclasspath">
 			<classpath refid="sunflow.classpath"/>
 		</javac>
 		<jar jarfile="${dist}/jReality-sunflow.jar" basedir="${build}/sunflow" />
@@ -540,7 +546,7 @@
 		<mkdir dir="${build}/portal" />
 		<javac source="${source}" target="${target}" excludesfile="excludes.txt" 
 			srcdir="${portal}" destdir="${build}/portal" 
-			debug="true" includeantruntime="false">
+			debug="true" includeantruntime="false" bootclasspathref="jre6.libraryclasspath">
 			<classpath refid="portal.classpath"/>
 		</javac>
 		<jar jarfile="${dist}/jReality-portal.jar" basedir="${build}/portal" />
@@ -551,7 +557,7 @@
 		<mkdir dir="${build}/plugin" />
 		<javac source="${source}" target="${target}" excludesfile="excludes.txt" 
 			srcdir="${plugin}" destdir="${build}/plugin" 
-			debug="true" includeantruntime="false">
+			debug="true" includeantruntime="false" bootclasspathref="jre6.libraryclasspath">
 			<classpath refid="plugin.classpath"/>
 		</javac>
 		<copy todir="${build}/plugin">
@@ -566,7 +572,7 @@
 		<mkdir dir="${build}/tutorial" />
 		<javac source="${source}" target="${target}" excludesfile="excludes.txt" 
 			srcdir="${tutorial}" destdir="${build}/tutorial" 
-			debug="true" includeantruntime="false">
+			debug="true" includeantruntime="false" bootclasspathref="jre6.libraryclasspath">
 			<classpath refid="tutorial.classpath"/>
 		</javac>
 		<copy todir="${build}/tutorial">
@@ -766,8 +772,9 @@
 		<copy file="${lib}/jrworkspace.jar" todir="${release_dir}/tmp/lib" />
 		<copy file="${lib}/NetUtil.jar" todir="${release_dir}/tmp/lib" />
 		<copy file="${lib}/sunflow.jar" todir="${release_dir}/tmp/lib" />
-		<copy file="${lib}/xstream-1.4.2.jar" todir="${release_dir}/tmp/lib" />
-		<copy file="${lib}/xpp3-1.1.4c.jar" todir="${release_dir}/tmp/lib" />
+		<copy file="${lib}/xstream-1.4.7.jar" todir="${release_dir}/tmp/lib" />
+		<copy file="${lib}/xpp3_min-1.1.4c.jar" todir="${release_dir}/tmp/lib" />
+		<copy file="${lib}/xmlpull-1.1.3.1.jar" todir="${release_dir}/tmp/lib" />
 		<copy todir="${release_dir}/tmp/lib">
 			<fileset dir="3rd-party" />
 		</copy>

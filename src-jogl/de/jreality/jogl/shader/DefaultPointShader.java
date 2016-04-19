@@ -64,8 +64,8 @@ import static de.jreality.shader.CommonAttributes.TRANSPARENCY_DEFAULT;
 
 import java.awt.Color;
 
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
 
 import de.jreality.geometry.GeometryUtility;
 import de.jreality.jogl.JOGLConfiguration;
@@ -401,7 +401,7 @@ public class DefaultPointShader extends AbstractPrimitiveShader implements
 				continue;
 			if (ra != null) {
 				double radius = ra.getValueAt(i);
-				scale[0] = scale[5] = scale[10] = pointRadius * radius;
+				scale[0] = scale[5] = scale[10] = radiiFactor * pointRadius * radius;
 			}
 			gl.glPushMatrix();
 			P3.makeTranslationMatrix(mat, transVec, sig);

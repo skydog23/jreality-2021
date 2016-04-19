@@ -72,6 +72,7 @@ public class CameraMenu extends Plugin {
 		final JMenu stereoTypesMenu = new JMenu("StereoType");
 		cameraMenu.add(new JMenuItem(new ToggleStereo("Toggle Stereo", viewer) {
 			private static final long serialVersionUID = 1L;
+			@Override
 			public void actionPerformed(ActionEvent e) {
 			    super.actionPerformed(e);
 				Camera camera = CameraUtility.getCamera(viewer);
@@ -90,6 +91,7 @@ public class CameraMenu extends Plugin {
 		JRadioButtonMenuItem b = new JRadioButtonMenuItem("CROSS_EYED_STEREO");
 		b.setSelected(true);
 		b.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Viewer v = viewer.getCurrentViewer();
 				((de.jreality.jogl.JOGLViewer) v).setStereoType(0);
@@ -100,6 +102,7 @@ public class CameraMenu extends Plugin {
 		
 		b = new JRadioButtonMenuItem("RED_BLUE_STEREO");
 		b.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Viewer v = viewer.getCurrentViewer();
 				((de.jreality.jogl.JOGLViewer) v).setStereoType(1);
@@ -110,6 +113,7 @@ public class CameraMenu extends Plugin {
 		
 		b = new JRadioButtonMenuItem("RED_GREEN_STEREO");
 		b.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Viewer v = viewer.getCurrentViewer();
 				((de.jreality.jogl.JOGLViewer) v).setStereoType(2);
@@ -120,6 +124,7 @@ public class CameraMenu extends Plugin {
 		
 		b = new JRadioButtonMenuItem("RED_CYAN_STEREO");
 		b.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Viewer v = viewer.getCurrentViewer();
 				((de.jreality.jogl.JOGLViewer) v).setStereoType(3);
@@ -147,7 +152,7 @@ public class CameraMenu extends Plugin {
 	}
 
 	
-	private void setZoomEnabled(boolean enable) {
+	public void setZoomEnabled(boolean enable) {
 		if (scene != null) {
 			scene.getSceneRoot().removeTool(zoomTool);
 			if (enable) {
@@ -157,7 +162,7 @@ public class CameraMenu extends Plugin {
 		zoomToolAction.setSelected(enable);
 	}
 	
-	private boolean isZoomEnabled() {
+	public boolean isZoomEnabled() {
 		return zoomToolAction.isSelected();
 	}
 	

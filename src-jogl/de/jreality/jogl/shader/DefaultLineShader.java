@@ -46,8 +46,8 @@ import static de.jreality.shader.CommonAttributes.USE_GLSL;
 
 import java.awt.Color;
 
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
 
 import de.jreality.geometry.FrameFieldType;
 import de.jreality.geometry.IndexedLineSetUtility;

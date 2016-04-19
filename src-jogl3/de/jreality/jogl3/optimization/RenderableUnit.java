@@ -5,14 +5,13 @@ import java.util.LinkedList;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-import javax.media.opengl.GL3;
+import com.jogamp.opengl.GL3;
 
 import de.jreality.jogl3.GlTexture;
 import de.jreality.jogl3.JOGLRenderState;
 import de.jreality.jogl3.JOGLSceneGraphComponentInstance.RenderableObject;
 import de.jreality.jogl3.geom.GlReflectionMap;
 import de.jreality.jogl3.geom.JOGLFaceSetInstance;
-import de.jreality.jogl3.geom.JOGLGeometryInstance.GlUniform;
 import de.jreality.jogl3.geom.JOGLGeometryInstance.GlUniformInt;
 import de.jreality.jogl3.geom.JOGLGeometryInstance.GlUniformMat4;
 import de.jreality.jogl3.shader.ShaderVarHash;
@@ -83,20 +82,20 @@ public class RenderableUnit {
 		
 		for(JOGLFaceSetInstance fsi : setA){
 			if(null == registered.get(fsi)){
-				System.err.println("killing");
+				System.err.println("killing from RenderableUnit no " + this.toString());
 				Instance ins = instances.get(fsi);
 				ins.collection.kill(ins);
 				instances.remove(fsi);
 			}else{
 				if(fsi.eap==null){
-					System.err.println("killing");
+					System.err.println("killing from RenderableUnit no " + this.toString());
 					Instance ins = instances.get(fsi);
 					ins.collection.kill(ins);
 					instances.remove(fsi);
 				}else{
 					boolean visible = (boolean)fsi.eap.getAttribute(ShaderUtility.nameSpace(CommonAttributes.POLYGON_SHADER, CommonAttributes.FACE_DRAW), CommonAttributes.FACE_DRAW_DEFAULT);
 					if(!visible){
-						System.err.println("killing");
+						System.err.println("killing from RenderableUnit no " + this.toString());
 						Instance ins = instances.get(fsi);
 						ins.collection.kill(ins);
 						instances.remove(fsi);
@@ -125,16 +124,21 @@ public class RenderableUnit {
 			if(instances.get(fsi) == null){
 				//in fact it's new
 				newSet.add(f);
-				System.out.println("adding to new set");
+				System.out.println("adding to new set of RenderableUnit no " + this.toString());
 			}else if(f.geom.oChangedLength()){
 				//is old, but changed its length
 				lengthSet.add(f);
-				System.out.println("adding to oChLength set");
-			}else if(f.geom.oChangedPositionsOrAttributes()){
+//				System.out.println("adding to oChLength set");
+			}else if(f.geom.oChangedPositions()){
 				//changed only positions or attributes
 				posASet.add(f);
-				instances.get(fsi).upToDate = false;
-				System.out.println("adding to oChPosA set");
+				instances.get(fsi).posUpToDate = false;
+//				System.out.println("adding to oChPosA set");
+			}else if(f.geom.oChangedAttributes()){
+				//changed only positions or attributes
+				posASet.add(f);
+				instances.get(fsi).appChanged = true;
+//				System.out.println("adding to oChPosA set");
 			}else{
 				//nothing changed, needs not be touched if not neccessary
 				//do nothing here!
@@ -212,7 +216,7 @@ public class RenderableUnit {
 		
 		//if newSet not empty yet, create new insColl:
 		while(newSet.size() > 0){
-			System.out.println("- adding new InstanceCollection to this RU");
+//			System.out.println("- adding new InstanceCollection to this RU");
 			
 			InstanceCollection currentCollection = new InstanceCollection(shader);
 			currentCollection.init(gl);

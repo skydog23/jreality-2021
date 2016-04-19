@@ -4,7 +4,7 @@ import static de.jreality.shader.CommonAttributes.POLYGON_SHADER;
 
 import java.io.IOException;
 
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 import de.jreality.jogl.JOGLRenderer;
 import de.jreality.jogl.JOGLRenderingState;

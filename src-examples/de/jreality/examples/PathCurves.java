@@ -40,8 +40,8 @@
 
 package de.jreality.examples;
 
-import javax.media.opengl.GL;
-import javax.media.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GLAutoDrawable;
 
 import de.jreality.jogl.AbstractCalculation;
 import de.jreality.jogl.GpgpuUtility;

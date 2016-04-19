@@ -41,7 +41,7 @@ package de.jreality.jogl.shader;
 
 import java.util.logging.Level;
 
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 import de.jreality.geometry.IndexedFaceSetUtility;
 import de.jreality.jogl.JOGLConfiguration;
@@ -69,7 +69,7 @@ public class ImplodePolygonShader extends DefaultPolygonShader {
 		super.setFromEffectiveAppearance(eap, name);
 		implodeFactor = eap.getAttribute(
 				ShaderUtility.nameSpace(name, "implodeFactor"), implodeFactor);
-		System.err.println("implode factor = " + implodeFactor);
+//		System.err.println("implode factor = " + implodeFactor);
 	}
 
 	public double getImplodeFactor() {

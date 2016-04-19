@@ -1,6 +1,6 @@
 package de.jreality.jogl.shader;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 
 import de.jreality.jogl.JOGLRenderer;
 import de.jreality.jogl.JOGLRenderingState;

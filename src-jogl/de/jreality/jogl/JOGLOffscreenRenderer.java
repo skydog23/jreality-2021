@@ -7,14 +7,12 @@ import java.io.File;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
-import java.util.logging.Level;
 
-import javax.media.opengl.GLAutoDrawable;
-import javax.media.opengl.GLCapabilities;
-import javax.media.opengl.GLDrawableFactory;
-import javax.media.opengl.GLPbuffer;
-import javax.media.opengl.GLProfile;
-
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.GLDrawableFactory;
+import com.jogamp.opengl.GLOffscreenAutoDrawable;
+import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.util.awt.ImageUtil;
 
 import de.jreality.math.Matrix;
@@ -25,7 +23,7 @@ import de.jreality.util.ImageUtility;
 
 public class JOGLOffscreenRenderer {
 
-	transient private GLPbuffer offscreenPBuffer;
+	transient private GLOffscreenAutoDrawable offscreenPBuffer;
 	transient private Buffer offscreenBuffer;
 	BufferedImage offscreenImage, bi;
 	boolean preMultiplied = false; // not sure about this!
@@ -55,7 +53,7 @@ public class JOGLOffscreenRenderer {
 		return renderOffscreen(null, imageWidth, imageHeight, aa, canvas);
 	}
 
-	HashMap<Long, GLPbuffer> pbuffers = new HashMap<Long, GLPbuffer>();
+	HashMap<Long, GLOffscreenAutoDrawable> pbuffers = new HashMap<Long, GLOffscreenAutoDrawable>();
 	Boolean useFBO = true;
 	JOGLFBO joglFBO = null, joglFBOSlow;
 	int[] fbo = { -1 }, rbuffer = { -1 }, cbuffer = { -1 }, txt = { -1 },
@@ -107,21 +105,21 @@ public class JOGLOffscreenRenderer {
 			jr.setFboMode(true);
 			jr.setAlternateCameraPath(cp);
 			jr.theViewer.render();
-			// canvas.display();
 			dst = joglFBOSlow.getImage();
 			jr.setAlternateCameraPath(null);
 			jr.setFboMode(false);
 		} else { // use pbuffers
 			jr.offscreenMode = true;
-			if (!GLDrawableFactory.getFactory(canvas.getGLProfile())
-					.canCreateGLPbuffer(
-							canvas.getNativeSurface()
-									.getGraphicsConfiguration().getScreen()
-									.getDevice(), canvas.getGLProfile())) {
-				JOGLConfiguration.getLogger().log(Level.WARNING,
-						"PBuffers not supported");
-				return null;
-			}
+			//TODO messed up with updates
+//			if (!GLDrawableFactory.getFactory(canvas.getGLProfile())
+//					.canCreateGLPbuffer(
+//							canvas.getNativeSurface()
+//									.getGraphicsConfiguration().getScreen()
+//									.getDevice())) {
+//				JOGLConfiguration.getLogger().log(Level.WARNING,
+//						"PBuffers not supported");
+//				return null;
+//			}
 
 			double oldaa = jr.renderingState.globalAntiAliasingFactor;
 			jr.renderingState.globalAntiAliasingFactor = aa;
@@ -152,10 +150,10 @@ public class JOGLOffscreenRenderer {
 				// if (offscreenPBuffer != null)
 				// offscreenPBuffer.destroy();
 				offscreenPBuffer = GLDrawableFactory.getFactory(
-						GLProfile.get("GL2")).createGLPbuffer(
+						GLProfile.get("GL2")).createOffscreenAutoDrawable(
 						canvas.getNativeSurface().getGraphicsConfiguration()
 								.getScreen().getDevice(), caps, null,
-						tileSizeX, tileSizeY, canvas.getContext());
+						tileSizeX, tileSizeY);
 				pbuffers.put(hashkey, offscreenPBuffer);
 			} else {
 				jr.renderingState.clearColorBuffer = true;
@@ -182,7 +180,7 @@ public class JOGLOffscreenRenderer {
 		return dst;
 	}
 
-	public GLPbuffer getOffscreenPBuffer() {
+	public GLOffscreenAutoDrawable getOffscreenPBuffer() {
 		return offscreenPBuffer;
 	}
 

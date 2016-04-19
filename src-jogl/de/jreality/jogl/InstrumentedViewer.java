@@ -1,6 +1,6 @@
 package de.jreality.jogl;
 
-import javax.media.opengl.GLEventListener;
+import com.jogamp.opengl.GLEventListener;
 
 public interface InstrumentedViewer extends GLEventListener {
 	public void installOverlay();

@@ -157,6 +157,7 @@ public class XStreamFactory {
     ret.alias("Sphere", Sphere.class);
     ret.alias("SpotLight", SpotLight.class);    
     ret.alias("Transformation", Transformation.class);
+    ret.alias("color", Color.class);
 
     // data package
     ret.alias("Attribute", Attribute.class);
@@ -207,7 +208,9 @@ public class XStreamFactory {
     try {
       Class type = mapper.realClass(reader.getNodeName());
       ret = context.convertAnother(null, type);
-    } catch (Exception e) { /* signal error */ }
+    } catch (Exception e) { 
+    	e.printStackTrace();
+    }
     reader.moveUp();
     return ret;
   }

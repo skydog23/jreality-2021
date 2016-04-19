@@ -2,7 +2,7 @@ package de.jreality.jogl;
 
 import java.awt.Dimension;
 
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 import de.jreality.scene.SceneGraphComponent;
 import de.jreality.scene.SceneGraphPath;

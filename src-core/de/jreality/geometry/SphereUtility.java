@@ -132,6 +132,7 @@ public class SphereUtility {
 				int vlength = GeometryUtility.getVectorLength(tessellatedIcosahedra[i]);
 				Rn.normalize(verts, verts);
 				tessellatedIcosahedra[i].setVertexAttributes(Attribute.COORDINATES, StorageModel.DOUBLE_ARRAY.array(vlength).createReadOnly(verts));
+				tessellatedIcosahedra[i].setVertexAttributes(Attribute.TEXTURE_COORDINATES, StorageModel.DOUBLE_ARRAY.array(4).createReadOnly(getTC(verts)));
 			}
 			tessellatedIcosahedra[i].setVertexAttributes(Attribute.TEXTURE_COORDINATES, StorageModel.DOUBLE_ARRAY.array(4).createReadOnly(getTC(verts)));
 			tessellatedIcosahedra[i].setVertexAttributes(Attribute.NORMALS, tessellatedIcosahedra[i].getVertexAttributes(Attribute.COORDINATES)); 

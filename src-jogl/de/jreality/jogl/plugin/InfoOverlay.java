@@ -9,19 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
-import javax.media.opengl.GLAutoDrawable;
-import javax.media.opengl.GLEventListener;
-import javax.media.opengl.GLException;
-import javax.media.opengl.glu.GLU;
-
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLEventListener;
+import com.jogamp.opengl.GLException;
+import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.util.gl2.GLUT;
 
 import de.jreality.jogl.InstrumentedViewer;
 
 /**
- * @author Pepijn Van Eeckhoudt
+ * @author Charles Gunn
  */
 public class InfoOverlay implements GLEventListener {
 	public interface InfoProvider {
@@ -77,6 +76,7 @@ public class InfoOverlay implements GLEventListener {
 			setAllVisible(visible);
 		else
 			this.visible = visible;
+		System.err.println("setting visibility to "+visible);
 	}
 
 	public int getPosition() {
@@ -99,6 +99,7 @@ public class InfoOverlay implements GLEventListener {
 			infoProvider.updateInfoStrings(this);
 		if (info == null || info.size() == 0)
 			return;
+//		System.err.println("displaying IO "+visible);
 
 		// JOGLConfiguration.theLog.log(Level.FINE,"In info display");
 		try{
@@ -113,8 +114,8 @@ public class InfoOverlay implements GLEventListener {
 			gl.glPushMatrix();
 			gl.glLoadIdentity();
 
-			Dimension size = new Dimension(glDrawable.getWidth(),
-					glDrawable.getHeight());
+			Dimension size = new Dimension(glDrawable.getSurfaceWidth(),
+					glDrawable.getSurfaceHeight());
 			gl.glViewport(0, 0, size.width, size.height);
 
 			// Store enabled state and disable lighting, texture mapping and the

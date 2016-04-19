@@ -3,7 +3,7 @@ package de.jreality.jogl3.geom;
 import java.util.HashMap;
 import java.util.Set;
 
-import javax.media.opengl.GL3;
+import com.jogamp.opengl.GL3;
 
 import de.jreality.jogl3.shader.GLVBO;
 import de.jreality.jogl3.shader.GLVBOFloat;
@@ -191,7 +191,7 @@ public class JOGLLineSetEntity extends JOGLPointSetEntity {
 						}
 					}
 					
-					System.out.println("creating " + "edge_"+a.getName());
+//					System.out.println("creating " + "edge_"+a.getName());
 				}else{
 					System.out.println("LSE1: not knowing what to do with " + attribs.getStorageModel().toString() + ", " + a.getName());
 				}

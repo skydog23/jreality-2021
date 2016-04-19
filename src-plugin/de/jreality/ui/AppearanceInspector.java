@@ -15,7 +15,6 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JButton;
@@ -299,6 +298,7 @@ public class AppearanceInspector extends JPanel implements ActionListener, Chang
 	}
 
 	
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object s = e.getSource();
 		// lines
@@ -366,6 +366,7 @@ public class AppearanceInspector extends JPanel implements ActionListener, Chang
 			updateTransparencyEnabled();
 	}
 	
+	@Override
 	public void stateChanged(ChangeEvent e) {
 		Object s = e.getSource();
 		// lines
@@ -401,7 +402,7 @@ public class AppearanceInspector extends JPanel implements ActionListener, Chang
 		return textureInspector.getTextures();
 	}
 	
-	public void setTextures(HashMap<String, String> textures) {
+	public void setTextures(Map<String, String> textures) {
 		textureInspector.setTextures(textures);
 	}
 	
@@ -443,6 +444,7 @@ public class AppearanceInspector extends JPanel implements ActionListener, Chang
 		this.appearance = appearance;
 		Scene.executeWriter(appearance, new Runnable() {
 			
+			@Override
 			public void run() {
 				textureInspector.setAppearance(appearance);
 				pointFontInspector.setAppearance(appearance);

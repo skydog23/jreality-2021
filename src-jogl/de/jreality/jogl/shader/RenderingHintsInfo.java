@@ -39,8 +39,8 @@
 
 package de.jreality.jogl.shader;
 
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
 
 import de.jreality.jogl.JOGLConfiguration;
 import de.jreality.jogl.JOGLRenderer;
@@ -210,11 +210,11 @@ public class RenderingHintsInfo {
 			jrs.lighting = values[LE][which];
 		}
 		if (values[FN][ACTIVE]) {
-			if (values[FN][which] != jr.renderingState.flipped) {
-				jr.renderingState.flipped = values[FN][which];
-				jr.globalGL.glFrontFace(jr.renderingState.flipped ? GL.GL_CW
+			if (values[FN][which] != jr.renderingState.flipNormals) {
+				jr.renderingState.flipNormals = values[FN][which];
+				jr.globalGL.glFrontFace(jr.renderingState.flipNormals ^ jr.renderingState.negativeDet ? GL.GL_CW
 						: GL.GL_CCW);
-				// System.err.println("flipped "+jr.renderingState.flipped);
+				 System.err.println("flipped state "+(jr.renderingState.flipNormals ^ jr.renderingState.negativeDet));
 			}
 		}
 		if (values[BF][ACTIVE]) {
@@ -228,16 +228,8 @@ public class RenderingHintsInfo {
 				gl.glDisable(GL.GL_CULL_FACE);
 		}
 		if (values[IA][ACTIVE]) {
-			gl.glAlphaFunc(values[IA][which] ? GL.GL_GREATER : GL.GL_ALWAYS, 0f); // alpha
-																					// =
-																					// 0
-																					// gets
-																					// ignored
-																					// in
-																					// fragment
-																					// shader:
-																					// cheap
-																					// transparency
+			// alpha = 0 gets ignored in fragment shader: cheap transparency
+			gl.glAlphaFunc(values[IA][which] ? GL.GL_GREATER : GL.GL_ALWAYS, 0f); 
 		}
 		if (values[LL][ACTIVE]) {
 			gl.glLightModeli(GL2.GL_LIGHT_MODEL_LOCAL_VIEWER,

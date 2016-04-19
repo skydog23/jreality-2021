@@ -41,7 +41,7 @@ package de.jreality.jogl.shader;
 
 import java.awt.Color;
 
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL2;
 
 import de.jreality.jogl.JOGLRenderer;
 import de.jreality.jogl.JOGLRenderingState;

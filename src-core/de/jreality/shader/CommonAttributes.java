@@ -45,8 +45,6 @@ import java.awt.Font;
 
 import javax.swing.SwingConstants;
 
-import sun.awt.resources.awt;
-
 import de.jreality.geometry.FrameFieldType;
 import de.jreality.scene.Appearance;
 
@@ -64,7 +62,13 @@ import de.jreality.scene.Appearance;
 
 	// goes in root appearance: first set controls how the background of generated image appears
   	public static final String SMALL_OBJ_OPTIMIZATION = "smallObjectsOptimization";
+  	public static final String STEREOGRAM_RENDERING = "stereogramRendering";
+  	public static final String STEREOGRAM_NUM_SLICES = "stereogramNumSlices";
+  	
   	public static final boolean SMALL_OBJ_OPTIMIZATION_DEFAULT = true;
+  	public static final boolean STEREOGRAM_RENDERING_DEFAULT = false;
+  	public static final int STEREOGRAM_NUM_SLICES_DEFAULT = 2;
+  	
   	public final static String BACKGROUND_COLOR = 	"backgroundColor";
     public final static Color  BACKGROUND_COLOR_DEFAULT = new java.awt.Color(225, 225, 225);
 	public final static String BACKGROUND_COLORS = 	"backgroundColors";		// array of four colors for corners of background
@@ -85,10 +89,12 @@ import de.jreality.scene.Appearance;
 	public final static String FORCE_RESIDENT_TEXTURES = "forceResidentTextures";
 	public final static String USE_OLD_TRANSPARENCY = "useOldTransparency";		// use the alpha channels of shader colors: pre-2006
 	public final static String ANTI_ALIASING_FACTOR = "antiAliasingFactor";
+	public final static int ANTI_ALIASING_FACTOR_DEFAULT = 2;
     // rendering hints that can appear anywhere in the scene graph
 	public final static String LIGHTING_ENABLED 	= 		"lightingEnabled";
 	public final static boolean LIGHTING_ENABLED_DEFAULT = true;
 	public final static String ANTIALIASING_ENABLED = 	"antiAliasing";
+	public final static boolean ANTIALIASING_ENABLED_DEFAULT = 	false;
 	public final static String TRANSPARENCY_ENABLED = 	"transparencyEnabled";
     public static final String ADDITIVE_BLENDING_ENABLED = "additiveBlendingEnabled";
 	public final static String Z_BUFFER_ENABLED = 		"zBufferEnabled";
@@ -351,7 +357,14 @@ import de.jreality.scene.Appearance;
 			return TEXT_ALIGNMENT_DEFAULT;
 		if(key.equals(SMALL_OBJ_OPTIMIZATION))
 			return SMALL_OBJ_OPTIMIZATION_DEFAULT;
-		
+		if(key.equals(STEREOGRAM_RENDERING))
+			return STEREOGRAM_RENDERING_DEFAULT;
+		if(key.equals(STEREOGRAM_NUM_SLICES))
+			return STEREOGRAM_NUM_SLICES_DEFAULT;
+		if(key.equals(ANTI_ALIASING_FACTOR))
+			return ANTI_ALIASING_FACTOR_DEFAULT;
+		if(key.equals(ANTIALIASING_ENABLED))
+			return ANTIALIASING_ENABLED_DEFAULT;
 		
 		return value;
 	}

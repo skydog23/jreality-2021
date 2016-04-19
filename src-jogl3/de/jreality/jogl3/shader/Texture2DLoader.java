@@ -5,7 +5,7 @@ import java.nio.FloatBuffer;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-import javax.media.opengl.GL3;
+import com.jogamp.opengl.GL3;
 
 import de.jreality.shader.ImageData;
 import de.jreality.shader.Texture2D;

@@ -46,11 +46,11 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.media.opengl.DebugGL2;
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
-import javax.media.opengl.GLAutoDrawable;
-import javax.media.opengl.GLPbuffer;
+import com.jogamp.opengl.DebugGL2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLOffscreenAutoDrawable;
 
 import de.jreality.backends.viewer.PerformanceMeter;
 import de.jreality.jogl.shader.RenderingHintsInfo;
@@ -111,7 +111,7 @@ public class JOGLRenderer {
 			backZBuffer = new double[16];
 
 	transient protected boolean lightListDirty = true, lightsChanged = true,
-			clippingPlanesDirty = true, disposed = false, frontBanana = false,
+			clippingPlanesDirty = true, disposed = false, frontBanana = false, // Why frontBanana?!
 			texResident = true, offscreenMode = false, fboMode = false;
 	protected Viewer theViewer;
 	protected Camera theCamera;
@@ -273,6 +273,8 @@ public class JOGLRenderer {
 				renderingState.cameraToWorld);
 		renderingState.cameraToNDC = c2ndc;
 		globalGL.glMultTransposeMatrixd(renderingState.worldToCamera, 0);
+		
+		// skybox
 		if (topAp.getSkyboxCubemap() != null)
 			JOGLSkyBox.render(globalGL, renderingState.worldToCamera,
 					topAp.getSkyboxCubemap(),
@@ -285,8 +287,8 @@ public class JOGLRenderer {
 		rhStack.clear();
 		rhStack.push(RenderingHintsInfo.defaultRHInfo);
 		RenderingHintsInfo.defaultRHInfo.render(renderingState, null);
-		renderingState.flipped = (Rn.determinant(renderingState.worldToCamera) < 0.0);
-		globalGL.glFrontFace(renderingState.flipped ? GL.GL_CW : GL.GL_CCW);
+		renderingState.flipNormals = (Rn.determinant(renderingState.worldToCamera) < 0.0);
+		globalGL.glFrontFace(renderingState.flipNormals ? GL.GL_CW : GL.GL_CCW);
 
 		texResident = true;
 		renderPeerRoot();
@@ -400,11 +402,11 @@ public class JOGLRenderer {
 			drawable.setGL(new DebugGL2(drawable.getGL().getGL2()));
 		}
 		theCanvas = drawable;
-		if (!(theCanvas instanceof GLPbuffer)) { // workaround in bug in
+		if (!(theCanvas instanceof GLOffscreenAutoDrawable)) { // workaround in bug in
 													// implementation of
 													// GLPbuffer
-			width = theCanvas.getWidth();
-			height = theCanvas.getHeight();
+			width = theCanvas.getSurfaceWidth();
+			height = theCanvas.getSurfaceHeight();
 			setAspectRatio(((double) width) / height);
 		}
 		init(theCanvas.getGL().getGL2());

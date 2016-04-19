@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
@@ -139,6 +140,7 @@ public class ContentAppearance extends SceneShrinkPanel implements ColorPickerMo
 					putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke('1', InputEvent.CTRL_DOWN_MASK));
 				}
 			
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					double ps = appearanceInspector.getPointRadius();
 					ps *= 1.2;
@@ -154,6 +156,7 @@ public class ContentAppearance extends SceneShrinkPanel implements ColorPickerMo
 					putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke('1', InputEvent.ALT_DOWN_MASK));
 				}
 			
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					double ps = appearanceInspector.getPointRadius();
 					ps /= 1.2;
@@ -169,6 +172,7 @@ public class ContentAppearance extends SceneShrinkPanel implements ColorPickerMo
 					putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke('2', InputEvent.CTRL_DOWN_MASK));
 				}
 			
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					double ps = appearanceInspector.getTubeRadius();
 					ps *= 1.2;
@@ -184,6 +188,7 @@ public class ContentAppearance extends SceneShrinkPanel implements ColorPickerMo
 					putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke('2', InputEvent.ALT_DOWN_MASK));
 				}
 			
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					double ps = appearanceInspector.getTubeRadius();
 					ps /= 1.2;
@@ -191,7 +196,7 @@ public class ContentAppearance extends SceneShrinkPanel implements ColorPickerMo
 				}
 			};
 	
-	private HashMap<String, String> 
+	private Map<String, String> 
 		textures = new HashMap<String, String>();
 
 	public AppearanceInspector getPanel() {
@@ -215,6 +220,7 @@ public class ContentAppearance extends SceneShrinkPanel implements ColorPickerMo
 		contentApp.setAttribute(CommonAttributes.OPAQUE_TUBES_AND_SPHERES, true);
 		appearanceInspector.setAppearance(contentApp);
 		contentApp.addAppearanceListener(new AppearanceListener() {
+			@Override
 			public void appearanceChanged(AppearanceEvent ev) {
 				boolean showV = (Boolean)contentApp.getAttribute(CommonAttributes.VERTEX_DRAW);
 				showVerticesAction.setSelected(showV);
@@ -226,6 +232,7 @@ public class ContentAppearance extends SceneShrinkPanel implements ColorPickerMo
 		});
 	}
 
+	@Override
 	public void colorPickerModeChanged(int mode) {
 		getPanel().setColorPickerMode(mode);
 	}

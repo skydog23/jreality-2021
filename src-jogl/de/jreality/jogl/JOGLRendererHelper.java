@@ -46,8 +46,8 @@ import java.awt.geom.Rectangle2D;
 import java.util.List;
 import java.util.logging.Level;
 
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
 
 import de.jreality.backends.label.LabelUtility;
 import de.jreality.geometry.GeometryUtility;

@@ -10,18 +10,16 @@ import java.awt.font.TextLayout;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
-import javax.media.opengl.GL3;
 import javax.swing.SwingConstants;
+
+import com.jogamp.opengl.GL3;
 
 import de.jreality.jogl3.GlTexture;
 import de.jreality.jogl3.JOGLRenderState;
-import de.jreality.jogl3.JOGLTexture2D;
-import de.jreality.jogl3.geom.Label;
 import de.jreality.jogl3.glsl.GLShader;
 import de.jreality.jogl3.glsl.GLShader.ShaderVar;
 import de.jreality.jogl3.shader.GLVBOFloat;
 import de.jreality.jogl3.shader.ShaderVarHash;
-import de.jreality.jogl3.shader.Texture2DLoader;
 import de.jreality.math.Rn;
 import de.jreality.scene.Appearance;
 import de.jreality.scene.Geometry;
@@ -41,13 +39,18 @@ public abstract class JOGLGeometryInstance extends SceneTreeNode {
 	//the "o" indicates that this code is only neccessary for the optimization of scenes with 10.000 small
 		//geometries or more.
 		protected boolean oChangedLength = true;
-		protected boolean oChangedPosA = true;
+		protected boolean oChangedPos = true;
+		protected boolean oChangedAtt = true;
 		public boolean oChangedLength() {
 			return oChangedLength;
 		}
 		
-		public boolean oChangedPositionsOrAttributes() {
-			return oChangedPosA;
+		public boolean oChangedPositions() {
+			return oChangedPos;
+		}
+		
+		public boolean oChangedAttributes() {
+			return oChangedAtt;
 		}
 		
 		public void resetOChangedLength() {
@@ -55,7 +58,8 @@ public abstract class JOGLGeometryInstance extends SceneTreeNode {
 		}
 		
 		public void resetOChangedPositionsOrAttributes() {
-			oChangedPosA = false;
+			oChangedPos = false;
+			oChangedAtt = false;
 		}
 	
 	public abstract class GlUniform<T>{
@@ -178,7 +182,7 @@ public abstract class JOGLGeometryInstance extends SceneTreeNode {
 	public void updateLabelTextureAndVBOsAndUniforms(GL3 gl, LabelRenderData lrd, Label[] labels, InstanceFontData ifd){
 		if(labels == null || labels.length == 0)
 			return;
-		System.out.println("updateLabelTextureAndVBOsAndUniforms called");
+//		System.out.println("updateLabelTextureAndVBOsAndUniforms called");
 		lrd.drawLabels = ifd.drawLabels;
 		lrd.xyzOffsetScale[3] = (float)ifd.scale;
 		
@@ -607,7 +611,7 @@ public abstract class JOGLGeometryInstance extends SceneTreeNode {
     				c.add(new GlUniformInt("_combineMode", tex.getApplyMode()));
     				texture.combineMode = tex.getApplyMode();
     				c.add(new GlUniformMat4("textureMatrix", Rn.convertDoubleToFloatArray(tex.getTextureMatrix().getArray())));
-    				System.err.println("sampler2D: "+ v.getName());
+//    				System.out.println("sampler2D: "+ v.getName());
     				hasTexture = true;
     			}
     		}else if(v.getType().equals("sampler2D") && name.equals("front")){

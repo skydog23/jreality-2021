@@ -42,8 +42,8 @@ package de.jreality.jogl;
 import java.util.WeakHashMap;
 import java.util.logging.Level;
 
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
 
 import de.jreality.geometry.Primitives;
 import de.jreality.scene.IndexedFaceSet;
@@ -61,12 +61,6 @@ public class JOGLCylinderUtility {
 
 	private static int numCyls = 6;
 	private static IndexedFaceSet[] cylinderList = new IndexedFaceSet[numCyls];
-
-	private static IndexedFaceSet getCylinder(int i) {
-		if (cylinderList[i] == null)
-			cylinderList[i] = Primitives.cylinder(2 ^ i);
-		return cylinderList[i];
-	}
 
 	static boolean sharedDisplayLists = JOGLConfiguration.sharedContexts;
 	static WeakHashMap<GL, int[]> cylinderDListsTable = new WeakHashMap<GL, int[]>();

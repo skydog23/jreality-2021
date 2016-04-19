@@ -16,14 +16,15 @@ import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.media.opengl.GL3;
-import javax.media.opengl.GLAutoDrawable;
-import javax.media.opengl.GLCapabilities;
-import javax.media.opengl.GLEventListener;
-import javax.media.opengl.GLException;
-import javax.media.opengl.GLProfile;
-import javax.media.opengl.awt.GLCanvas;
 import javax.swing.JPanel;
+
+import com.jogamp.opengl.GL3;
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.GLEventListener;
+import com.jogamp.opengl.GLException;
+import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.awt.GLCanvas;
 
 import de.jreality.backends.viewer.PerformanceMeter;
 import de.jreality.jogl.InstrumentedViewer;
@@ -36,7 +37,6 @@ import de.jreality.jogl3.helper.SphereHelper;
 import de.jreality.jogl3.helper.TransparencyHelper;
 import de.jreality.jogl3.helper.TubeHelper;
 import de.jreality.jogl3.light.JOGLLightCollection;
-import de.jreality.jogl3.optimization.RenderableUnit;
 import de.jreality.jogl3.optimization.RenderableUnitCollection;
 import de.jreality.jogl3.shader.LabelShader;
 import de.jreality.jogl3.shader.PointShader;
@@ -110,7 +110,7 @@ public class JOGL3Viewer implements de.jreality.scene.Viewer, StereoViewer, Inst
 		//a value of 1, 2, 4 and 8 has just the same effect on linux nvidia-310.14, i.e. no anti-aliasing
 		//16 times does anti-aliasing
 		caps.setSampleBuffers(true);
-		caps.setNumSamples(16);
+		caps.setNumSamples(8);
 		
 		
 		canvas = new GLCanvas(caps);
@@ -285,7 +285,7 @@ public class JOGL3Viewer implements de.jreality.scene.Viewer, StereoViewer, Inst
 	BufferedImage dst = null;
 	boolean offscreen = false;
 	int textureDeletionCounter = 0;
-	RenderableUnitCollection RUC = new RenderableUnitCollection();
+	RenderableUnitCollection RUC = null;
 	public void display(GLAutoDrawable arg0, int width, int height) {
 		
 		perfmeter.beginFrame();
@@ -301,7 +301,7 @@ public class JOGL3Viewer implements de.jreality.scene.Viewer, StereoViewer, Inst
 //			this.camPath.getMatrix(aMatrix);
 			double[] mat = new double[16];
 	        Camera cam = (Camera)(this.camPath.getLastElement());
-	        double ar = ((double) arg0.getWidth())/arg0.getHeight();
+	        double ar = ((double) arg0.getSurfaceWidth())/arg0.getSurfaceHeight();
 	        //ar = width/height;
 	        mat = CameraUtility.getCameraToNDC(cam, ar);
 //	        P3.makePerspectiveProjectionMatrix(mat, CameraUtility.getViewport(cam, 1), (float)cam.getNear(), (float)cam.getFar());
@@ -330,6 +330,47 @@ public class JOGL3Viewer implements de.jreality.scene.Viewer, StereoViewer, Inst
 					RUC.setActive((Boolean) bgo);
 				else{
 					RUC.setActive(CommonAttributes.SMALL_OBJ_OPTIMIZATION_DEFAULT);
+				}
+				
+				bgo = null;
+				if (rootAp != null)
+					bgo = rootAp.getAttribute(CommonAttributes.STEREOGRAM_RENDERING);
+				if (bgo != null && bgo instanceof Boolean && (Boolean)bgo == true)
+					TransparencyHelper.setUpStereogramTexture(gl, rootAp);
+				else{
+					TransparencyHelper.noStereogramRender();
+				}
+				
+				bgo = null;
+				boolean enabled;
+				if (rootAp != null)
+					bgo = rootAp.getAttribute(CommonAttributes.ANTIALIASING_ENABLED);
+				if (bgo != null && bgo instanceof Boolean)
+					enabled = (Boolean) bgo;
+				else{
+					enabled = CommonAttributes.ANTIALIASING_ENABLED_DEFAULT;
+				}
+				if(enabled){
+					int factor;
+					if (rootAp != null)
+						bgo = rootAp.getAttribute(CommonAttributes.ANTI_ALIASING_FACTOR);
+					if (bgo != null && bgo instanceof Integer)
+						factor = (Integer) bgo;
+					else{
+						factor = CommonAttributes.ANTI_ALIASING_FACTOR_DEFAULT;
+					}
+					if(factor != supersample){
+						supersample = factor;
+						TransparencyHelper.setSupersample(factor);
+						TransparencyHelper.resizeFramebufferTextures(arg0.getGL().getGL3(), width, height);
+					}
+				}else{
+					if(supersample != 1){
+						//reset
+						supersample = 1;
+						TransparencyHelper.setSupersample(supersample);
+						TransparencyHelper.resizeFramebufferTextures(arg0.getGL().getGL3(), width, height);
+					}
 				}
 			}
 			
@@ -421,8 +462,8 @@ public class JOGL3Viewer implements de.jreality.scene.Viewer, StereoViewer, Inst
 		GL3 gl = arg0.getGL().getGL3();
 		
 		//initialization for depth peeling
-		width = arg0.getWidth();
-    	height = arg0.getHeight();
+		width = arg0.getSurfaceWidth();
+    	height = arg0.getSurfaceHeight();
     	TransparencyHelper.initTransparency(gl, width, height);
     	
 //		int[] arr = new int[1];
@@ -457,6 +498,7 @@ public class JOGL3Viewer implements de.jreality.scene.Viewer, StereoViewer, Inst
 		backgroundHelper.initializeBackground(gl);
 		tubeHelper = new TubeHelper();
 		sphereHelper = new SphereHelper();
+		RUC = new RenderableUnitCollection();
 	}
 	
 	public void reshape(GLAutoDrawable arg0, int arg1, int arg2, int arg3,

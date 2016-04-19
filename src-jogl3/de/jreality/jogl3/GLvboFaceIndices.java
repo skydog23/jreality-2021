@@ -2,7 +2,7 @@ package de.jreality.jogl3;
 
 import java.nio.IntBuffer;
 
-import javax.media.opengl.GL3;
+import com.jogamp.opengl.GL3;
 
 public class GLvboFaceIndices {
 	

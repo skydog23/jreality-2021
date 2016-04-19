@@ -39,8 +39,8 @@
 
 package de.jreality.jogl.shader;
 
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
 
 import de.jreality.jogl.JOGLConfiguration;
 import de.jreality.jogl.JOGLRenderer;
@@ -142,12 +142,12 @@ public class RenderingHintsShader {
 		} else
 			gl.glDisable(GL.GL_CULL_FACE);
 
-		oldFlipped = jr.renderingState.flipped;
+		oldFlipped = jr.renderingState.flipNormals;
 		boolean newf = flipNormalsEnabled ^ oldFlipped;
 		// System.err.println("flip = "+flipNormalsEnabled);
 		if (oldFlipped != newf) {
-			jr.renderingState.flipped = newf;
-			jr.globalGL.glFrontFace(jr.renderingState.flipped ? GL.GL_CW
+			jr.renderingState.flipNormals = newf;
+			jr.globalGL.glFrontFace(jr.renderingState.flipNormals ? GL.GL_CW
 					: GL.GL_CCW);
 			System.err.println("Flipping normals");
 		}
@@ -185,9 +185,9 @@ public class RenderingHintsShader {
 	public void postRender(JOGLRenderingState jrs) {
 		JOGLRenderer jr = jrs.renderer;
 		GL gl = jr.globalGL;
-		if (oldFlipped != jr.renderingState.flipped) {
-			jr.globalGL.glFrontFace(oldFlipped ? GL.GL_CW : GL.GL_CCW);
-			jr.renderingState.flipped = oldFlipped;
+		if (oldFlipped != jr.renderingState.flipNormals) {
+			jr.globalGL.glFrontFace(jr.renderingState.negativeDet ^ oldFlipped ? GL.GL_CW : GL.GL_CCW);
+			jr.renderingState.flipNormals = oldFlipped;
 		}
 
 		// if (transparencyEnabled) {

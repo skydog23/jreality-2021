@@ -1,9 +1,8 @@
 package de.jreality.jogl3.shader;
 
-import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-import javax.media.opengl.GL3;
+import com.jogamp.opengl.GL3;
 
 public class GLVBOInt extends GLVBO{
 	
@@ -23,7 +22,7 @@ public class GLVBOInt extends GLVBO{
 	public void updateSubData(GL3 gl, int[] subdata, int begin, int length){
 		System.arraycopy(subdata, 0, this.data, begin, length);
 		gl.glBindBuffer(gl.GL_ARRAY_BUFFER, index);
-		System.out.println("begin = " + begin);
+//		System.out.println("begin = " + begin);
 		gl.glBufferSubData(gl.GL_ARRAY_BUFFER, 4*begin, 4*length, IntBuffer.wrap(subdata));
 	}
 	public void updateData(GL3 gl, int[] data){

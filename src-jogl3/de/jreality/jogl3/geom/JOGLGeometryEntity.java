@@ -1,6 +1,6 @@
 package de.jreality.jogl3.geom;
 
-import javax.media.opengl.GL3;
+import com.jogamp.opengl.GL3;
 
 import de.jreality.scene.SceneGraphNode;
 import de.jreality.scene.data.StorageModel;

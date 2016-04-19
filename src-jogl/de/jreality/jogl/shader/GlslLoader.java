@@ -45,8 +45,8 @@ import java.nio.IntBuffer;
 import java.util.HashMap;
 import java.util.WeakHashMap;
 
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
 
 import de.jreality.jogl.JOGLRenderer;
 import de.jreality.shader.GlslProgram;
@@ -64,7 +64,7 @@ public class GlslLoader {
 	}
 
 	public static void render(GlslProgram prog, GL2 gl) {
-		// System.err.println("in glslLoader render()");
+//		 System.err.println("in glslLoader render()");
 		ProgramContext context = getContext(gl, prog);
 		context.linkProgram(gl);
 		context.activateProgram(gl);
@@ -191,10 +191,10 @@ public class GlslLoader {
 			if (isLinked)
 				return;
 
-			progID = new Integer(gl.glCreateProgramObjectARB());
-
+			progID = new Integer((int) gl.glCreateProgramObjectARB());
+			System.err.println("progid = "+progID);
 			if (source.getVertexProgram() != null) {
-				int vertexProgID = gl
+				int vertexProgID = (int)gl
 						.glCreateShaderObjectARB(GL2.GL_VERTEX_SHADER);
 				gl.glShaderSource(vertexProgID,
 						source.getVertexProgram().length,
@@ -205,7 +205,7 @@ public class GlslLoader {
 				printInfoLog("vert attatch", vertexProgID, gl);
 			}
 			if (source.getFragmentProgram() != null) {
-				int fragmentProgID = gl
+				int fragmentProgID = (int)gl
 						.glCreateShaderObjectARB(GL2.GL_FRAGMENT_SHADER);
 				gl.glShaderSourceARB(fragmentProgID,
 						source.getFragmentProgram().length,
@@ -219,7 +219,7 @@ public class GlslLoader {
 			printInfoLog("prog attatch", progID.intValue(), gl);
 			gl.glLinkProgramARB(progID.intValue());
 			printInfoLog("prog link", progID.intValue(), gl);
-			// System.out.println("loaded program ["+progID+"]");
+			 System.out.println("loaded program ["+progID+"]");
 			isLinked = true;
 		}
 

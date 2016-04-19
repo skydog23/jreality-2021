@@ -1,10 +1,12 @@
 package light;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import de.jreality.geometry.Primitives;
 import de.jreality.math.MatrixBuilder;
 import de.jreality.plugin.JRViewer;
+import de.jreality.plugin.basic.InfoOverlayPlugin;
 import de.jreality.plugin.basic.Scene;
 import de.jreality.scene.Appearance;
 import de.jreality.scene.DirectionalLight;
@@ -20,6 +22,7 @@ import de.jreality.shader.ShaderUtility;
 import de.jreality.shader.Texture2D;
 import de.jreality.shader.TextureUtility;
 import de.jreality.tutorial.util.SimpleTextureFactory;
+import de.jreality.util.Input;
 
 public class LightTest {
 
@@ -117,9 +120,27 @@ public class LightTest {
 		vr.addBasicUI();
 		vr.addContentUI();
 		vr.addBeanShellSupport();
+		vr.registerPlugin(InfoOverlayPlugin.class);
 		vr.startup();
 		Scene scene = vr.getPlugin(Scene.class);
-//		scene.getRootAppearance().setAttribute(CommonAttributes.SMALL_OBJ_OPTIMIZATION, false);
+		Appearance rootApp = scene.getRootAppearance();
+		rootApp.setAttribute(CommonAttributes.ANTIALIASING_ENABLED, false);
+		rootApp.setAttribute(CommonAttributes.ANTI_ALIASING_FACTOR, 2);
+		
+		
+		ImageData id = null;
+		try{
+			id = ImageData.load(Input.getInput("textures/desert/desert_dn.jpg"));
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		TextureUtility.setBackgroundTexture(rootApp, id);
+		rootApp.setAttribute(CommonAttributes.BACKGROUND_COLOR, Appearance.INHERITED);
+		rootApp.setAttribute(CommonAttributes.BACKGROUND_COLORS, Appearance.INHERITED);
+		
+		
+		rootApp.setAttribute(CommonAttributes.STEREOGRAM_RENDERING, true);
+		rootApp.setAttribute(CommonAttributes.STEREOGRAM_NUM_SLICES, 5);
 	}
 
 }

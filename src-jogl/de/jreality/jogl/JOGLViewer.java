@@ -45,12 +45,12 @@ import java.awt.GraphicsEnvironment;
 import java.lang.ref.WeakReference;
 import java.util.logging.Level;
 
-import javax.media.opengl.GLAutoDrawable;
-import javax.media.opengl.GLCapabilities;
-import javax.media.opengl.GLCapabilitiesChooser;
-import javax.media.opengl.GLContext;
-import javax.media.opengl.GLProfile;
-import javax.media.opengl.awt.GLCanvas;
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.GLCapabilitiesChooser;
+import com.jogamp.opengl.GLContext;
+import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.awt.GLCanvas;
 
 import de.jreality.scene.SceneGraphComponent;
 import de.jreality.scene.SceneGraphPath;
@@ -83,7 +83,7 @@ public class JOGLViewer extends AbstractViewer {
 			caps.setSampleBuffers(true);
 			caps.setNumSamples(4);
 			caps.setStereo(JOGLConfiguration.quadBufferedStereo);
-			canvas = new GLCanvas(caps, chooser, sharedContext,
+			canvas = new GLCanvas(caps, chooser, 
 					GraphicsEnvironment.getLocalGraphicsEnvironment()
 							.getDefaultScreenDevice());
 		} else {
@@ -102,7 +102,7 @@ public class JOGLViewer extends AbstractViewer {
 	}
 
 	public void dispose(GLAutoDrawable drawable) {
-		System.out.println("calling JOGLViewer.dispose()");
+//		System.out.println("calling JOGLViewer.dispose()");
 		//super.dispose();
 		//if (drawable != null)
 		//	drawable.removeGLEventListener(this);

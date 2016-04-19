@@ -1,6 +1,6 @@
 package de.jreality.jogl3;
 
-import javax.media.opengl.GL3;
+import com.jogamp.opengl.GL3;
 
 import de.jreality.jogl3.glsl.GLShader;
 import de.jreality.jogl3.shader.ShaderVarHash;

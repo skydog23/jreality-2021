@@ -3,7 +3,7 @@ package de.jreality.jogl3.geom;
 import java.util.HashMap;
 import java.util.Set;
 
-import javax.media.opengl.GL3;
+import com.jogamp.opengl.GL3;
 
 import de.jreality.jogl3.shader.GLVBO;
 import de.jreality.scene.Sphere;

@@ -42,8 +42,9 @@ package de.jreality.jogl;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.media.opengl.GL;
 import javax.swing.JPopupMenu;
+
+import com.jogamp.opengl.GL;
 
 import de.jreality.util.LoggingSystem;
 import de.jreality.util.Secure;
