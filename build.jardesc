@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="lib/jReality.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/jreality/build.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <javaElement handleIdentifier="=jreality/src-jinput"/>
+        <javaElement handleIdentifier="=jreality/src-core"/>
+        <javaElement handleIdentifier="=jreality/src-swing"/>
+        <javaElement handleIdentifier="=jreality/src-examples"/>
+        <javaElement handleIdentifier="=jreality/src-proxies"/>
+        <javaElement handleIdentifier="=jreality/src-soft"/>
+        <javaElement handleIdentifier="=jreality/src-jogl"/>
+        <javaElement handleIdentifier="=jreality/src-ui"/>
+        <javaElement handleIdentifier="=jreality/src-vr"/>
+        <javaElement handleIdentifier="=jreality/src-io"/>
+        <javaElement handleIdentifier="=jreality/src-jogl3"/>
+        <javaElement handleIdentifier="=jreality/src-gpgpu"/>
+        <folder path="/jreality/jni/macosx"/>
+        <javaElement handleIdentifier="=jreality/src-tool"/>
+        <javaElement handleIdentifier="=jreality/src-backends-share"/>
+        <javaElement handleIdentifier="=jreality/src-soft-new"/>
+        <javaElement handleIdentifier="=jreality/src-sunflow"/>
+        <javaElement handleIdentifier="=jreality/src-python"/>
+        <javaElement handleIdentifier="=jreality/src-renderman"/>
+        <javaElement handleIdentifier="=jreality/src-portal"/>
+        <javaElement handleIdentifier="=jreality/src-audio"/>
+        <javaElement handleIdentifier="=jreality/src-plugin"/>
+    </selectedElements>
+</jardesc>
