@@ -530,52 +530,57 @@ public  class TubeFactory {
 				 * Next try to calculate the tangent as a "mid-plane" if the three points are not collinear
 				 */
 				double[] midPlane = null, plane1 = null, plane2 = null;
-				if (!collinear)	{
-					plane1 = P3.planeFromPoints(null, binormalField[i-1], polygonh[i], polygonh[i-1]);
-					plane2 = P3.planeFromPoints(null, binormalField[i-1], polygonh[i], polygonh[i+1]);
-					midPlane = Pn.midPlane(null, plane1, plane2, metric);
-					size = Rn.euclideanNormSquared(midPlane);
-					if ((debug & 2) != 0) LoggingSystem.getLogger(this).log(Level.FINER,"tangent norm squared is "+size);					
-					theta = Pn.angleBetween(plane1, plane2, metric);
-				}
-				/*
-				 * if this is degenerate, then the curve must be collinear at this node
-				 * get the tangent by projecting the line into the tangent space at this point
-				 */ 
-				if (collinear || size < 10E-16)	{
-					// the three points must be collinear
-					if ((debug & 2) != 0) LoggingSystem.getLogger(this).log(Level.FINER,"degenerate Tangent vector");
-					// TODO figure out why much breaks 
-					// if the two vertices in the following call are swapped
-					double[] pseudoT = P3.lineIntersectPlane(null, polygonh[i-1], polygonh[i+1], polarPlane);	
-					if ((debug & 2) != 0) LoggingSystem.getLogger(this).log(Level.FINE,"pseudo-Tangent vector is "+Rn.toString(pseudoT));
-					// more euclidean/noneuclidean trouble
-					// we want the plane equation of the midplane 
-					if (metric != Pn.EUCLIDEAN)	{
-						midPlane = Pn.polarizePoint(null, pseudoT, metric);
-					} else {
-						// TODO figure out why the vector (the output of lineIntersectPlane)
-						// has to be flipped in this case but not in the non-euclidean case
-						midPlane = Rn.times(null, -1.0, pseudoT);
-//						midPlane = pseudoT;
-						// the euclidean polar of a point is the plane at infinity: we want something
-						// much more specific: 
-						// we assume the polygonal data is dehomogenized (last coord = 1)
-						midPlane[3] = -Rn.innerProduct(midPlane, polygonh[i], 3);						
-					}	
-					// TODO detect case where the angle is 0, also
-					theta = Math.PI;
-				}
-				//System.err.println("calc'ed midplane is "+Rn.toString(midPlane));
-				if ((debug & 2) != 0) LoggingSystem.getLogger(this).log(Level.FINE,"Midplane is "+Rn.toString(midPlane));
-					Pn.polarizePlane(tangentField[i-1], midPlane, metric);						
-				if (userTangents == null){
-				} else {
+				if (userTangents != null){
 					System.arraycopy(userTangents[i-1], 0, tangentField[i-1], 0, userTangents[i-1].length);
 					midPlane = Rn.planeParallelToPassingThrough(null, userTangents[i-1], polygonh[i]);
 					//System.err.println("given midplane is "+Rn.toString(midPlane));
 					if (i>1) theta = Pn.angleBetween(userTangents[i-2], userTangents[i-1], metric);
 					else theta = 0;
+				} else {
+					if (!collinear)	{
+						plane1 = P3.planeFromPoints(null, binormalField[i-1], polygonh[i], polygonh[i-1]);
+						plane2 = P3.planeFromPoints(null, binormalField[i-1], polygonh[i], polygonh[i+1]);
+						midPlane = Pn.midPlane(null, plane1, plane2, metric);
+						size = Rn.euclideanNormSquared(midPlane);
+						if ((debug & 2) != 0) LoggingSystem.getLogger(this).log(Level.FINER,"tangent norm squared is "+size);					
+						theta = Pn.angleBetween(plane1, plane2, metric);
+					}
+					/*
+					 * if this is degenerate, then the curve must be collinear at this node
+					 * get the tangent by projecting the line into the tangent space at this point
+					 */ 
+					if (collinear || size < 10E-16)	{
+						// the three points must be collinear
+						if ((debug & 2) != 0) LoggingSystem.getLogger(this).log(Level.FINER,"degenerate Tangent vector");
+						// TODO figure out why much breaks 
+						// if the two vertices in the following call are swapped
+						double[] pseudoT = P3.lineIntersectPlane(null, polygonh[i-1], polygonh[i+1], polarPlane);	
+						if ((debug & 2) != 0) LoggingSystem.getLogger(this).log(Level.FINE,"pseudo-Tangent vector is "+Rn.toString(pseudoT));
+						// more euclidean/noneuclidean trouble
+						// we want the plane equation of the midplane 
+						if (metric != Pn.EUCLIDEAN)	{
+							midPlane = Pn.polarizePoint(null, pseudoT, metric);
+						} else {
+							// TODO figure out why the vector (the output of lineIntersectPlane)
+							// has to be flipped in this case but not in the non-euclidean case
+							midPlane = Rn.times(null, -1.0, pseudoT);
+//							midPlane = pseudoT;
+							// the euclidean polar of a point is the plane at infinity: we want something
+							// much more specific: 
+							// we assume the polygonal data is dehomogenized (last coord = 1)
+							midPlane[3] = -Rn.innerProduct(midPlane, polygonh[i], 3);	
+							// actually shouldn't we just keep the old tangent in the euclidean case?
+							if (i > 1) midPlane = tangentField[i-2];
+						}	
+						// TODO detect case where the angle is 0, also
+						theta = Math.PI;
+					}
+					//System.err.println("calc'ed midplane is "+Rn.toString(midPlane));
+					if ((debug & 2) != 0) LoggingSystem.getLogger(this).log(Level.FINE,"Midplane is "+Rn.toString(midPlane));
+					if (collinear && metric == Pn.EUCLIDEAN) 
+						if (i > 1) tangentField[i-1] = tangentField[i-2];
+					else
+						Pn.polarizePlane(tangentField[i-1], midPlane, metric);						
 				}
 				// This is a hack to try to choose the correct version of the tangent vector:
 				// since we're in projective space, t and -t are equivalent but only one
@@ -585,8 +590,7 @@ public  class TubeFactory {
 					Rn.times(tangentField[i-1], -1.0, tangentField[i-1]);
 
 				Pn.setToLength(tangentField[i-1], tangentField[i-1], 1.0, metric);
-//				System.err.println("Tangent field = "+Rn.toString(tangentField[i-1]));
-				//System.err.println("tangent is "+Rn.toString(tangentField[i-1]));
+//				System.err.println(i+" Tangent field = "+Rn.toString(tangentField[i-1]));
 				// finally calculate the normal vector
 				Pn.polarizePlane(frenetNormalField[i-1], P3.planeFromPoints(null,binormalField[i-1], tangentField[i-1],  polygonh[i]),metric);					
 				Pn.setToLength(frenetNormalField[i-1], frenetNormalField[i-1], 1.0, metric);
@@ -624,6 +628,7 @@ public  class TubeFactory {
 				} 
 //				size = Rn.euclideanNormSquared(pN[i-1]);
 				else phi = 0.0;
+//				System.err.println(i+" Normal field = "+Rn.toString(frenetNormalField[i-1]));
 				
 				System.arraycopy(frenetNormalField[i-1], 0, frame, 0, 4);
 				System.arraycopy(binormalField[i-1], 0, frame, 4, 4);
