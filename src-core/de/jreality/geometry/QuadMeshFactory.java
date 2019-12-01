@@ -128,7 +128,7 @@ public class QuadMeshFactory extends AbstractQuadMeshFactory {
 	 * the number of v-lines (@link getVLineCount) and u-lines (@link getULineCount).
 	 */
 	public void setVertexCoordinates(double[][][] points) {
-		double[][] npoints = convertDDDtoDD(points);
+		double[][] npoints = points != null ? convertDDDtoDD(points) : null;
 		setVertexCoordinates(npoints);
 	}
 
@@ -149,6 +149,8 @@ public class QuadMeshFactory extends AbstractQuadMeshFactory {
 		int lengthv = points.length;
 		int lengthu = points[0].length;
 		int lengthf = points[0][0].length;
+		System.err.println("dims = "+points.length+" "+points[0].length+" "+points[0][0].length);
+		System.err.println("u = "+getULineCount()+" v = "+getVLineCount());
 		if (lengthv != getVLineCount() || lengthu != getULineCount() ) {
 			throw new IllegalArgumentException("Bad dimension for 3D array");
 		}

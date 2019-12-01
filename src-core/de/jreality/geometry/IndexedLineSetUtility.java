@@ -40,6 +40,9 @@
 
 package de.jreality.geometry;
 
+import java.util.ArrayList;
+
+import de.jreality.math.Pn;
 import de.jreality.math.Rn;
 import de.jreality.scene.IndexedLineSet;
 import de.jreality.scene.Scene;
@@ -354,12 +357,14 @@ public class IndexedLineSetUtility {
 	}
 
 	public static IndexedLineSetFactory circleFactory(int n, double cx, double cy, double r) {
-		double[][] verts = new double[n][3];
+		double[][] verts = new double[n][4];
 		double angle = 0, delta = Math.PI * 2 / (n);
 		for (int i = 0; i<n; ++i) {
 			angle = i * delta;
 			verts[i][0] = cx+r*Math.cos(angle);
 			verts[i][1] = cy+r*Math.sin(angle);
+			verts[i][2] = 0.0;
+			verts[i][3] = 1.0;
 		}
 		return createCurveFactoryFromPoints(verts, true);
 	}
@@ -369,4 +374,33 @@ public class IndexedLineSetUtility {
 		return circle(n, 0, 0, 1);
 	}
 
+	public static void removeInfinity(IndexedLineSet ils, double distance)	{
+		// convert the edge index list into a list of segments, skipping over all segments where a w-coordinate sign change is detected.
+		double[][] verts = ils.getVertexAttributes(Attribute.COORDINATES).toDoubleArrayArray(null);
+		verts = Pn.dehomogenize(verts, verts);
+		int[][] eind = ils.getEdgeAttributes(Attribute.INDICES).toIntArrayArray(null);
+		// first go through and find where the switches take place
+		ArrayList<int[]> goods = new ArrayList<int[]>();
+		for (int i = 0; i<eind.length; ++i)	{
+			for (int j = 1; j<eind[i].length; ++j)	{
+				int i1 = eind[i][j-1], i2 = eind[i][j];
+				double[] v1 = verts[i1], v2 = verts[i2];
+				double d = Pn.distanceBetween(v1, v2, Pn.EUCLIDEAN);
+				
+				if (d <= distance) {
+					goods.add(new int[]{i1, i2});
+				}
+			}
+		}
+//		System.err.println("size = "+goods.size());
+		int[][] ninds = new int[goods.size()][];
+		int count = 0;
+		for (int[] item : goods)	{
+//			System.err.println(item[0]+":"+item[1]);
+			ninds[count] = item;
+//			System.err.println("Count = "+count+ninds[count][0]+":"+ninds[count][1]);
+			count++;
+		}
+		ils.setEdgeCountAndAttributes(Attribute.INDICES, StorageModel.INT_ARRAY.array(2).createReadOnly(ninds));
+	}
 }

@@ -135,7 +135,8 @@ import de.jreality.util.LoggingSystem;
 			vals = new double[realLength][vl];
 
 		if (n <= 1) {
-			throw new IllegalArgumentException("Can't tube a vertex list of length less than 2");
+			return null;
+//			throw new IllegalArgumentException("Can't tube a vertex list of length less than 2");
 		}
 		double[] radii2 = null;
 		boolean hasRadii = radii.length > 1;
@@ -219,6 +220,8 @@ import de.jreality.util.LoggingSystem;
 			radii[0] = radius;
 		}
 		theTubeVertices = makeTube(theCurve, radii, crossSection, frameFieldType, closedCurve, metric, twists);
+//		
+		if (theTubeVertices == null) return;
 //		System.err.println("PTF: metric is "+metric);
 		qmf = new QuadMeshFactory();
 		qmf.setMetric(metric);

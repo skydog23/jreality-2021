@@ -366,6 +366,12 @@ public class Primitives {
 		if (label != null) ps.setVertexAttributes(Attribute.LABELS,StorageModel.STRING_ARRAY.createReadOnly(new String[]{label}));
 		return ps;
 	}
+	public static PointSet points( double[][] pts, String[] label)	{
+		int n = pts.length;
+		PointSet ps = new PointSet(n);
+		ps.setVertexCountAndAttributes(Attribute.COORDINATES,StorageModel.DOUBLE_ARRAY.array(pts[0].length).createReadOnly(pts));
+		return ps;
+	}
 	
 	public static SceneGraphComponent labelPoint( SceneGraphComponent sgc, double[] center, String label)	{
 		PointSet ps = point(center, label);

@@ -244,11 +244,11 @@ public class TubeUtility {
 			System.arraycopy(p1, 0, frame, 12, 4);		
 			// make sure the transformation is orientation-preserving
 			// NOTE: If there appear shading problems on tubes, un-comment this code
-//			if (Rn.determinant(frame) < 0)		{
-//				System.arraycopy(normal, 0, frame, 0, 4);
-//				System.arraycopy(binormal, 0, frame, 4, 4);
-//
-//			}
+			if (Rn.determinant(frame) < 0)		{
+				System.arraycopy(normal, 0, frame, 0, 4);
+				System.arraycopy(binormal, 0, frame, 4, 4);
+				System.err.println("tube one edge: flipping orientation");
+			}
 			if ((debug & 16) != 0)  {
 				theLogger.log(Level.FINE,"Frame is "+Rn.matrixToString(frame));
 				theLogger.log(Level.FINE,"Det is "+Rn.determinant(frame));

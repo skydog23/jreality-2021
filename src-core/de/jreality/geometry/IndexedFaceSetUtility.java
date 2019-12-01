@@ -223,20 +223,20 @@ public class IndexedFaceSetUtility {
 	}
 	
 	public static IndexedFaceSetFactory constructPolygonFactory(IndexedFaceSetFactory ifsf, double[][] points, int sig)	{
-		int[][] ind = new int[1][points.length];
-		for (int i = 0; i<points.length; ++i)	ind[0][i] = i;
 		// TODO replace this code when it's fixed to initialize the factory with the existing ifs.
 		if (ifsf == null) ifsf = new IndexedFaceSetFactory();// Pn.EUCLIDEAN, true, false, true);
 		ifsf.setMetric(sig);
 		ifsf.setGenerateFaceNormals(true);
 		ifsf.setVertexCount(points.length);
-		ifsf.setFaceCount(1);
 		ifsf.setVertexCoordinates(points);
+		ifsf.setFaceCount(1);
 		ifsf.setFaceIndices(new int[][]{{}});
-		ifsf.setFaceIndices(ind);
-		ifsf.setEdgeCount(1);
-		ind = new int[1][points.length+1];
-		for (int i = 0; i<=points.length; ++i)	ind[0][i] = (i%points.length);
+		int[][] find = new int[1][points.length];
+		for (int i = 0; i<points.length; ++i)	find[0][i] = (i);
+		ifsf.setFaceIndices(find);
+		int[][] ind = new int[points.length][2];
+		for (int i = 0; i<points.length; ++i)	{ind[i][0] = i; ind[i][1] = (i+1)%points.length;}
+		ifsf.setEdgeCount(ind.length);
 		ifsf.setEdgeIndices(ind);
 		ifsf.update();
 		
@@ -523,13 +523,23 @@ public class IndexedFaceSetUtility {
 	 * @return
 	 */
 	public static IndexedFaceSet removeTextureCoordinateJumps(IndexedFaceSet src, double jumpSize)	{
-		return removeTextureCoordinateJumps(src, jumpSize, jumpSize);
-	}
+			return removeTextureCoordinateJumps(src, jumpSize, jumpSize);
+		}
+	public static IndexedFaceSet removeTextureCoordinateJumps(IndexedFaceSet src, double jumpSize, double jpsize)	{
+			return removeTextureCoordinateJumps(src, 0, jumpSize, jpsize);
+		}
 	
-	public static IndexedFaceSet removeTextureCoordinateJumps(IndexedFaceSet src, double ujumpSize, double vjumpSize)	{
+	public static IndexedFaceSet removeTextureCoordinateJumps(IndexedFaceSet src, int wtex, double ujumpSize, double vjumpSize)	{
 		int np = src.getNumPoints();
 		int nf = src.getNumFaces();
-		double[][] textureCoords = src.getVertexAttributes(Attribute.TEXTURE_COORDINATES).toDoubleArrayArray(null);
+		// this is a terrible hack. There's a new parameter (wtex) that controls
+		// which texture coordinates are read.
+		// But Attribute.TEXTURE_COORDINATES is always written.
+		// Important right now is that is fixes the conformal movie animation.
+		Attribute texAtt = Attribute.TEXTURE_COORDINATES;
+		if (wtex == 1) texAtt = Attribute.TEXTURE_COORDINATES1;
+		else if (wtex == 2) texAtt = Attribute.TEXTURE_COORDINATES2;
+		double[][] textureCoords = src.getVertexAttributes(texAtt).toDoubleArrayArray(null);
 		int[][] indices = src.getFaceAttributes(Attribute.INDICES).toIntArrayArray(null);
 		int newVerts = 0;
 		double[][][] minmax = new double[nf][][];
@@ -580,6 +590,7 @@ public class IndexedFaceSetUtility {
 							while ((minmax[i][0][k] - ntex[outcount][k]) > .5) 
 								ntex[outcount][k] += 1.0;//Math.ceil(ntex[outcount][k] - minmax[i][0][k]); 
 							LoggingSystem.getLogger(IndexedFaceSetUtility.class).log(Level.FINE, "Setting texture coordinate to "+ntex[outcount][k]+"from "+textureCoords[which][k]);							}
+//						System.err.println("Setting texture coordinate to "+ntex[outcount][k]+"from "+textureCoords[which][k]);
 					}
 					indices[i][j] = outcount;
 					outcount++;
@@ -604,6 +615,8 @@ public class IndexedFaceSetUtility {
 		if( src.getFaceAttributes(Attribute.COLORS) != null) 
 			ifsf.setFaceColors( src.getFaceAttributes(Attribute.COLORS));
 		ifsf.update();
+//		ifsf.getIndexedFaceSet().setVertexAttributes(Attribute.TEXTURE_COORDINATES1, 
+//				src.getVertexAttributes(Attribute.TEXTURE_COORDINATES1));
 		return ifsf.getIndexedFaceSet();
 	}
 

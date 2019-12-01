@@ -43,6 +43,7 @@ package de.jreality.geometry;
 import java.awt.Color;
 import java.util.Vector;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import de.jreality.geometry.TubeUtility.FrameInfo;
 import de.jreality.math.Matrix;
@@ -111,8 +112,11 @@ import de.jreality.util.LoggingSystem;
 public  class TubeFactory {
 
 		static int debug = 0; //255;
-//		static Logger LoggingSystem.getLogger(this) = LoggingSystem.getLogger(TubeFactory.class);
-		
+//		static Logger logger = LoggingSystem.getLogger(TubeFactory.class);
+		Logger logger = LoggingSystem.getLogger(this);
+		{
+			logger.setLevel(Level.SEVERE);
+		}
 		public double[][] theCurve, 
 			userTangents = null,
 			userBinormals = null,
@@ -474,7 +478,7 @@ public  class TubeFactory {
 				throw new IllegalArgumentException("Points must have dimension 4");
 			}
 		 	if ((debug & 1) != 0)	
-		 		LoggingSystem.getLogger(this).log(Level.FINER,"Generating frame field for metric "+metric);
+		 		logger.log(Level.FINER,"Generating frame field for metric "+metric);
 		 	if (tangentField == null || tangentField.length != (numberJoints-2))	{
 				tangentField = new double[numberJoints-2][4];
 				frenetNormalField = new double[numberJoints-2][4];
@@ -485,7 +489,7 @@ public  class TubeFactory {
 			double[] d  = new double[numberJoints-2];			// distances between adjacent points
 			if ((debug & 32) != 0)	{
 				for (int i = 0; i<numberJoints; ++i)	{
-					LoggingSystem.getLogger(this).log(Level.FINER,"Vertex "+i+" : "+Rn.toString(polygonh[i]));
+					logger.log(Level.FINER,"Vertex "+i+" : "+Rn.toString(polygonh[i]));
 				}
 			}
 			double[] frame = new double[16];
@@ -505,13 +509,14 @@ public  class TubeFactory {
 				double theta = 0.0, phi=0.0;
 				boolean collinear = false;
 				double[] polarPlane = Pn.polarizePoint(null, polygonh[i], metric);
-				if ((debug & 2) != 0) LoggingSystem.getLogger(this).log(Level.FINER,"Polar plane is: "+Rn.toString(polarPlane));					
+				if ((debug & 2) != 0) logger.log(Level.FINE,"Polar plane is: "+Rn.toString(polarPlane));					
 				
 				double[] osculatingPlane = P3.planeFromPoints(null, polygonh[i-1], polygonh[i], polygonh[i+1]);
 				double size = Rn.euclideanNormSquared(osculatingPlane);
 				if (size < 10E-16)	{			// collinear points!
 					collinear = true;
-					if ((debug & 2) != 0) LoggingSystem.getLogger(this).log(Level.FINER,"degenerate binormal");
+//					System.err.println("Collinear is true.");
+					if ((debug & 2) != 0) logger.log(Level.FINER,"degenerate binormal");
 					if (i == 1)		binormalField[i-1] = getInitialBinormal(polygonh, metric);
 					else Pn.projectToTangentSpace(binormalField[i-1], polygonh[i], binormalField[i-2], metric);
 				} else
@@ -523,7 +528,7 @@ public  class TubeFactory {
 					double foo = Pn.angleBetween(binormalField[i-2], binormalField[i-1], metric);
 					if (Math.abs(foo) > Math.PI/2)  Rn.times(binormalField[i-1], -1, binormalField[i-1]);
 				}
-				if ((debug & 2) != 0) LoggingSystem.getLogger(this).log(Level.FINER,"Binormal is "+Rn.toString(binormalField[i-1]));
+				if ((debug & 2) != 0) logger.log(Level.FINER,"Binormal is "+Rn.toString(binormalField[i-1]));
 //				System.err.println("Binormal field = "+Rn.toString(binormalField[i-1]));
 
 				/*
@@ -542,7 +547,7 @@ public  class TubeFactory {
 						plane2 = P3.planeFromPoints(null, binormalField[i-1], polygonh[i], polygonh[i+1]);
 						midPlane = Pn.midPlane(null, plane1, plane2, metric);
 						size = Rn.euclideanNormSquared(midPlane);
-						if ((debug & 2) != 0) LoggingSystem.getLogger(this).log(Level.FINER,"tangent norm squared is "+size);					
+						if ((debug & 2) != 0) logger.log(Level.FINER,"tangent norm squared is "+size);					
 						theta = Pn.angleBetween(plane1, plane2, metric);
 					}
 					/*
@@ -551,37 +556,27 @@ public  class TubeFactory {
 					 */ 
 					if (collinear || size < 10E-16)	{
 						// the three points must be collinear
-						if ((debug & 2) != 0) LoggingSystem.getLogger(this).log(Level.FINER,"degenerate Tangent vector");
+						if ((debug & 2) != 0) logger.log(Level.FINER,"degenerate Tangent vector");
 						// TODO figure out why much breaks 
 						// if the two vertices in the following call are swapped
 						double[] pseudoT = P3.lineIntersectPlane(null, polygonh[i-1], polygonh[i+1], polarPlane);	
-						if ((debug & 2) != 0) LoggingSystem.getLogger(this).log(Level.FINE,"pseudo-Tangent vector is "+Rn.toString(pseudoT));
+						if ((debug & 2) != 0) logger.log(Level.FINE,"pseudo-Tangent vector is "+Rn.toString(pseudoT));
 						// more euclidean/noneuclidean trouble
 						// we want the plane equation of the midplane 
 						if (metric != Pn.EUCLIDEAN)	{
 							midPlane = Pn.polarizePoint(null, pseudoT, metric);
 						} else {
-							// TODO figure out why the vector (the output of lineIntersectPlane)
-							// has to be flipped in this case but not in the non-euclidean case
-							midPlane = Rn.times(null, -1.0, pseudoT);
-//							midPlane = pseudoT;
-							// the euclidean polar of a point is the plane at infinity: we want something
-							// much more specific: 
-							// we assume the polygonal data is dehomogenized (last coord = 1)
-							midPlane[3] = -Rn.innerProduct(midPlane, polygonh[i], 3);	
-							// actually shouldn't we just keep the old tangent in the euclidean case?
-							if (i > 1) midPlane = tangentField[i-2];
+							midPlane = pseudoT;    // the degenerate metric at work
 						}	
 						// TODO detect case where the angle is 0, also
 						theta = Math.PI;
 					}
-					//System.err.println("calc'ed midplane is "+Rn.toString(midPlane));
-					if ((debug & 2) != 0) LoggingSystem.getLogger(this).log(Level.FINE,"Midplane is "+Rn.toString(midPlane));
-					if (collinear && metric == Pn.EUCLIDEAN) 
-						if (i > 1) tangentField[i-1] = tangentField[i-2];
-					else
-						Pn.polarizePlane(tangentField[i-1], midPlane, metric);						
+//					System.err.println(i+"collinear = "+collinear+" Midplane = "+Rn.toString(midPlane));
+									//System.err.println("calc'ed midplane is "+Rn.toString(midPlane));
+					if ((debug & 2) != 0) logger.log(Level.FINE,"Midplane is "+Rn.toString(midPlane));
+					Pn.polarizePlane(tangentField[i-1], midPlane, metric);						
 				}
+//				System.err.println(i+" Tangent field = "+Rn.toString(tangentField[i-1]));
 				// This is a hack to try to choose the correct version of the tangent vector:
 				// since we're in projective space, t and -t are equivalent but only one
 				// "points" in the correct direction.  Deserves further study!
@@ -594,7 +589,7 @@ public  class TubeFactory {
 				// finally calculate the normal vector
 				Pn.polarizePlane(frenetNormalField[i-1], P3.planeFromPoints(null,binormalField[i-1], tangentField[i-1],  polygonh[i]),metric);					
 				Pn.setToLength(frenetNormalField[i-1], frenetNormalField[i-1], 1.0, metric);
-				if ((debug & 2) != 0) LoggingSystem.getLogger(this).log(Level.FINE,"frenet normal is "+Rn.toString(frenetNormalField[i-1]));
+				if ((debug & 2) != 0) logger.log(Level.FINE,"frenet normal is "+Rn.toString(frenetNormalField[i-1]));
 				if (type == FrameFieldType.PARALLEL)	{
 					// get started 
 					if (i == 1)		System.arraycopy(frenetNormalField[0], 0, parallelNormalField[0], 0, 4);		
@@ -602,15 +597,14 @@ public  class TubeFactory {
 						double[] nPlane = P3.planeFromPoints(null, polygonh[i], polygonh[i-1], parallelNormalField[i-2]);
 						double[] projectedN = P3.pointFromPlanes(null, nPlane, midPlane, polarPlane );
 						if (Rn.euclideanNormSquared(projectedN) < 10E-16)	{
-							LoggingSystem.getLogger(this).log(Level.FINE,"degenerate normal");
+							logger.log(Level.FINE,"degenerate normal");
 							projectedN = parallelNormalField[i-2];		// try something!
 						}
 						parallelNormalField[i-1] = Pn.normalizePlane(null, projectedN, metric);
-						if ((debug & 128) != 0)	LoggingSystem.getLogger(this).log(Level.FINE,"Parallel normal is "+Rn.toString(parallelNormalField[i-1]));
 					
 					}
 //					if (size < 10E-16)	{
-//						if ((debug & 2) != 0) LoggingSystem.getLogger(this).log(Level.FINE,"degenerate parallel normal");
+//						if ((debug & 2) != 0) logger.log(Level.FINE,"degenerate parallel normal");
 //						if (i > 1) parallelNormalField[i-1] = parallelNormalField[i-2];
 //					}
 					if (parallelNormalField[i-1] == null)	{
@@ -618,6 +612,7 @@ public  class TubeFactory {
 //						throw new IllegalStateException("Null vector");
 					} else 
 						Pn.setToLength(parallelNormalField[i-1], parallelNormalField[i-1], 1.0, metric);
+					if ((debug & 128) != 0)	logger.log(Level.FINE,"Parallel normal is "+Rn.toString(parallelNormalField[i-1]));
 					phi = Pn.angleBetween(frenetNormalField[i-1],parallelNormalField[i-1],metric);
 					if (metric == Pn.ELLIPTIC)	{
 						if (phi > Math.PI/2) phi = phi - Math.PI;
@@ -629,15 +624,16 @@ public  class TubeFactory {
 //				size = Rn.euclideanNormSquared(pN[i-1]);
 				else phi = 0.0;
 //				System.err.println(i+" Normal field = "+Rn.toString(frenetNormalField[i-1]));
+//				System.err.println(i+" theta, phi = "+theta+" "+phi);
 				
 				System.arraycopy(frenetNormalField[i-1], 0, frame, 0, 4);
 				System.arraycopy(binormalField[i-1], 0, frame, 4, 4);
 				System.arraycopy(tangentField[i-1], 0, frame, 8, 4);
 				System.arraycopy(polygonh[i], 0, frame, 12, 4);
 				   	
-				if ((debug & 4) != 0) LoggingSystem.getLogger(this).log(Level.FINE,"determinant is:\n"+Rn.determinant(frame));
+				if ((debug & 4) != 0) logger.log(Level.FINE,"determinant is:\n"+Rn.determinant(frame));
 				frameInfo[i-1] = new FrameInfo(Rn.transpose(null, frame),d[i-1],theta, phi);
-				if ((debug & 16) != 0) LoggingSystem.getLogger(this).log(Level.FINE,"Frame "+(i-1)+": "+frameInfo[i-1].toString());
+				if ((debug & 16) != 0) logger.log(Level.FINE,"Frame "+(i-1)+": "+frameInfo[i-1].toString());
 			}
 			framesDirty = false;
 			return frameInfo;

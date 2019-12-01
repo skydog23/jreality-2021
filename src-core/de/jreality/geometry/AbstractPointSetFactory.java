@@ -117,7 +117,7 @@ public class AbstractPointSetFactory extends AbstractGeometryFactory {
 	}
 	
 	protected void setVertexCoordinates( double [][] data ) {
-		setVertexAttribute( Attribute.COORDINATES,
+		setVertexAttribute( Attribute.COORDINATES, data == null ? null :
 				StorageModel.DOUBLE_ARRAY.array(data[0].length).createReadOnly(data));
 	}
 	
