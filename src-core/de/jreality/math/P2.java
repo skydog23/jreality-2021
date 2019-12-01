@@ -391,16 +391,6 @@ final public class P2 {
 		return dst;
 	}
 
-	 public static double[][] imbedP2InP3(double[][] vec4, double[][] vec3)	{
-		double[][] dst;
-		if (vec4 == null || vec3.length != vec4.length)	dst = new double[vec3.length][4];
-		else dst = vec4;
-		for (int i = 0; i<vec3.length; ++i)	{
-			imbedP2InP3(dst[i], vec3[i]);
-		}
-		return dst;
-	}
-
 	 private static int[] which = {0,1,3};
 	 public static double[] imbedMatrixP2InP3(double[] dst, double[] m3)	{
 			if (dst == null)	dst = new double[16];

@@ -41,17 +41,18 @@ public class SkyboxAndReflMapExample {
 		CubeMap rm = null;
 		try {
 			rm = TextureUtility.createReflectionMap(ap,"polygonShader",
-					"/Users/gunn/Software/workspace/ProjectiveGeometry/src/charlesgunn/jreality/resources/cubemapStarmap/foo.",
+			  	"http://www3.math.tu-berlin.de/jreality/download/data/reflectionMap/desert_",
 			     new String[]{"rt","lf","up", "dn","bk","ft"},
-			     ".png");
+			     ".jpg");
 			TextureUtility.createReflectionMap(ap,"lineShader.polygonShader",
-				  	TextureUtility.getCubeMapImages(rm));
+				  	"http://www3.math.tu-berlin.de/jreality/download/data/reflectionMap/desert_",
+				     new String[]{"rt","lf","up", "dn","bk","ft"},
+				     ".jpg");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		Viewer v = JRViewer.display(worldSGC);
 		ImageData[] sides = TextureUtility.getCubeMapImages(rm);
-		System.err.println("width = "+sides[0].getWidth());
 		// attach a skybox to the scene root
 		TextureUtility.createSkyBox(v.getSceneRoot().getAppearance(), sides);
 	}

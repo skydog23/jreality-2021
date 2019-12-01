@@ -401,7 +401,6 @@ abstract public class AbstractViewer implements de.jreality.scene.Viewer,
 
 	public static Matrix[] cubeMapMatrices = new Matrix[6],
 			textureMapMatrices = new Matrix[6];
-	static double[] xplane = {1,0,0,0}, yplane = {0,1,0,0};
 	static {
 		for (int i = 0; i < 6; i++) {
 			cubeMapMatrices[i] = new Matrix();
@@ -415,8 +414,7 @@ abstract public class AbstractViewer implements de.jreality.scene.Viewer,
 				.assignTo(cubeMapMatrices[2]); // up
 		MatrixBuilder.euclidean().rotateX(-Math.PI / 2)
 				.assignTo(cubeMapMatrices[3]); // down
-		MatrixBuilder.euclidean().rotateY(Math.PI)
-				.assignTo(cubeMapMatrices[5]); // back
+		MatrixBuilder.euclidean().rotateY(Math.PI).assignTo(cubeMapMatrices[5]); // back
 																					// ...
 																					// front
 																					// (Id)
@@ -435,12 +433,10 @@ abstract public class AbstractViewer implements de.jreality.scene.Viewer,
 		if (camNode.getTransformation() == null)
 			camNode.setTransformation(new Transformation());
 		Matrix oldCamMat = new Matrix(camNode.getTransformation().getMatrix());
-		System.err.println(" old cam matrix = "+oldCamMat.toString());
 		for (int i = 0; i < 6; ++i) {
 			Matrix newCamMat = new Matrix(oldCamMat);
 			newCamMat.multiplyOnRight(cubeMapMatrices[i]);
 			newCamMat.assignTo(camNode);
-			System.err.println(i+" cam matrix = "+newCamMat.toString());
 			cmp[i] = renderOffscreen(cmp[i], size, size);
 		}
 		cam.setFieldOfView(oldFOV);

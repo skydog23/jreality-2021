@@ -46,10 +46,8 @@ import de.jreality.jogl.shader.JOGLTexture2D;
 import de.jreality.jogl.shader.Texture2DLoaderJOGL;
 import de.jreality.math.P3;
 import de.jreality.math.Pn;
-import de.jreality.math.Rn;
 import de.jreality.scene.Appearance;
 import de.jreality.scene.Camera;
-import de.jreality.scene.Transformation;
 import de.jreality.scene.data.AttributeEntityUtility;
 import de.jreality.shader.CubeMap;
 import de.jreality.shader.ImageData;
@@ -100,14 +98,8 @@ class JOGLSkyBox {
 		gl.glColor4fv(white, 0);
 		gl.glPushMatrix();
 
-		double[] w2cRot = P3.extractOrientationMatrix(null, w2c,
-				P3.originP3, Pn.EUCLIDEAN);
-		Transformation t = cm.getTransformation();
-		if (t != null) 	{
-			double[] o2w = t.getMatrix();
-			Rn.times(w2cRot, w2cRot,  o2w);
-		}
-		gl.glLoadTransposeMatrixd(w2cRot, 0);
+		gl.glLoadTransposeMatrixd(P3.extractOrientationMatrix(null, w2c,
+				P3.originP3, Pn.EUCLIDEAN), 0);
 		double scale = (cam.getNear() + cam.getFar()) / 2;
 		// Here's where you can control whether the images appear mirrored or
 		// not

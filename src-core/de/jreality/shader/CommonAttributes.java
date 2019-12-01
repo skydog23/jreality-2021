@@ -82,8 +82,6 @@ import de.jreality.scene.Appearance;
     public final static boolean  FOG_ENABLED_DEFAULT = false;
     public final static String FOG_COLOR = "fogColor";
     public final static String FOG_DENSITY = "fogDensity";
-    public final static String FOG_BEGIN = "fogBegin";
-    public final static String FOG_END = "fogEnd";
     public final static double FOG_DENSITY_DEFAULT = 0.1; 
     // rendering hints that have to be in the root appearance to take effect
 	public static final String ONE_TEXTURE2D_PER_IMAGE = "oneTexture2DPerImage";	// allows optimizing performance if true; default: false
@@ -303,7 +301,7 @@ import de.jreality.scene.Appearance;
 			return FOG_ENABLED_DEFAULT;
 		if(key.equals("fogDensity"))
 			return FOG_DENSITY_DEFAULT;
-		if(key.equals("levelOfDetail"))
+		if(key.equals("levenOfDetail"))
 			return LEVEL_OF_DETAIL_DEFAULT;
 		if(key.equals("opaqueTubesAndSpheres"))
 			return OPAQUE_TUBES_AND_SPHERES_DEFAULT;

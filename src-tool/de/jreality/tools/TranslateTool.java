@@ -57,7 +57,7 @@ import de.jreality.scene.tool.ToolContext;
  */
 public class TranslateTool extends AbstractTool {
 
-    private static InputSlot activate = InputSlot.MIDDLE_BUTTON; //getDevice("TranslateActivation");
+    private static InputSlot activate = InputSlot.getDevice("TranslateActivation");
     private static InputSlot trafo = InputSlot.getDevice("DeltaTranslation");
     
     public TranslateTool() {

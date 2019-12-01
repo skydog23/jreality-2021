@@ -123,7 +123,7 @@ public class LoggingSystem {
         logger.setLevel(GLOBAL_LEVEL);
         handler.setLevel(Level.ALL);
         // make debugging loggers noisy
-        Logger.getLogger("de.jreality.geometry").setLevel(Level.FINER);
+        Logger.getLogger("de.jreality.scene.geometry").setLevel(Level.FINER);
 //        Logger.getLogger("de.jreality.toolsystem").setLevel(Level.FINER);
 //        Logger.getLogger("de.jreality.scene.pick").setLevel(Level.FINE);
 //        Logger.getLogger("de.jreality.math").setLevel(Level.FINER);

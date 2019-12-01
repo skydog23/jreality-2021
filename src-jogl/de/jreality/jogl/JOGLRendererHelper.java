@@ -48,7 +48,6 @@ import java.util.logging.Level;
 
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.GL2ES1;
 
 import de.jreality.backends.label.LabelUtility;
 import de.jreality.geometry.GeometryUtility;
@@ -59,7 +58,6 @@ import de.jreality.jogl.shader.Texture2DLoaderJOGL;
 import de.jreality.math.Pn;
 import de.jreality.math.Rn;
 import de.jreality.scene.Appearance;
-import de.jreality.scene.Camera;
 import de.jreality.scene.ClippingPlane;
 import de.jreality.scene.IndexedFaceSet;
 import de.jreality.scene.IndexedLineSet;
@@ -78,7 +76,6 @@ import de.jreality.shader.DefaultTextShader;
 import de.jreality.shader.ImageData;
 import de.jreality.shader.Texture2D;
 import de.jreality.shader.TextureUtility;
-import de.jreality.util.CameraUtility;
 
 public class JOGLRendererHelper {
 
@@ -245,35 +242,24 @@ public class JOGLRendererHelper {
 			if (bgo != null && bgo instanceof Color) {
 				fogColor = ((Color) bgo).getRGBComponents(null);
 			}
-//			gl.glFogi(GL2.GL_FOG_MODE, GL2.GL_EXP2);
-			gl.glFogi(GL2.GL_FOG_MODE, GL2.GL_LINEAR);
-			Camera cam = CameraUtility.getCamera(jr.theViewer);
-			float near = (float) (cam.getNear()*2);
-			float far = (float) (cam.getFar()*.5);
-			bgo = topAp.getAttribute(CommonAttributes.FOG_BEGIN);
-			if (bgo != null && bgo instanceof Double) {
-				near = (float) ((Double) bgo).doubleValue();
-			}
-			bgo = topAp.getAttribute(CommonAttributes.FOG_END);
-			if (bgo != null && bgo instanceof Double) {
-				far = (float) ((Double) bgo).doubleValue();
-			}
-//			System.err.println("near, far: "+near+" "+far);
-			gl.glFogf(GL2ES1.GL_FOG_START, near);
-			gl.glFogf(GL2ES1.GL_FOG_END, far);
-			gl.glFogfv(GL2ES1.GL_FOG_COLOR, fogColor, 0);
+			gl.glFogi(GL2.GL_FOG_MODE, GL2.GL_EXP);
+			gl.glFogfv(GL2.GL_FOG_COLOR, fogColor, 0);
 			bgo = topAp.getAttribute(CommonAttributes.FOG_DENSITY);
 			float density = (float) CommonAttributes.FOG_DENSITY_DEFAULT;
 			if (bgo != null && bgo instanceof Double) {
 				density = (float) ((Double) bgo).doubleValue();
 			}
-			gl.glFogf(GL2ES1.GL_FOG_DENSITY, density);
+			gl.glFogf(GL2.GL_FOG_DENSITY, density);
 		} else {
-			gl.glDisable(GL2ES1.GL_FOG);
-			gl.glFogf(GL2ES1.GL_FOG_DENSITY, 0f);
+			gl.glDisable(GL2.GL_FOG);
+			gl.glFogf(GL2.GL_FOG_DENSITY, 0f);
 		}
 	}
 
+	// private static ByteBuffer vBuffer, vcBuffer, vnBuffer, fcBuffer,
+	// fnBuffer, tcBuffer;
+
+	// private static DataList vLast = null, vcLast = null, vnLast = null;
 
 	@Deprecated
 	public static void drawVertices(JOGLRenderer jr, PointSet sg, double alpha) {
@@ -476,14 +462,13 @@ public class JOGLRendererHelper {
 		DataList lightMapCoords = sg.getVertexAttributes(Attribute
 				.attributeForName("lightmap coordinates"));
 		int textureCount = jr.renderingState.texUnitCount;
-//		if (texCoords2 != null)
-//		 System.err.println("got texture coordinates 2, # tex units = "+textureCount+" name "+sg.getName());
+		 if (texCoords2 != null)
+		 System.err.println("got texture coordinates 2, # tex units = "+textureCount+" name "+sg.getName());
 
 		// JOGLConfiguration.theLog.log(Level.INFO,"Vertex normals are:
 		// "+((vertexNormals != null) ? vertexNormals.size() : 0));
 		// JOGLConfiguration.theLog.log(Level.INFO,"alpha value is "+alpha);
-//		System.err.println("draw faces: vertex normals "+vertexNormals);
-//		System.err.println("draw faces: face normals "+Rn.toString(faceNormals.toDoubleArrayArray(null)));
+
 		// vertex color has priority over face color
 		vertices = sg.getVertexAttributes(Attribute.COORDINATES);
 		int vertexLength = GeometryUtility.getVectorLength(vertices);
@@ -521,7 +506,7 @@ public class JOGLRendererHelper {
 		jr.renderingState.normals4d = !doNormals3; //jr.renderingState.currentMetric != Pn.EUCLIDEAN; //
 		// HACK!!! make sure the vertex shader knows whether the normals are 4d
 		// or 3d
-//		gl.glFogf(GL2.GL_FOG_START, jr.renderingState.normals4d ? 0.01f : 0f);
+		gl.glFogf(GL2.GL_FOG_START, jr.renderingState.normals4d ? 0.01f : 0f);
 //		if (nFiber == 4)
 //		 System.err.println("Rendering 4d normals for "+sg.getName());
 		DoubleArray da = null;

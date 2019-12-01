@@ -258,10 +258,6 @@ public class JOGLRenderer {
 		// Rectangle2D viewPort = CameraUtility.getViewport(theCamera,
 		// aspectRatio);
 		// System.err.println("Camera viewport = "+viewPort.toString());
-		if (renderingState.fogEnabled)	{
-			globalGL.glFogf(GL2.GL_FOG_START, (float) (theCamera.getNear()*1.5));
-			globalGL.glFogf(GL2.GL_FOG_END, (float) (theCamera.getFar()/2.0));
-		}
 		double[] c2ndc = CameraUtility.getCameraToNDC(theCamera,
 				getAspectRatio(), whichEye);
 		// System.err.println("C2ndc = "+Rn.matrixToString(c2ndc));
@@ -330,7 +326,6 @@ public class JOGLRenderer {
 			lightsChanged = true;
 		}
 		lightHelper.enableLights(globalGL, lights.size());
-//		System.err.println("processing "+lights.size()+" lights");
 		if (lightsChanged) {
 			lightHelper.cacheLightMatrices(lights);
 			lightsChanged = false;
