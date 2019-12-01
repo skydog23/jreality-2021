@@ -254,7 +254,7 @@ public class Sky extends Plugin implements UIFlavor {
 		}
 	}
 
-	private void setCubeMap(ImageData[] cubeMap) {
+	public void setCubeMap(ImageData[] cubeMap) {
 		this.cubeMap = cubeMap;
 		Appearance rootAppearance = scene.getRootAppearance();
 		if (showSkyCheckBox.isSelected()) {

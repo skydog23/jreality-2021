@@ -116,6 +116,7 @@ public class ViewerKeyListener extends KeyAdapter {
 			helpOverlay.registerKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_S,0), "Toggle smooth shading");
 			helpOverlay.registerKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_S,InputEvent.SHIFT_DOWN_MASK), "Toggle sphere drawing");
 //			helpOverlay.registerKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_T,0), "Activate translation tool");
+			helpOverlay.registerKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_T,0), "Toggle transparency enabled");
 			helpOverlay.registerKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_T,InputEvent.SHIFT_DOWN_MASK), "Toggle tube drawing");
 			helpOverlay.registerKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_U,0), "Increase fog factor");
 			helpOverlay.registerKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_U,InputEvent.SHIFT_DOWN_MASK), "Decrease fog factor");
@@ -123,7 +124,6 @@ public class ViewerKeyListener extends KeyAdapter {
 			helpOverlay.registerKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_V,InputEvent.SHIFT_DOWN_MASK), "Toggle vertex drawing");
 			helpOverlay.registerKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_W,0), "Increase line width/ tube radius");
 			helpOverlay.registerKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_W,InputEvent.SHIFT_DOWN_MASK), "Decrease line width/tube radius");
-			helpOverlay.registerKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_X,0), "Toggle transparency enabled");
 			helpOverlay.registerKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_X,InputEvent.SHIFT_DOWN_MASK), "Toggle thread-safe");
 //			helpOverlay.registerKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_Y,0), "Activate selection tool");
 			helpOverlay.registerKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_Y,InputEvent.SHIFT_DOWN_MASK), "Activate stereo tool");
@@ -290,6 +290,7 @@ public class ViewerKeyListener extends KeyAdapter {
 				case KeyEvent.VK_T:		// activate translation tool
 					if (e.isShiftDown()) toggleValue(CommonAttributes.LINE_SHADER+"."+CommonAttributes.TUBES_DRAW);
 //					else if (tm != null) tm.activateTool(ToolManager.TRANSLATION_TOOL);
+					else toggleValue(CommonAttributes.TRANSPARENCY_ENABLED);
 				    viewer.renderAsync();
 					break;
 				
@@ -314,7 +315,6 @@ public class ViewerKeyListener extends KeyAdapter {
 						SceneGraphNode.setThreadSafe(!SceneGraphNode.getThreadSafe());
 						System.err.println("Thread safe is now "+SceneGraphNode.getThreadSafe());
 					}
-					else toggleValue(CommonAttributes.TRANSPARENCY_ENABLED);
 					break;
 					
 				case KeyEvent.VK_Y:		// activate tool

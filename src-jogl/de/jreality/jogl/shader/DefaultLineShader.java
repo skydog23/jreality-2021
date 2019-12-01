@@ -409,6 +409,7 @@ public class DefaultLineShader extends AbstractPrimitiveShader implements LineSh
 						p2[xx] = da.getValueAt(xx);
 					SceneGraphComponent cc = TubeUtility.tubeOneEdge(p1, p2,
 							effectiveRadius, crossSection, sig);
+//					System.err.println("Rendering one tubed edge metric = "+sig);
 					if (cc.getGeometry() != null) {
 						if (pickMode)
 							gl.glPushName(j);

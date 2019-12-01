@@ -208,8 +208,13 @@ public class View extends SideContainerPerspective implements ChangeListener {
 			String[] vrs = viewer.split(" ");
 			List<Viewer> viewerList = new LinkedList<Viewer>();
 			String viewerClassName;
+	    	String cp = System.getProperty("java.class.path").replace(':', '\n'); //split(":");
+	    	System.err.println("cp = "+cp);
+	    	 cp = System.getProperty("java.library.path").replace(':', '\n'); //split(":");
+	    	System.err.println("java.library.path = "+cp);
 			for (int i = 0; i < vrs.length; i++) {
 				viewerClassName = vrs[i];
+				System.err.println("view: viewer name "+viewerClassName);
 				try {
 					Viewer v = (Viewer) Class.forName(viewerClassName).newInstance();
 					viewerList.add(v);

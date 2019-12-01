@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.fixedfunc.GLLightingFunc;
 
 import de.jreality.scene.DirectionalLight;
 import de.jreality.scene.Light;
@@ -144,7 +145,7 @@ public class JOGLLightHelper {
 	private void wisit(PointLight dl, GL2 globalGL, int lightCount) {
 		// gl.glLightfv(lightCount, GL.GL_AMBIENT, lightAmbient);
 		wisit((Light) dl, globalGL, lightCount);
-		globalGL.glLightfv(lightCount, GL2.GL_POSITION, origin, 0);
+		globalGL.glLightfv(lightCount, GLLightingFunc.GL_POSITION, origin, 0);
 		globalGL.glLightf(lightCount, GL2.GL_CONSTANT_ATTENUATION,
 				(float) dl.getFalloffA0());
 		globalGL.glLightf(lightCount, GL2.GL_LINEAR_ATTENUATION,

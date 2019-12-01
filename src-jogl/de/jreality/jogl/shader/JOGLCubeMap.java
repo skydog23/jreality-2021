@@ -2,6 +2,7 @@ package de.jreality.jogl.shader;
 
 import java.awt.Color;
 
+import de.jreality.scene.Transformation;
 import de.jreality.shader.CubeMap;
 import de.jreality.shader.ImageData;
 
@@ -93,6 +94,18 @@ public class JOGLCubeMap implements CubeMap {
 	public void setBlendColor(Color blendColor) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Transformation getTransformation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setTransformation(Transformation t) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
