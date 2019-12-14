@@ -43,8 +43,8 @@ public class ContentTools extends Plugin {
 	private static final boolean DEFAULT_SNAP_TO_GRID_ENABLED = false;
 
 	private RotateTool rotateTool;
-	private SimpleRotateTool simpleRotateTool;
-	private SimpleDraggingTool simpleDraggingTool;
+//	private SimpleRotateTool simpleRotateTool;
+//	private SimpleDraggingTool simpleDraggingTool;
 	private DraggingTool draggingTool;
 	private AxisTranslationTool snapDragTool;
 	private EncompassTool encompassTool;
@@ -128,16 +128,16 @@ public class ContentTools extends Plugin {
 		rotateTool.setAnimTimeMin(250.0);
 		rotateTool.setAnimTimeMax(750.0);
 		
-		simpleRotateTool = new SimpleRotateTool();
-		simpleRotateTool.setFixOrigin(false);
-		simpleRotateTool.setMoveChildren(false);
-		simpleRotateTool.setUpdateCenter(false);
+//		simpleRotateTool = new SimpleRotateTool();
+//		simpleRotateTool.setFixOrigin(false);
+//		simpleRotateTool.setMoveChildren(false);
+//		simpleRotateTool.setUpdateCenter(false);
 		
 		draggingTool = new DraggingTool();
 		draggingTool.setMoveChildren(false);
 		
-		simpleDraggingTool = new SimpleDraggingTool();
-		simpleDraggingTool.setMoveChildren(false);
+//		simpleDraggingTool = new SimpleDraggingTool();
+//		simpleDraggingTool.setMoveChildren(false);
 
 		snapDragTool = new AxisTranslationTool();
 
@@ -255,8 +255,8 @@ public class ContentTools extends Plugin {
 		ViewToolBar tb = c.getPlugin(ViewToolBar.class);
 		installToolbox(tb);
 		
-		setToolEnabled(simpleRotateTool, true);
-		setToolEnabled(simpleDraggingTool, true);
+//		setToolEnabled(simpleRotateTool, true);
+//		setToolEnabled(simpleDraggingTool, true);
 	}
 
 	private void installToolbox(ToolBarAggregator viewToolbar) {

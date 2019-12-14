@@ -2,6 +2,7 @@ package de.jreality.jogl.shader;
 
 import java.awt.Color;
 
+import de.jreality.scene.Transformation;
 import de.jreality.shader.CubeMap;
 import de.jreality.shader.ImageData;
 
@@ -15,6 +16,7 @@ public class JOGLCubeMap implements CubeMap {
 	CubeMap proxy;
 	protected Color blendColor;
 	protected ImageData back, bottom, front, left, right, top;
+	Transformation tf;
 
 	public JOGLCubeMap(CubeMap t) {
 		super();
@@ -93,6 +95,18 @@ public class JOGLCubeMap implements CubeMap {
 	public void setBlendColor(Color blendColor) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Transformation getTransformation() {
+		// TODO Auto-generated method stub
+		return tf;
+	}
+
+	@Override
+	public void setTransformation(Transformation tf) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

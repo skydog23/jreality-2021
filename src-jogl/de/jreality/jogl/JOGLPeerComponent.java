@@ -429,8 +429,8 @@ public class JOGLPeerComponent extends JOGLPeerNode implements
 		} else if (goBetween.originalComponent.getGeometry() != null) {
 			if (debug)
 				theLog.log(Level.FINER, "Updating shaders for " + name);
-			if (geometryShader == null || parent == null
-					|| geometryShader == parent.geometryShader)
+			if (true || (geometryShader == null || parent == null
+					|| geometryShader == parent.geometryShader))
 				geometryShader = createGeometryShader();
 			else
 				geometryShader.setFromEffectiveAppearance(eAp, "");

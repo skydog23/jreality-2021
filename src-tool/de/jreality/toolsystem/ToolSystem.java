@@ -559,6 +559,8 @@ public class ToolSystem implements ToolEventReceiver {
 					noTrigger = candidates.isEmpty();
 				}
 			}
+//			if (activatedTools.size() != 0)
+//				System.err.println("activated tools = "+activatedTools.toString());
 			if (axis != null && axis.isReleased()) { // possible deactivation
 				Set<Tool> deactivated = findDeactivatedTools(slot);
 				deactivatedTools.addAll(deactivated);

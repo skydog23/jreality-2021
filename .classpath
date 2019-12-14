@@ -4,21 +4,21 @@
 	<classpathentry kind="src" path="src-backends-share"/>
 	<classpathentry kind="src" path="src-core">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="jreality/jni/linux64"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="jreality/jni/macosx"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry excluding="de/jreality/examples/SwtExample.java" kind="src" path="src-examples"/>
 	<classpathentry kind="src" path="src-gpgpu"/>
 	<classpathentry kind="src" path="src-io"/>
 	<classpathentry kind="src" path="src-jinput"/>
-	<classpathentry kind="src" path="src-jogl"/>
-	<classpathentry kind="src" path="src-jogl3"/>
-	<classpathentry kind="src" path="src-plugin"/>
-	<classpathentry excluding="de/jreality/toolsystem/raw/DeviceVPRNARTrack.java|de/jreality/toolsystem/raw/DeviceVRPNAnalog.java|de/jreality/toolsystem/raw/DeviceVRPNButton.java|de/jreality/toolsystem/raw/DeviceVRPNTracker.java|de/jreality/toolsystem/raw/DeviceVRPNARTrack.java" kind="src" path="src-portal">
+	<classpathentry kind="src" path="src-jogl">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/home/portal/jreality_portal/native32"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="jreality/jni/macosx"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path="src-jogl3"/>
+	<classpathentry kind="src" path="src-plugin"/>
+	<classpathentry excluding="de/jreality/toolsystem/raw/DeviceVPRNARTrack.java|de/jreality/toolsystem/raw/DeviceVRPNAnalog.java|de/jreality/toolsystem/raw/DeviceVRPNButton.java|de/jreality/toolsystem/raw/DeviceVRPNTracker.java|de/jreality/toolsystem/raw/DeviceVRPNARTrack.java" kind="src" path="src-portal"/>
 	<classpathentry kind="src" path="src-proxies"/>
 	<classpathentry kind="src" path="src-renderman"/>
 	<classpathentry kind="src" path="src-soft"/>
@@ -36,6 +36,11 @@
 	<classpathentry kind="src" path="test-proxies"/>
 	<classpathentry kind="src" path="test-swing"/>
 	<classpathentry kind="src" path="src-python"/>
+	<classpathentry kind="lib" path="lib/jogamp/gluegen-rt.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="jreality/jni/macosx"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="lib/jterm.jar"/>
 	<classpathentry kind="lib" path="lib/smrj.jar"/>
 	<classpathentry kind="lib" path="lib/sunflow.jar"/>
@@ -65,7 +70,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry exported="true" kind="lib" path="lib/jrworkspace.jar" sourcepath="/jrworkspace"/>
 	<classpathentry kind="lib" path="lib/itextpdf-5.3.2.jar"/>
-	<classpathentry kind="lib" path="lib/jogamp/gluegen-rt.jar"/>
-	<classpathentry kind="lib" path="lib/jogamp/jogl-all.jar"/>
+	<classpathentry kind="lib" path="lib/jogamp/jogl-all-natives-macosx-universal.jar"/>
+	<classpathentry kind="lib" path="lib/jogamp/jogl-all-2-3-2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

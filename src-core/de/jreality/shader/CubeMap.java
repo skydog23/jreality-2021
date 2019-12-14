@@ -42,6 +42,7 @@ package de.jreality.shader;
 
 import java.awt.Color;
 
+import de.jreality.scene.Transformation;
 import de.jreality.scene.data.AttributeEntity;
 
 
@@ -73,5 +74,9 @@ public interface CubeMap extends AttributeEntity {
   public void setBottom(ImageData img);
   public void setLeft(ImageData img);
   public void setRight(ImageData img);
+  
+  public Transformation getTransformation();
+  public void setTransformation(Transformation t);
+  
   
 }

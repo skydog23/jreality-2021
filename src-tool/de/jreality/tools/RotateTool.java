@@ -71,7 +71,7 @@ public class RotateTool extends AbstractTool {
   	evolutionSlot = InputSlot.getDevice("TrackballTransformation");
 
   private boolean 
-  	fixOrigin = false,
+  	fixOrigin = true,
   	rotateOnPick = false,
   	animationEnabled = true;
 

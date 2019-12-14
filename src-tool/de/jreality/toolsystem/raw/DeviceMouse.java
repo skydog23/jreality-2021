@@ -144,6 +144,7 @@ public class DeviceMouse extends AbstractDeviceMouse implements RawDevice, Mouse
       if (e.isAltDown() && ((mods & InputEvent.BUTTON2_MASK) != 0) ) button = 2;
       else if (button == 1 &&  ((mods & InputEvent.BUTTON3_MASK) != 0) ) button = 3;
     }
+//    System.err.println("Button "+button);
     return button;
   }
 

@@ -288,10 +288,10 @@ public class Pn {
 				vv = innerProduct(v, v, metric);
 				uv = innerProduct(u, v, metric);
 				if (uu >= 0 || vv >= 0) 	{// error: infinite distance
-					throw new IllegalArgumentException("Points cannot lie on or outside the hyperbolic absolute");
+//					throw new IllegalArgumentException("Points cannot lie on or outside the hyperbolic absolute");
 //					return (Double.MAX_VALUE);
 				}
-				double k =  -(uv)/Math.sqrt((uu*vv));
+				double k =  -(uv)/Math.sqrt((Math.abs(uu*vv)));
 				if (k < 1.0) k = 1.0;
 				d = Math.abs(acosh(k));
 //				else  //d = Math.abs(asinh(k));
@@ -877,7 +877,8 @@ public class Pn {
 	}
 	
 	/**
-	 * Calculate the projectivity that takes the standard basis to the basis given by dm and the unit point to the last entry of dm
+	 * Calculate the projectivity that takes 
+	 * the standard basis to the basis given by dm and the unit point to the last entry of dm
 	 * @param dst
 	 * @param domainPts
 	 * @param imagePts

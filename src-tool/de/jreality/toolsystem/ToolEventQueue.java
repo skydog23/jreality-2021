@@ -40,11 +40,13 @@
 
 package de.jreality.toolsystem;
 
+import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.logging.Level;
 
 import de.jreality.scene.tool.InputSlot;
+import de.jreality.toolsystem.raw.RawDevice;
 import de.jreality.util.LoggingSystem;
 
 /**
@@ -76,12 +78,19 @@ public class ToolEventQueue {
                         }
                     }
                     event = (ToolEvent) queue.removeFirst();
+//                    if (event.getSource() instanceof KeyEvent || 
+//                    		(event.getSource() instanceof RawDevice && 
+//                    		(!((RawDevice) event.getSource()).toString().contains("Timer"))  &&
+//                    		(!( event).toString().contains("PointerNDC"))) )  { // || event.getSource() instanceof KeyEvent) {
+//                    	 	System.err.println("tool event: "+event.toString());
+//                    	 	System.err.println("receiver = "+receiver);
+//                    }
                     isRunning = running;
                 }
                 if (isRunning) try {
-                	receiver.processToolEvent(event);
+                		receiver.processToolEvent(event);
                 } catch (Throwable e) {
-                	e.printStackTrace();
+                		e.printStackTrace();
                 }
                 else break;
             }

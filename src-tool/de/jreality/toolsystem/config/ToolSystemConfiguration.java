@@ -172,8 +172,8 @@ public static ToolSystemConfiguration loadDefaultConfiguration() {
 			e1.printStackTrace();
 		} 
 		
-		//System.out.println("After transform: ");
-		//sysoutXML(outResult);
+//		System.out.println("After transform: ");
+//		sysoutXML(outResult);
     	    
       };  
       

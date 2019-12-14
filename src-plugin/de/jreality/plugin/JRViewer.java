@@ -260,7 +260,7 @@ public class JRViewer {
 	 * @param s the scene
 	 */
 	public JRViewer(JrScene s) {
-		setShowPanelSlots(false, true, false, false);
+		setShowPanelSlots(false, false, false, false);
 		c.setManageLookAndFeel(false);
 		c.registerPlugin(view);
 		c.registerPlugin(viewPreferences);
