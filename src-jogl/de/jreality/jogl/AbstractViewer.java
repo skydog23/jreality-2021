@@ -42,6 +42,8 @@ package de.jreality.jogl;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -196,6 +198,7 @@ abstract public class AbstractViewer implements de.jreality.scene.Viewer,
 		public void mousePressed(MouseEvent e) {
 			component.dispatchEvent(e);
 			((Component) drawable).requestFocus();
+			System.err.println("Size = "+getViewingComponentSize().toString());
 		}
 
 		public void mouseReleased(MouseEvent e) {
@@ -217,7 +220,16 @@ abstract public class AbstractViewer implements de.jreality.scene.Viewer,
 			component.dispatchEvent(e);
 		}
 	};
+	
+	ComponentAdapter resizeListener = new ComponentAdapter() {
 
+		@Override
+		public void componentResized(ComponentEvent e) {
+			Dimension dim = e.getComponent().getSize();
+			System.err.println("window size: "+dim.width+":"+dim.height);
+		}
+		
+	};
 	public Object getViewingComponent() {
 		// this is to avoid layout problems when returning the plain glcanvas
 		if (component == null) {
@@ -232,6 +244,7 @@ abstract public class AbstractViewer implements de.jreality.scene.Viewer,
 			((Component) drawable).addMouseListener(mouseListener);
 			((Component) drawable).addMouseMotionListener(mouseMotionListener);
 			((Component) drawable).addMouseWheelListener(mouseWheelListener);
+			((Component) drawable).addComponentListener(resizeListener);;
 		}
 		return component;
 	}

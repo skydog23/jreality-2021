@@ -105,6 +105,7 @@ public class FlyTool extends AbstractTool {
       }
     int metric = eap.getAttribute("metric", Pn.EUCLIDEAN);
     LoggingSystem.getLogger(this).fine("metric is "+metric);
+    System.out.println("FlyTool: metric is "+metric);
     SceneGraphComponent ship = tc.getRootToToolComponent().getLastComponent();
 
     Matrix pointerMatrix = new Matrix(tc.getTransformationMatrix(InputSlot.getDevice("PointerTransformation")));

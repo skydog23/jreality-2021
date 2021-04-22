@@ -406,6 +406,7 @@ public class GlslPolygonShader extends AbstractPrimitiveShader implements
 			DataList texCoords1, DataList texCoords2, DataList lightMapCoords,
 			int vertexLength, boolean smooth, boolean doNormals4) {
 		// System.err.println("rendering with vertex arrays");
+//		System.err.println("vertices = \n"+Rn.toString(vertices.toDoubleArrayArray(null)));
 		boolean faceN = normalBind == PER_FACE;
 
 		boolean faceC = colorBind == PER_FACE;

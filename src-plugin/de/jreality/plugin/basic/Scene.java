@@ -63,8 +63,8 @@ public class Scene extends Plugin {
 		trafo = new Transformation("camera trafo", trafoMatrix);
 		cameraNode.setTransformation(trafo);
 		Camera camera = new Camera("camera"); 
-		camera.setFar(100.0);
-		camera.setFieldOfView(30.0);
+		camera.setFar(10.0);
+		camera.setFieldOfView(40.0);
 		camera.setFocus(3.0);
 		camera.setNear(0.1);
 		camera.setOnAxis(true);

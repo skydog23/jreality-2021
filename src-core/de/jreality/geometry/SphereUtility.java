@@ -154,6 +154,27 @@ public class SphereUtility {
 		ifsf.update();
 		return ifsf.getIndexedFaceSet();
 	}
+	
+	public static double[][] getHemisphereVerts(int level)	{
+		IndexedFaceSet ifs = tessellatedIcosahedronSphere(level, true);
+		double[][] verts = ifs.getVertexAttributes(Attribute.COORDINATES).toDoubleArrayArray(null);
+		int count = 0;
+		for (int i = 0; i<verts.length; ++i)	{
+			if (verts[i][2] >= 0) count++;
+		}
+		double[][] pverts = new double[count][];
+		count = 0;
+		for (int i = 0; i<verts.length; ++i)	{
+			if (verts[i][2] >= 0)  {
+				pverts[count++] = verts[i];
+			} else if (verts[i][2] == 0)	{
+				if (verts[i][0] >= 0) pverts[count++] = verts[i];
+			}
+			
+		}
+		return pverts;
+	}
+	
 	public static double[][] getTC(double[][] sphere)	{
 		return getTC(sphere, new int[]{0,1,2});
 	}

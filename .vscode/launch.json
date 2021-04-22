@@ -1,0 +1,1995 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch SunflowGUI",
+            "request": "launch",
+            "mainClass": "SunflowGUI",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Tool",
+            "request": "launch",
+            "mainClass": "antlr.Tool",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Tool(1)",
+            "request": "launch",
+            "mainClass": "antlr.build.Tool",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ASTFrame",
+            "request": "launch",
+            "mainClass": "antlr.debug.misc.ASTFrame",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Tool(2)",
+            "request": "launch",
+            "mainClass": "antlr.preprocessor.Tool",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch CommandLineReader",
+            "request": "launch",
+            "mainClass": "bsh.CommandLineReader",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Console",
+            "request": "launch",
+            "mainClass": "bsh.Console",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Interpreter",
+            "request": "launch",
+            "mainClass": "bsh.Interpreter",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Parser",
+            "request": "launch",
+            "mainClass": "bsh.Parser",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Remote",
+            "request": "launch",
+            "mainClass": "bsh.Remote",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch BshClassPath",
+            "request": "launch",
+            "mainClass": "bsh.classpath.BshClassPath",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch SimpleTemplate",
+            "request": "launch",
+            "mainClass": "bsh.servlet.SimpleTemplate",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch AWTConsole",
+            "request": "launch",
+            "mainClass": "bsh.util.AWTConsole",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ClassBrowser",
+            "request": "launch",
+            "mainClass": "bsh.util.ClassBrowser",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Httpd",
+            "request": "launch",
+            "mainClass": "bsh.util.Httpd",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ColorPicker",
+            "request": "launch",
+            "mainClass": "com.bric.swing.ColorPicker",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch PdfContentReaderTool",
+            "request": "launch",
+            "mainClass": "com.itextpdf.text.pdf.parser.PdfContentReaderTool",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch GlueGenVersion",
+            "request": "launch",
+            "mainClass": "com.jogamp.common.GlueGenVersion",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch SHASum",
+            "request": "launch",
+            "mainClass": "com.jogamp.common.util.SHASum",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch NativeWindowVersion",
+            "request": "launch",
+            "mainClass": "com.jogamp.nativewindow.NativeWindowVersion",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch NewtVersion",
+            "request": "launch",
+            "mainClass": "com.jogamp.newt.NewtVersion",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch GLWindow",
+            "request": "launch",
+            "mainClass": "com.jogamp.newt.opengl.GLWindow",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch MainThread",
+            "request": "launch",
+            "mainClass": "com.jogamp.newt.util.MainThread",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch JoglVersion",
+            "request": "launch",
+            "mainClass": "com.jogamp.opengl.JoglVersion",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch GLCanvas",
+            "request": "launch",
+            "mainClass": "com.jogamp.opengl.awt.GLCanvas",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch GLCanvas(1)",
+            "request": "launch",
+            "mainClass": "com.jogamp.opengl.swt.GLCanvas",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch CompileShaderNVidia",
+            "request": "launch",
+            "mainClass": "com.jogamp.opengl.util.glsl.sdk.CompileShaderNVidia",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch AsmLibraryLoader",
+            "request": "launch",
+            "mainClass": "com.kenai.jaffl.provider.jffi.AsmLibraryLoader",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch JackNativeClient",
+            "request": "launch",
+            "mainClass": "com.noisepages.nettoyeur.jack.JackNativeClient",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch JVM",
+            "request": "launch",
+            "mainClass": "com.thoughtworks.xstream.core.JVM",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Test51",
+            "request": "launch",
+            "mainClass": "de.jreality.audio.Test51",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestVR",
+            "request": "launch",
+            "mainClass": "de.jreality.audio.TestVR",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch JackAmbisonicsStereoDecoder",
+            "request": "launch",
+            "mainClass": "de.jreality.audio.jack.JackAmbisonicsStereoDecoder",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch PdExample",
+            "request": "launch",
+            "mainClass": "de.jreality.audio.puredata.PdExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch LabelsOnCube",
+            "request": "launch",
+            "mainClass": "de.jreality.backends.label.LabelsOnCube",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch LabelsOnIndexedLineSet",
+            "request": "launch",
+            "mainClass": "de.jreality.backends.label.LabelsOnIndexedLineSet",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch LabelsOnPointSet",
+            "request": "launch",
+            "mainClass": "de.jreality.backends.label.LabelsOnPointSet",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestLabelBug",
+            "request": "launch",
+            "mainClass": "de.jreality.backends.label.TestLabelBug",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestLabelImages",
+            "request": "launch",
+            "mainClass": "de.jreality.backends.label.TestLabelImages",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch DepthPeeling",
+            "request": "launch",
+            "mainClass": "de.jreality.backends.testingApps.DepthPeeling",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Texturing",
+            "request": "launch",
+            "mainClass": "de.jreality.backends.testingApps.Texturing",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch GFZTool",
+            "request": "launch",
+            "mainClass": "de.jreality.examples.GFZTool",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Oloid",
+            "request": "launch",
+            "mainClass": "de.jreality.examples.Oloid",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch PaintComponent",
+            "request": "launch",
+            "mainClass": "de.jreality.examples.PaintComponent",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch PathCurves",
+            "request": "launch",
+            "mainClass": "de.jreality.examples.PathCurves",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch SimpleExample",
+            "request": "launch",
+            "mainClass": "de.jreality.examples.SimpleExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ToolsAndAppearances",
+            "request": "launch",
+            "mainClass": "de.jreality.examples.ToolsAndAppearances",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch VulptureGPUApp",
+            "request": "launch",
+            "mainClass": "de.jreality.examples.VulptureGPUApp",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch jRLogo",
+            "request": "launch",
+            "mainClass": "de.jreality.examples.jRLogo",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch CoordinateSystemTest",
+            "request": "launch",
+            "mainClass": "de.jreality.geometry.CoordinateSystemTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch FatIndexedFaceSetFactoryTest",
+            "request": "launch",
+            "mainClass": "de.jreality.geometry.FatIndexedFaceSetFactoryTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch IndexedFaceSetFactoryTest",
+            "request": "launch",
+            "mainClass": "de.jreality.geometry.IndexedFaceSetFactoryTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch IndexedLineSetFactoryTest",
+            "request": "launch",
+            "mainClass": "de.jreality.geometry.IndexedLineSetFactoryTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ParametricSurfaceFactoryTest",
+            "request": "launch",
+            "mainClass": "de.jreality.geometry.ParametricSurfaceFactoryTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch RadiiWorldCoordinatesTest",
+            "request": "launch",
+            "mainClass": "de.jreality.geometry.RadiiWorldCoordinatesTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestIFSFactory",
+            "request": "launch",
+            "mainClass": "de.jreality.geometry.TestIFSFactory",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestMerge",
+            "request": "launch",
+            "mainClass": "de.jreality.geometry.TestMerge",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestTriangulate",
+            "request": "launch",
+            "mainClass": "de.jreality.geometry.TestTriangulate",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ThickenedSurfaceFactoryTest",
+            "request": "launch",
+            "mainClass": "de.jreality.geometry.ThickenedSurfaceFactoryTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ClothCalculation",
+            "request": "launch",
+            "mainClass": "de.jreality.jogl.ClothCalculation",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ClothCalculation2",
+            "request": "launch",
+            "mainClass": "de.jreality.jogl.ClothCalculation2",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Cloth2LineShader",
+            "request": "launch",
+            "mainClass": "de.jreality.jogl.shader.Cloth2LineShader",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ClothLineShader",
+            "request": "launch",
+            "mainClass": "de.jreality.jogl.shader.ClothLineShader",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch JRViewer",
+            "request": "launch",
+            "mainClass": "de.jreality.plugin.JRViewer",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch JRPluginManager",
+            "request": "launch",
+            "mainClass": "de.jreality.plugin.experimental.JRPluginManager",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch WebContentLoader",
+            "request": "launch",
+            "mainClass": "de.jreality.plugin.experimental.WebContentLoader",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch JobsTestPlugin",
+            "request": "launch",
+            "mainClass": "de.jreality.plugin.job.JobsTestPlugin",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch VRExamples",
+            "request": "launch",
+            "mainClass": "de.jreality.plugin.scene.VRExamples",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch PythonConsole",
+            "request": "launch",
+            "mainClass": "de.jreality.plugin.scripting.PythonConsole",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch PythonToolsManager",
+            "request": "launch",
+            "mainClass": "de.jreality.plugin.scripting.PythonToolsManager",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch DebugLattice",
+            "request": "launch",
+            "mainClass": "de.jreality.portal.DebugLattice",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch MasterApplication",
+            "request": "launch",
+            "mainClass": "de.jreality.portal.MasterApplication",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestCylindricalPerspective",
+            "request": "launch",
+            "mainClass": "de.jreality.portal.TestCylindricalPerspective",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch CalibrationApp",
+            "request": "launch",
+            "mainClass": "de.jreality.portal.calibration.CalibrationApp",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestTrackd",
+            "request": "launch",
+            "mainClass": "de.jreality.portal.trackd.TestTrackd",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch LASReaderTest",
+            "request": "launch",
+            "mainClass": "de.jreality.reader.LASReaderTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch RendermanTestScene",
+            "request": "launch",
+            "mainClass": "de.jreality.renderman.RendermanTestScene",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TransformationCustomizer",
+            "request": "launch",
+            "mainClass": "de.jreality.scene.TransformationCustomizer",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestBruteForcePicking",
+            "request": "launch",
+            "mainClass": "de.jreality.scene.pick.TestBruteForcePicking",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch SMRJMirrorFactoryTest",
+            "request": "launch",
+            "mainClass": "de.jreality.scene.proxy.smrj.SMRJMirrorFactoryTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TreeProxyTest",
+            "request": "launch",
+            "mainClass": "de.jreality.scene.proxy.tree.TreeProxyTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ShipNavigationTest",
+            "request": "launch",
+            "mainClass": "de.jreality.scene.tool.ShipNavigationTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ToolTestScene",
+            "request": "launch",
+            "mainClass": "de.jreality.scene.tool.ToolTestScene",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch GlslSource",
+            "request": "launch",
+            "mainClass": "de.jreality.shader.GlslSource",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TextureUtility",
+            "request": "launch",
+            "mainClass": "de.jreality.shader.TextureUtility",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Test4coords",
+            "request": "launch",
+            "mainClass": "de.jreality.soft.Test4coords",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestRenderRenderAsync",
+            "request": "launch",
+            "mainClass": "de.jreality.soft.TestRenderRenderAsync",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch BatchRenderer",
+            "request": "launch",
+            "mainClass": "de.jreality.sunflow.batchrender.BatchRenderer",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Master",
+            "request": "launch",
+            "mainClass": "de.jreality.sunflow.batchrender.Master",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch JRonJRTest",
+            "request": "launch",
+            "mainClass": "de.jreality.swing.test.JRonJRTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch SwingTest",
+            "request": "launch",
+            "mainClass": "de.jreality.swing.test.SwingTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestJRWindows",
+            "request": "launch",
+            "mainClass": "de.jreality.swing.test.TestJRWindows",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TrackballRotateToolTest",
+            "request": "launch",
+            "mainClass": "de.jreality.tools.TrackballRotateToolTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ToolSystemConfiguration",
+            "request": "launch",
+            "mainClass": "de.jreality.toolsystem.config.ToolSystemConfiguration",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch DetectControllers",
+            "request": "launch",
+            "mainClass": "de.jreality.toolsystem.raw.DetectControllers",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Trackd",
+            "request": "launch",
+            "mainClass": "de.jreality.toolsystem.raw.Trackd",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch OSCPool",
+            "request": "launch",
+            "mainClass": "de.jreality.toolsystem.util.OSCPool",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch AnimatedTextureExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.app.AnimatedTextureExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch BackgroundExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.app.BackgroundExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch GLShadingLangExample01",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.app.GLShadingLangExample01",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch GLShadingLangExample01NewBackend",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.app.GLShadingLangExample01NewBackend",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch GLShadingLangExample02",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.app.GLShadingLangExample02",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch GLShadingLangExample02NewBackend",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.app.GLShadingLangExample02NewBackend",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch GLShadingLangExample03",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.app.GLShadingLangExample03",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch GLVertexArrayExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.app.GLVertexArrayExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch LineShaderExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.app.LineShaderExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch MultilineLabelExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.app.MultilineLabelExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch NonDefaultShaderExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.app.NonDefaultShaderExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch PointShaderExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.app.PointShaderExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ShadedLineExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.app.ShadedLineExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch SkyboxAndReflMapExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.app.SkyboxAndReflMapExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TextureExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.app.TextureExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch VertexColorsExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.app.VertexColorsExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch AudioExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.audio.AudioExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch DopplerDemo",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.audio.DopplerDemo",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch LeslieDemo",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.audio.LeslieDemo",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch BallAndStickFactoryExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.geom.BallAndStickFactoryExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ClippingPlaneExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.geom.ClippingPlaneExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Cube01",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.geom.Cube01",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Cube02",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.geom.Cube02",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Cube03",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.geom.Cube03",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Cube04",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.geom.Cube04",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Cube05",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.geom.Cube05",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Cube06",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.geom.Cube06",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch CubeUnwrapped",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.geom.CubeUnwrapped",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch GeometryMergeExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.geom.GeometryMergeExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ImplodedTori",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.geom.ImplodedTori",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch LabelsOnCube(1)",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.geom.LabelsOnCube",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch LabelsOnTorus",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.geom.LabelsOnTorus",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ParametricSurfaceExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.geom.ParametricSurfaceExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch QuadMeshExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.geom.QuadMeshExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch QuickStart",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.geom.QuickStart",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch SliceBoxExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.geom.SliceBoxExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ThickenedSurfaceExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.geom.ThickenedSurfaceExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TubeFactory01",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.geom.TubeFactory01",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TubeFactory02",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.geom.TubeFactory02",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch BeanInspectorExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.gui.BeanInspectorExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch SliderExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.gui.SliderExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Icosahedron",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.intro.Icosahedron",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch IcosahedronVR",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.intro.IcosahedronVR",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Intro01",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.intro.Intro01",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Intro02",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.intro.Intro02",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Intro03",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.intro.Intro03",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Intro04",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.intro.Intro04",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Intro05",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.intro.Intro05",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Intro06",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.intro.Intro06",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Intro07",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.intro.Intro07",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Intro08",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.intro.Intro08",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch FileReaderExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.misc.FileReaderExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch MatheonBearExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.misc.MatheonBearExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch NonEuclideanExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.misc.NonEuclideanExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ODEExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.misc.ODEExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ContentToolsExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.plugin.ContentToolsExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch InternalFrameTest",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.plugin.InternalFrameTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Persistence",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.plugin.Persistence",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch SimpleAppearanceInspectorExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.plugin.SimpleAppearanceInspectorExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch DarbouxDemo",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.projects.darboux.DarbouxDemo",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch KSurfacesApp",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.projects.ksurfaces.KSurfacesApp",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ReaderExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.reader.ReaderExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch CameraListenerExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.scene.CameraListenerExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch CameraPathExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.scene.CameraPathExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch SpotLightExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.scene.SpotLightExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TransformationFlat",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.tform.TransformationFlat",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TransformationHierarchy",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.tform.TransformationHierarchy",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TransformationListenerExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.tform.TransformationListenerExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch AddPointsExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.tool.AddPointsExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch AddToolExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.tool.AddToolExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch AnimationExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.tool.AnimationExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch DragEventTool01",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.tool.DragEventTool01",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch DragEventTool02",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.tool.DragEventTool02",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch InputSegmentsExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.tool.InputSegmentsExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch MapNavigationToolExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.tool.MapNavigationToolExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ModelExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.tool.ModelExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Paint3DToolExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.tool.Paint3DToolExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch PointerHitToolExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.tool.PointerHitToolExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TextureDragExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.tool.TextureDragExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ToolIntro",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.tool.ToolIntro",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch SubdividerDemo",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.util.polygon.SubdividerDemo",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch AccessoryViewer",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.viewer.AccessoryViewer",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch AddViewerToInternalFrame",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.viewer.AddViewerToInternalFrame",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch GLJPanelViewerExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.viewer.GLJPanelViewerExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch JOGLFBOTextureExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.viewer.JOGLFBOTextureExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch JRViewerVR",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.viewer.JRViewerVR",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch OffscreenRenderAlternateCameraPath",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.viewer.OffscreenRenderAlternateCameraPath",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch PerformanceMeterExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.viewer.PerformanceMeterExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch SelectionExample",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.viewer.SelectionExample",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch SimpleJRViewer",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.viewer.SimpleJRViewer",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch SimpleViewer",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.viewer.SimpleViewer",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ViewerFromScratch",
+            "request": "launch",
+            "mainClass": "de.jreality.tutorial.viewer.ViewerFromScratch",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Display1Test",
+            "request": "launch",
+            "mainClass": "de.jreality.ui.Display1Test",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch LabelsInspector",
+            "request": "launch",
+            "mainClass": "de.jreality.ui.LabelsInspector",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch PluginHierarchyTest",
+            "request": "launch",
+            "mainClass": "de.jreality.ui.plugins.PluginHierarchyTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch StartupLocalTest",
+            "request": "launch",
+            "mainClass": "de.jreality.ui.plugins.StartupLocalTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ViewerTest",
+            "request": "launch",
+            "mainClass": "de.jreality.ui.plugins.ViewerTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ViewerApp",
+            "request": "launch",
+            "mainClass": "de.jreality.ui.viewerapp.ViewerApp",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ViewerAppFromScene",
+            "request": "launch",
+            "mainClass": "de.jreality.ui.viewerapp.ViewerAppFromScene",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ViewerAppTest",
+            "request": "launch",
+            "mainClass": "de.jreality.ui.viewerapp.ViewerAppTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TextSlider",
+            "request": "launch",
+            "mainClass": "de.jreality.ui.widgets.TextSlider",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch AttributeEntityTest",
+            "request": "launch",
+            "mainClass": "de.jreality.util.AttributeEntityTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ConfigurationAttributesTest",
+            "request": "launch",
+            "mainClass": "de.jreality.util.ConfigurationAttributesTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch FactoredMatrixTest",
+            "request": "launch",
+            "mainClass": "de.jreality.util.FactoredMatrixTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch MatrixBuilderTest",
+            "request": "launch",
+            "mainClass": "de.jreality.util.MatrixBuilderTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Landscape",
+            "request": "launch",
+            "mainClass": "de.jreality.vr.Landscape",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ViewerVR",
+            "request": "launch",
+            "mainClass": "de.jreality.vr.ViewerVR",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch WriterSTL",
+            "request": "launch",
+            "mainClass": "de.jreality.writer.WriterSTL",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch BlenderTestScene",
+            "request": "launch",
+            "mainClass": "de.jreality.writer.blender.test.BlenderTestScene",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch BlenderTestScene2",
+            "request": "launch",
+            "mainClass": "de.jreality.writer.blender.test.BlenderTestScene2",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch BlenderTestTubesAndSpheres",
+            "request": "launch",
+            "mainClass": "de.jreality.writer.blender.test.BlenderTestTubesAndSpheres",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch WordCoordinatesPickingTest",
+            "request": "launch",
+            "mainClass": "de.jreality.writer.blender.test.WordCoordinatesPickingTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch WriterPDF",
+            "request": "launch",
+            "mainClass": "de.jreality.writer.pdf.WriterPDF",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestScene",
+            "request": "launch",
+            "mainClass": "de.jreality.writer.u3d.TestScene",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch SimpleColorChooser",
+            "request": "launch",
+            "mainClass": "de.jtem.beans.SimpleColorChooser",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestBed",
+            "request": "launch",
+            "mainClass": "de.jtem.jrworkspace.plugin.sidecontainer.widget.TestBed",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch SPIPluginTest",
+            "request": "launch",
+            "mainClass": "de.jtem.jrworkspace.plugin.simplecontroller.widget.SPIPluginTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ToolBarAggregatorTest",
+            "request": "launch",
+            "mainClass": "de.jtem.jrworkspace.plugin.simplecontroller.widget.ToolBarAggregatorTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch WrapLayout",
+            "request": "launch",
+            "mainClass": "de.jtem.jrworkspace.plugin.simplecontroller.widget.WrapLayout",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch BshTerm",
+            "request": "launch",
+            "mainClass": "de.jtem.jterm.BshTerm",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Test",
+            "request": "launch",
+            "mainClass": "de.jtem.jterm.Test",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ExampleIntegration",
+            "request": "launch",
+            "mainClass": "de.jtem.numericalMethods.calculus.integration.ExampleIntegration",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch DefaultODE",
+            "request": "launch",
+            "mainClass": "de.jtem.numericalMethods.calculus.odeSolving.DefaultODE",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ExampleODE",
+            "request": "launch",
+            "mainClass": "de.jtem.numericalMethods.calculus.odeSolving.ExampleODE",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ExampleNewtonRaphson",
+            "request": "launch",
+            "mainClass": "de.jtem.numericalMethods.calculus.rootFinding.ExampleNewtonRaphson",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Clausen",
+            "request": "launch",
+            "mainClass": "de.jtem.numericalMethods.calculus.specialFunctions.Clausen",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Edge",
+            "request": "launch",
+            "mainClass": "de.jtem.numericalMethods.geometry.mesh.Edge",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch DelaunayViewer",
+            "request": "launch",
+            "mainClass": "de.jtem.numericalMethods.geometry.meshGeneration.ruppert.DelaunayViewer",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch NetUtil",
+            "request": "launch",
+            "mainClass": "de.sciss.net.NetUtil",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ANSIBuffer",
+            "request": "launch",
+            "mainClass": "jline.ANSIBuffer",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ConsoleRunner",
+            "request": "launch",
+            "mainClass": "jline.ConsoleRunner",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ResourceFile",
+            "request": "launch",
+            "mainClass": "jogamp.graph.font.typecast.ot.mac.ResourceFile",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch LinuxKeyEventTracker",
+            "request": "launch",
+            "mainClass": "jogamp.newt.driver.linux.LinuxKeyEventTracker",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch X11UnderlayTracker",
+            "request": "launch",
+            "mainClass": "jogamp.newt.driver.x11.X11UnderlayTracker",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch VersionApplet",
+            "request": "launch",
+            "mainClass": "jogamp.opengl.awt.VersionApplet",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Type_Widget",
+            "request": "launch",
+            "mainClass": "jogamp.opengl.glu.mipmap.Type_Widget",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ALDummyUsage",
+            "request": "launch",
+            "mainClass": "jogamp.opengl.openal.av.ALDummyUsage",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch PngDeinterlacer",
+            "request": "launch",
+            "mainClass": "jogamp.opengl.util.pngj.PngDeinterlacer",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch GUITest",
+            "request": "launch",
+            "mainClass": "light.GUITest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch LightTest",
+            "request": "launch",
+            "mainClass": "light.LightTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch MainApp",
+            "request": "launch",
+            "mainClass": "light.MainApp",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ScalingTest",
+            "request": "launch",
+            "mainClass": "light.ScalingTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Test(1)",
+            "request": "launch",
+            "mainClass": "light.Test",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TextureTest",
+            "request": "launch",
+            "mainClass": "light.TextureTest",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Tool(3)",
+            "request": "launch",
+            "mainClass": "org.antlr.Tool",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Interp",
+            "request": "launch",
+            "mainClass": "org.antlr.gunit.Interp",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Tool(4)",
+            "request": "launch",
+            "mainClass": "org.antlr.gunit.swingui.Tool",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch StringTemplateTreeView",
+            "request": "launch",
+            "mainClass": "org.antlr.stringtemplate.misc.StringTemplateTreeView",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch GrammarSpelunker",
+            "request": "launch",
+            "mainClass": "org.antlr.tool.GrammarSpelunker",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Interp(1)",
+            "request": "launch",
+            "mainClass": "org.antlr.tool.Interp",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch RandomPhrase",
+            "request": "launch",
+            "mainClass": "org.antlr.tool.RandomPhrase",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Strip",
+            "request": "launch",
+            "mainClass": "org.antlr.tool.Strip",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Compiler",
+            "request": "launch",
+            "mainClass": "org.codehaus.janino.Compiler",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch JavaSourceClassLoader",
+            "request": "launch",
+            "mainClass": "org.codehaus.janino.JavaSourceClassLoader",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch SimpleCompiler",
+            "request": "launch",
+            "mainClass": "org.codehaus.janino.SimpleCompiler",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch UnicodeUnescapeReader",
+            "request": "launch",
+            "mainClass": "org.codehaus.janino.UnicodeUnescapeReader",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch UnparseVisitor",
+            "request": "launch",
+            "mainClass": "org.codehaus.janino.UnparseVisitor",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ClassBodyDemo",
+            "request": "launch",
+            "mainClass": "org.codehaus.janino.samples.ClassBodyDemo",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch DeclarationCounter",
+            "request": "launch",
+            "mainClass": "org.codehaus.janino.samples.DeclarationCounter",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ExpressionDemo",
+            "request": "launch",
+            "mainClass": "org.codehaus.janino.samples.ExpressionDemo",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ScriptDemo",
+            "request": "launch",
+            "mainClass": "org.codehaus.janino.samples.ScriptDemo",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ShippingCost",
+            "request": "launch",
+            "mainClass": "org.codehaus.janino.samples.ShippingCost",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Disassembler",
+            "request": "launch",
+            "mainClass": "org.codehaus.janino.tools.Disassembler",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch HprofScrubber",
+            "request": "launch",
+            "mainClass": "org.codehaus.janino.tools.HprofScrubber",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch JGrep",
+            "request": "launch",
+            "mainClass": "org.codehaus.janino.tools.JGrep",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch AnalyzingParser",
+            "request": "launch",
+            "mainClass": "org.python.antlr.AnalyzingParser",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch GrammarTester",
+            "request": "launch",
+            "mainClass": "org.python.antlr.GrammarTester",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch PythonPartialTester",
+            "request": "launch",
+            "mainClass": "org.python.antlr.PythonPartialTester",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch WalkerTester",
+            "request": "launch",
+            "mainClass": "org.python.antlr.WalkerTester",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Constants",
+            "request": "launch",
+            "mainClass": "org.python.apache.xerces.impl.Constants",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Version",
+            "request": "launch",
+            "mainClass": "org.python.apache.xerces.impl.Version",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch XPath",
+            "request": "launch",
+            "mainClass": "org.python.apache.xerces.impl.xpath.XPath",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch REUtil",
+            "request": "launch",
+            "mainClass": "org.python.apache.xerces.impl.xpath.regex.REUtil",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ConstantSet",
+            "request": "launch",
+            "mainClass": "org.python.constantine.ConstantSet",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch HtmlDemo",
+            "request": "launch",
+            "mainClass": "org.python.indexer.demos.HtmlDemo",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ucnhash",
+            "request": "launch",
+            "mainClass": "org.python.modules.ucnhash",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch ASMifierClassVisitor",
+            "request": "launch",
+            "mainClass": "org.python.objectweb.asm.util.ASMifierClassVisitor",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch CheckClassAdapter",
+            "request": "launch",
+            "mainClass": "org.python.objectweb.asm.util.CheckClassAdapter",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch TraceClassVisitor",
+            "request": "launch",
+            "mainClass": "org.python.objectweb.asm.util.TraceClassVisitor",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch JarRunner",
+            "request": "launch",
+            "mainClass": "org.python.util.JarRunner",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch jython",
+            "request": "launch",
+            "mainClass": "org.python.util.jython",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch STViz",
+            "request": "launch",
+            "mainClass": "org.stringtemplate.v4.gui.STViz",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Benchmark",
+            "request": "launch",
+            "mainClass": "org.sunflow.Benchmark",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch Gumbo",
+            "request": "launch",
+            "mainClass": "org.sunflow.core.tesselatable.Gumbo",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch RGBSpace",
+            "request": "launch",
+            "mainClass": "org.sunflow.image.RGBSpace",
+            "projectName": "jreality"
+        },
+        {
+            "type": "java",
+            "name": "Launch RenderGlobalsPanel",
+            "request": "launch",
+            "mainClass": "org.sunflow.system.RenderGlobalsPanel",
+            "projectName": "jreality"
+        }
+    ]
+}

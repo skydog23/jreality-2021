@@ -478,6 +478,7 @@ public class AttributeEntityUtility {
       }
       for (PropertyDescriptor descriptor : pds) {
         String attrName = descriptor.getName();
+//        System.err.println("create proxy: "+attrName);
         if (prop.put(attrName, descriptor) != null)
             throw new IllegalArgumentException("conflicts on property \""
                 + attrName + '"');

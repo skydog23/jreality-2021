@@ -111,7 +111,7 @@ import de.jreality.util.LoggingSystem;
  */
 public  class TubeFactory {
 
-		static int debug = 0; //255;
+		static int debug = 48; //255;
 //		static Logger logger = LoggingSystem.getLogger(TubeFactory.class);
 		Logger logger = LoggingSystem.getLogger(this);
 		{
@@ -135,6 +135,7 @@ public  class TubeFactory {
 		public boolean extendAtEnds = false;
 		boolean removeDuplicates = false;
 		boolean duplicatesRemoved = false;
+		boolean isLine = false;
 		public boolean framesDirty = true;
 		protected FrameInfo[] frames = null, userFrames = null;
 		protected double[] radiiField = null;
@@ -337,6 +338,10 @@ public  class TubeFactory {
 			return TubeFactory.getSceneGraphRepresentation(frames);
 		}
 		
+		public SceneGraphComponent getFramesSceneGraphRepresentation(double scale)	{
+			return TubeFactory.getSceneGraphRepresentation(frames, scale);
+		}
+		
 		public  void update()		{
 			if (removeDuplicates && !duplicatesRemoved)	{
 				theCurve = removeDuplicates(theCurve);
@@ -463,20 +468,26 @@ public  class TubeFactory {
 		 * @param metric	the metric metric {@link Pn}
 		 * @return	an array of length (n-2) of type {@link TubeUtility.FrameInfo} containing an orthonormal frame for each internal point in the initial polygon array.
 		 */
-		public  FrameInfo[] makeFrameField(double[][] polygon, FrameFieldType type, int metric)		{
+		public  FrameInfo[] makeFrameField(double[][] polygon, FrameFieldType type, int metric2)		{
 			if (frames!= null && !framesDirty) return frames;
 		 	int numberJoints = polygon.length;
 		 	double[][] polygonh;
+		 	metric = metric2;
 		 	// to simplify life, convert all points to homogeneous coordinates
 		 	if (polygon[0].length == 3) {
 		 		polygonh = Pn.homogenize(null, polygon);
 		 		Pn.normalize(polygonh, polygonh, metric);
 		 	}
-			else if (polygon[0].length == 4)	
+			else if (polygon[0].length == 4)	{
 				polygonh = Pn.normalize(null, polygon, metric);
+			 	for (int i = 0; i<polygon.length; ++i)	{
+			 		if (polygon[i][3] < 0) Rn.times(polygonh[i], -1, polygonh[i]);
+			 	}
+			}
 			else {
 				throw new IllegalArgumentException("Points must have dimension 4");
 			}
+		 	calculateIsLine(polygonh);
 		 	if ((debug & 1) != 0)	
 		 		logger.log(Level.FINER,"Generating frame field for metric "+metric);
 		 	if (tangentField == null || tangentField.length != (numberJoints-2))	{
@@ -620,25 +631,42 @@ public  class TubeFactory {
 					}
 					double a = Pn.angleBetween(parallelNormalField[i-1],binormalField[i-1],metric);
 					if (a > Math.PI/2) phi = -phi;
+					if (isLine) phi = 0;
 				} 
 //				size = Rn.euclideanNormSquared(pN[i-1]);
 				else phi = 0.0;
 //				System.err.println(i+" Normal field = "+Rn.toString(frenetNormalField[i-1]));
 //				System.err.println(i+" theta, phi = "+theta+" "+phi);
 				
-				System.arraycopy(frenetNormalField[i-1], 0, frame, 0, 4);
-				System.arraycopy(binormalField[i-1], 0, frame, 4, 4);
-				System.arraycopy(tangentField[i-1], 0, frame, 8, 4);
+				// for a line, reuse the frame over and over again.
+				int index = (isLine) ?  0 : (i-1);
+				System.arraycopy(frenetNormalField[index], 0, frame, 0, 4);
+				System.arraycopy(binormalField[index], 0, frame, 4, 4);
+				System.arraycopy(tangentField[index], 0, frame, 8, 4);
 				System.arraycopy(polygonh[i], 0, frame, 12, 4);
 				   	
 				if ((debug & 4) != 0) logger.log(Level.FINE,"determinant is:\n"+Rn.determinant(frame));
 				frameInfo[i-1] = new FrameInfo(Rn.transpose(null, frame),d[i-1],theta, phi);
-				if ((debug & 16) != 0) logger.log(Level.FINE,"Frame "+(i-1)+": "+frameInfo[i-1].toString());
+				if ((debug & 16) != 0) 
+					logger.log(Level.FINE,"Frame "+(i-1)+": "+frameInfo[i-1].toString());
 			}
 			framesDirty = false;
 			return frameInfo;
 		 }
 
+		private void calculateIsLine(double[][] polygon) {
+			int n = polygon.length;
+			for (int i = 1; i<n-1; ++i)	{
+				double[] bloop = 
+				Pn.polarize(null, P3.planeFromPoints(null, polygon[i-1], polygon[i], polygon[i+1]),metric);	
+				if (Rn.euclideanNormSquared(bloop) > 10E-16) {
+					isLine = false;
+					return;
+				}
+			}
+			isLine = true;
+		}
+		
 		static double[] B = new double[] {Math.random(), Math.random(), Math.random(), 1.0};
 		/**
 		 * 

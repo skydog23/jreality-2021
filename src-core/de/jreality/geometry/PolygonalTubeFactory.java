@@ -185,7 +185,7 @@ import de.jreality.util.LoggingSystem;
 			double r = hasRadii ? radii2[i+1] : radii[0];
 			rad[0] = r *factor;
 			rad[5] = r;
-			//System.err.println("frame is "+Rn.matrixToString(frames[i].frame));
+//			System.err.println("PTF: frame "+i+" is \n"+Rn.matrixToString(frames[i].frame));
 			frames[i].phi = frames[i].phi + i*correction+ twists*2*Math.PI*frames[i].length;
 			double[] zrot = P3.makeRotationMatrixZ(null,frames[i].phi);
 			double[] scaledFrame = Rn.times(null, frames[i].frame, Rn.times(null, rad, zrot));
@@ -205,6 +205,7 @@ import de.jreality.util.LoggingSystem;
 			}
 			
 		}
+//		System.err.println("PTF: vals = \n"+Rn.toString(vals));
 		return vals;
 	}
 	

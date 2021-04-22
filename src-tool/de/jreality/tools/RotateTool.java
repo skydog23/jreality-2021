@@ -96,7 +96,7 @@ public class RotateTool extends AbstractTool {
     if (comp.getTransformation() == null)
       comp.setTransformation(new Transformation());
     if (!fixOrigin){
-    	PickResult currentPick = tc.getCurrentPick();
+    		PickResult currentPick = tc.getCurrentPick();
 		if(rotateOnPick && currentPick!=null)
     		center=getRotationPoint(tc);
     	else
@@ -106,14 +106,16 @@ public class RotateTool extends AbstractTool {
         eap = EffectiveAppearance.create(tc.getRootToToolComponent());
       }
       metric = eap.getAttribute("metric", Pn.EUCLIDEAN);
-
+//      System.err.println("RotateTool: metric = "+metric);
   }
   
   private Matrix getCenter(SceneGraphComponent comp) {
 	  Matrix centerTranslation = new Matrix();
-	    Rectangle3D bb = BoundingBoxUtility.calculateChildrenBoundingBox(comp);
-	    // need to respect the metric here
-	    MatrixBuilder.init(null, metric).translate(bb.getCenter()).assignTo(centerTranslation);
+	   if (metric != Pn.ELLIPTIC) {
+		   Rectangle3D bb = BoundingBoxUtility.calculateChildrenBoundingBox(comp);
+		    // need to respect the metric here
+		    MatrixBuilder.init(null, metric).translate(bb.getCenter()).assignTo(centerTranslation);
+	   }
 	    return centerTranslation;
   }
   private Matrix getRotationPoint(ToolContext tc){

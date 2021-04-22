@@ -48,7 +48,7 @@ public class JOGLFBO {
 	public JOGLFBO(int width, int height) {
 		this.width = width;
 		this.height = height;
-		update();
+//		update();
 	}
 
 	boolean dirty = true;
@@ -210,10 +210,19 @@ public class JOGLFBO {
 	private void checkSize() {
 		if (!haveCheckedForMaxRBS)
 			return;
-		if (height * samples > maxrbuffer[0])
-			height = maxrbuffer[0] / samples;
-		if (width * samples > maxrbuffer[0])
-			width = maxrbuffer[0] / samples;
+		if (height * samples > maxrbuffer[0] || width * samples > maxrbuffer[0]) {
+			double scale = 0;
+			if (height > width) {
+				scale = (1.0 * height)/maxrbuffer[0];
+			} else {
+				scale = (1.0 * width)/maxrbuffer[0];
+			}
+			scale = scale * samples;
+			width = (int) (width/scale);  
+			height = (int) (height/scale);
+//			width = height = maxrbuffer[0] / samples;
+			System.err.println("adjusting image size to "+width+":"+height);
+		}
 	}
 
 	public boolean isAsTexture() {

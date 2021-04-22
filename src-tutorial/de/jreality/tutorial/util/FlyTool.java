@@ -69,8 +69,10 @@ public class FlyTool extends AbstractTool {
   
   private final transient InputSlot forwardBackwardSlot = InputSlot.getDevice("ForwardBackwardAxis");
   private final transient InputSlot shiftForwardBackwardSlot = InputSlot.getDevice("ShiftForwardBackwardAxis");
+  private final transient InputSlot altForwardBackwardSlot = InputSlot.getDevice("AltForwardBackwardAxis");
   private final transient InputSlot leftRightSlot = InputSlot.getDevice("LeftRightAxis");
   private final transient InputSlot shiftLeftRightSlot = InputSlot.getDevice("ShiftLeftRightAxis");
+  private final transient InputSlot altLeftRightSlot = InputSlot.getDevice("AltLeftRightAxis");
   private final transient InputSlot timerSlot = InputSlot.getDevice("SystemTime");
   private transient InputSlot currentKeySlot;
   private transient double velocity;
@@ -82,8 +84,10 @@ public class FlyTool extends AbstractTool {
   public FlyTool() {
 	  addCurrentSlot(forwardBackwardSlot);
 	  addCurrentSlot(shiftForwardBackwardSlot);
+	  addCurrentSlot(altForwardBackwardSlot);
 	  addCurrentSlot(leftRightSlot);
 	  addCurrentSlot(shiftLeftRightSlot);
+	  addCurrentSlot(altLeftRightSlot);
   }
   
   int metric = Pn.EUCLIDEAN;
@@ -92,29 +96,34 @@ public class FlyTool extends AbstractTool {
   boolean  shiftIsRotate = true;
   
   public void perform(ToolContext tc) {
+//	  System.err.println("fly tool perform");		
 		if (tc.getSource() == forwardBackwardSlot) {
 			currentKeySlot = forwardBackwardSlot;
 		} else if (tc.getSource() == shiftForwardBackwardSlot) {
 			currentKeySlot = shiftForwardBackwardSlot;
+		} else if (tc.getSource() == altForwardBackwardSlot) {
+			currentKeySlot = altForwardBackwardSlot;
 		} else if (tc.getSource() == leftRightSlot) {
 			currentKeySlot = leftRightSlot;
 		} else if (tc.getSource() == shiftLeftRightSlot){
 			currentKeySlot = shiftLeftRightSlot;
+		} else if (tc.getSource() == altLeftRightSlot){
+			currentKeySlot = altLeftRightSlot;
 		} //else currentKeySlot = null;
 		if (currentKeySlot != null) {
+//			System.err.println("current key slot: "+currentKeySlot.toString());
 			released = tc.getAxisState(currentKeySlot).isReleased();
 			if (released) {
 				flying = false;
 				removeCurrentSlot(timerSlot);
 				tc.getViewer().getSceneRoot().setPickable( true);
 				return;
-			} else {
-				flying = true;
-				velocity = tc.getAxisState(currentKeySlot).doubleValue();
-				velocity = velocity * velocity * velocity;
-				addCurrentSlot(timerSlot);
-				tc.getViewer().getSceneRoot().setPickable(false);
 			}
+			flying = true;
+			velocity = tc.getAxisState(currentKeySlot).doubleValue();
+			velocity = velocity * velocity * velocity;
+			addCurrentSlot(timerSlot);
+			tc.getViewer().getSceneRoot().setPickable(false);
 		}
 	if (!flying) return;
 	if (readFromAp)	{
@@ -123,7 +132,8 @@ public class FlyTool extends AbstractTool {
 	      }
 	    metric = eap.getAttribute("metric", Pn.EUCLIDEAN);		
 	}
-    LoggingSystem.getLogger(this).fine("metric is "+metric);
+//    LoggingSystem.getLogger(this).fine("metric is "+metric);
+//   System.err.println("metric is "+metric);
     shipSGC = tc.getRootToToolComponent().getLastComponent();
 	shipMatrix = new Matrix();
 	if (shipSGC.getTransformation() != null) shipMatrix.assignFrom(shipSGC.getTransformation());
@@ -140,13 +150,17 @@ public class FlyTool extends AbstractTool {
    		if (shiftIsRotate)	
    			MatrixBuilder.init(shipMatrix, metric).rotateX(rotateGain*forwardVal).assignTo(shipSGC);  
    		else moveShipInDirection(1);   		
+   	} else if (currentKeySlot == altForwardBackwardSlot) {
+   		moveShipInDirection(1);   		
     } else if (currentKeySlot == leftRightSlot) {
         	MatrixBuilder.init(shipMatrix, metric).rotateY(rotateGain*forwardVal).assignTo(shipSGC);  
     } else if (currentKeySlot == shiftLeftRightSlot){
-    	if (shiftIsRotate)	
-        	MatrixBuilder.init(shipMatrix, metric).rotateZ(rotateGain*forwardVal).assignTo(shipSGC);  
-   		else moveShipInDirection(0);   		
-    }
+    		if (shiftIsRotate)	
+    			MatrixBuilder.init(shipMatrix, metric).rotateZ(rotateGain*forwardVal).assignTo(shipSGC);  
+    		else moveShipInDirection(0);   		
+ 	} else if (currentKeySlot == altLeftRightSlot) {
+   		moveShipInDirection(0);   
+ 	}
     broadcastChange();
   }
 

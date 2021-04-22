@@ -47,6 +47,7 @@ vec4 Specular;
 vec4 texcoord;
 attribute vec4 normals4;
 uniform bool hyperbolic;
+uniform bool elliptic;
 uniform float metric;
 uniform bool 	useNormals4;
 uniform bool 	lightingEnabled; 
@@ -79,8 +80,10 @@ float acosh(in float x) {
 float distance4(in vec4 a, in vec4 b)    {
     float d = dot4(a,b)/sqrt(abs(dot4(a,a)*dot4(b,b)));
     if (hyperbolic) 
-    		return acosh(-d);
-    else return abs(acos(d));
+    		return acosh(d);
+    //float ww = a.w * b.w;
+    //if (ww < 0) return 0f;
+    return (acos(d));
 }
 
 // project the vector T into the hyperbolic tangent space of P
@@ -91,6 +94,7 @@ void projectToTangent(in vec4 P, inout vec4 T) {
 // find the representative of the given point with length +/- 1
 void normalize4(inout vec4 P)	{
     P = (1.0/length4(P))*P;
+    if (hyperbolic && P.w < 0.0) P = -P;
 }
  
 // adjust T to be a unit tangent vector to the point P
@@ -123,7 +127,7 @@ void pointLight(in int i, in vec4 normal, in vec4 eye, in vec4 ecPosition4)
     d = distance4(toLight, ecPosition4);
     // Normalize the vector from surface to light position
    normalize4(ecPosition4, toLight );
-//    if (!hyperbolic && toLight.w * ecPosition4.w < 0)
+//    if (!hyperbolic && toLight.w * ecPosition4.w < 0.0)
 //        toLight = -toLight;
 
  //   Compute attenuation
@@ -134,7 +138,8 @@ void pointLight(in int i, in vec4 normal, in vec4 eye, in vec4 ecPosition4)
 
     //    attenuation = clamp(attenuation, 0.0, 1.0);
     halfVector = (toLight + eye);
-    if (hyperbolic) halfVector = -halfVector;
+    if (hyperbolic) 
+		halfVector = -halfVector;
    normalize4(ecPosition4, halfVector); 
     nDotVP = abs(dot4(normal, toLight)); //max(0.0, dot4(normal, toLight));
    nDotHV = max(0.0, dot4(normal, halfVector));
@@ -161,25 +166,24 @@ vec4 light(in vec4 normal, in vec4 ecPosition, in gl_MaterialParameters matpar)
     float fog = 0.0, d2eye=0.0, alpha;
     if (fogEnabled)	{
       	d2eye = distance4(eye, ecPosition); 
-//    d2eye = 1.0;
-    	fog = exp2(-d2eye * gl_Fog.density);
+ //       if (!hyperbolic && ecPosition.w < 0.0) d2eye = d2eye + 1.0;
+    	fog = exp(-d2eye * gl_Fog.density);
     	fog = clamp(fog, 0.0, 1.0);
     }   
     // Clear the light intensity accumulators
     if (lightingEnabled)	{
-        normalize4(ecPosition, eye);
-        Ambient  = Diffuse = Specular = vec4 (0.0);
+      normalize4(ecPosition, eye);
+      Ambient  = Diffuse = Specular = vec4 (0.0);
         for ( i = 0; i<numLights; ++i)	{
     	    pointLight(i, normal, eye, ecPosition);
         }
    		color = gl_FrontLightModelProduct.sceneColor +
       	    Ambient  * matpar.ambient +
-      	    Diffuse  * gl_Color*matpar.diffuse  +
+      	    Diffuse  * gl_Color + //*matpar.diffuse  +
       	    Specular * matpar.specular;
     } else  {
-   		color = matpar.diffuse; //gl_FrontLightModelProduct.sceneColor +
-      	   //matpar.ambient +
-      	   //matpar.diffuse;
+   		color = gl_Color + gl_FrontLightModelProduct.sceneColor +
+      	   matpar.ambient;
     }
 
     color = clamp( color, 0.0, 1.0 );
@@ -191,13 +195,15 @@ vec4 light(in vec4 normal, in vec4 ecPosition, in gl_MaterialParameters matpar)
 
 void main (void)
 {
-	vec4 n4 = (useNormals4) ? gl_MultiTexCoord3 : vec4(gl_Normal, 0.0);
+//    vec4 oreo = vec4(0.0, 0.0, 0.0, 1.0);
+    vec4 n4 = (useNormals4) ? gl_MultiTexCoord3 : vec4(gl_Normal, 0.0);
     vec4  transformedNormal = gl_ModelViewMatrix * n4;
     normalize4(transformedNormal);
     vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex ;
     normalize4(ecPosition);
+    if (hyperbolic && ecPosition.w < 0.0) ecPosition = -ecPosition;
     normalize4(ecPosition, transformedNormal);
-    if (hyperbolic && transformedNormal.w * transformedNormal.z > 0.0) 
+    if (hyperbolic && transformedNormal.w * transformedNormal.z > 0.0 ) 
     	transformedNormal = -transformedNormal;
 // set the texture coordinate
     gl_TexCoord[0] = texcoord = gl_TextureMatrix[0] * gl_MultiTexCoord0;
@@ -205,6 +211,7 @@ void main (void)
     gl_FrontColor = light(transformedNormal, ecPosition, gl_FrontMaterial);
     transformedNormal = -transformedNormal;
     gl_BackColor = light(transformedNormal, ecPosition, gl_BackMaterial);
+//    if (exp(-distance4(ecPosition, oreo)*gl_Fog.density) > .9) gl_FrontColor = vec4(0.0, 1.0, 0.0, 1.0);
 //    if (gl_BackColor.r + gl_BackColor.g + gl_BackColor.b < .01) gl_BackColor = gl_FrontColor;
 //    else if (gl_FrontColor.r + gl_FrontColor.g + gl_FrontColor.b < .01) gl_FrontColor = gl_BackColor;
     if ( poincareModel)	{

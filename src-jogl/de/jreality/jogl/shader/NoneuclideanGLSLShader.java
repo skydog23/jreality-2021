@@ -44,6 +44,8 @@ public class NoneuclideanGLSLShader extends StandardGLSLShader {
 //			System.err.println("current metric is "+jrs.currentMetric);
 			glslProgram.setUniform("hyperbolic",
 					jrs.currentMetric == Pn.HYPERBOLIC);
+			glslProgram.setUniform("elliptic",
+					jrs.currentMetric == Pn.ELLIPTIC);
 			glslProgram.setUniform("metric",
 					(float) (jrs.currentMetric == Pn.HYPERBOLIC ? -1 : 1));
 //			glslProgram.setUniform("Nw", 1.0);

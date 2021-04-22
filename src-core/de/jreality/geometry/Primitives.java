@@ -531,6 +531,10 @@ public class Primitives {
 	}
 
 	public static IndexedFaceSet cone(int n, double h)	{
+		return cone(n, 1.0, false);
+	}
+
+	public static IndexedFaceSet cone(int n, double h, boolean base)	{
 		double[][] verts = new double[n+1][3];
 		double angle = 0;
 		double delta = Math.PI*2/(n);
@@ -539,17 +543,21 @@ public class Primitives {
 			verts[i] = new double[]{Math.sin(angle),Math.cos(angle),0};
 		}
 		verts[n]= new double[]{0,0,h};
-		int[][] indices = new int[n][];
+		int nf = base ? n+1 : n;
+		int[][] indices = new int[nf][];
+		if (base) indices[nf-1] = new int[n];
 		for (int i = 0; i<n; ++i)	{
 			indices[i] = new int[]{i,n,(i+1)%n};
+			if (base) indices[nf-1][i] = i;
 		}
 		IndexedFaceSetFactory ifsf = new IndexedFaceSetFactory();
 		ifsf.setVertexCount(n+1);
-		ifsf.setFaceCount(n);
+		ifsf.setFaceCount(nf);
 		ifsf.setVertexCoordinates(verts);
 		ifsf.setFaceIndices(indices);
 		ifsf.setGenerateEdgesFromFaces(true);
 		ifsf.setGenerateFaceNormals(true);
+		ifsf.setGenerateVertexNormals(true);
 		ifsf.update();
 		return ifsf.getIndexedFaceSet();
 	}

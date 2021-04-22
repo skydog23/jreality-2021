@@ -141,7 +141,7 @@ public class SceneTreeModel extends AbstractTreeModel {
           entities.put(sn, ents);
           for (int i = 0; i < ents.length; i++)
             parents.put(ents[i], sn);
-        }
+         }
         return ents.length;
       }
       int ret = sn.getChildren().size(); 

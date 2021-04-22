@@ -74,6 +74,7 @@ public class JOGLOffscreenRenderer {
 		// (in case asTexture = false)
 		joglFBO.setTexture(dst);
 		joglFBO.setAsTexture(asTexture);
+		System.err.println("fbo width:height = "+imageWidth+":"+imageHeight);
 		joglFBO.setSize(new Dimension(imageWidth, imageHeight));
 		if (asTexture) {
 			dst.setTextureMatrix(flipY);

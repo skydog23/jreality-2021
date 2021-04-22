@@ -245,8 +245,8 @@ public class JOGLRendererHelper {
 			if (bgo != null && bgo instanceof Color) {
 				fogColor = ((Color) bgo).getRGBComponents(null);
 			}
-//			gl.glFogi(GL2.GL_FOG_MODE, GL2.GL_EXP2);
-			gl.glFogi(GL2.GL_FOG_MODE, GL2.GL_LINEAR);
+			gl.glFogi(GL2.GL_FOG_MODE, GL2.GL_EXP2);
+//			gl.glFogi(GL2.GL_FOG_MODE, GL2.GL_LINEAR);
 			Camera cam = CameraUtility.getCamera(jr.theViewer);
 			float near = (float) (cam.getNear()*2);
 			float far = (float) (cam.getFar()*.5);
@@ -258,7 +258,6 @@ public class JOGLRendererHelper {
 			if (bgo != null && bgo instanceof Double) {
 				far = (float) ((Double) bgo).doubleValue();
 			}
-//			System.err.println("near, far: "+near+" "+far);
 			gl.glFogf(GL2ES1.GL_FOG_START, near);
 			gl.glFogf(GL2ES1.GL_FOG_END, far);
 			gl.glFogfv(GL2ES1.GL_FOG_COLOR, fogColor, 0);
@@ -268,6 +267,7 @@ public class JOGLRendererHelper {
 				density = (float) ((Double) bgo).doubleValue();
 			}
 			gl.glFogf(GL2ES1.GL_FOG_DENSITY, density);
+//			System.err.println("jogl fog near, far, density: "+near+" "+far+" "+density);
 		} else {
 			gl.glDisable(GL2ES1.GL_FOG);
 			gl.glFogf(GL2ES1.GL_FOG_DENSITY, 0f);
@@ -494,7 +494,7 @@ public class JOGLRendererHelper {
 			colorBind = PER_FACE;
 			colorLength = GeometryUtility.getVectorLength(faceColors);
 			double[][] fcd = faceColors.toDoubleArrayArray(null);
-//			System.err.println("draw faces:"+sg.getName()+" fc = \n"+Rn.toString(fcd, 10));
+//			System.err.println("draw faces:"+sg.getName()+" fc = \n"+Rn.toString(fcd));
 		} else
 			colorBind = PER_PART;
 		// JOGLConfiguration.theLog.log(Level.INFO,"Color binding is
@@ -837,9 +837,12 @@ public class JOGLRendererHelper {
 		for (int i = 0, n = labels.length; i < n; i++) {
 			ImageData img = labels[i];
 			tex2d.setImage(img);
+			double[] positionFor = LabelUtility.positionFor(i, vertices, indices);
+			boolean b = positionFor.length == 4 && positionFor[3] < 0;
+			if (b) continue;
 			LabelUtility.calculateBillboardMatrix(bbm, img.getWidth() * scale,
 					img.getHeight() * scale, offset, alignment, c2o,
-					LabelUtility.positionFor(i, vertices, indices),
+					positionFor,
 					jr.renderingState.currentMetric); // )Pn.EUCLIDEAN);
 			Texture2DLoaderJOGL.render(gl, tex2d);
 			gl.glPushMatrix();

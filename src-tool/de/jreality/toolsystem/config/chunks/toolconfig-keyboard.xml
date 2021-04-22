@@ -89,6 +89,18 @@
       <outputslot>ShiftRight</outputslot>
     </virtualdevice>
 
+  <virtualdevice type="de.jreality.toolsystem.virtual.VirtualCoupledAxis">
+      <inputslot>left</inputslot>
+      <inputslot>AltMeta</inputslot>
+      <outputslot>AltLeft</outputslot>
+    </virtualdevice>
+
+    <virtualdevice type="de.jreality.toolsystem.virtual.VirtualCoupledAxis">
+      <inputslot>right</inputslot>
+      <inputslot>AltMeta</inputslot>
+      <outputslot>AltRight</outputslot>
+    </virtualdevice>
+
     <virtualdevice type="de.jreality.toolsystem.virtual.VirtualCoupledAxis">
       <inputslot>forward</inputslot>
       <inputslot>Secondary</inputslot>
@@ -101,6 +113,18 @@
       <outputslot>ShiftBackward</outputslot>
     </virtualdevice>
 
+   <virtualdevice type="de.jreality.toolsystem.virtual.VirtualCoupledAxis">
+      <inputslot>forward</inputslot>
+      <inputslot>AltMeta</inputslot>
+      <outputslot>AltForward</outputslot>
+    </virtualdevice>
+
+    <virtualdevice type="de.jreality.toolsystem.virtual.VirtualCoupledAxis">
+      <inputslot>backward</inputslot>
+      <inputslot>AltMeta</inputslot>
+      <outputslot>AltBackward</outputslot>
+    </virtualdevice>
+
 
        <virtualdevice type="de.jreality.toolsystem.virtual.VirtualMergedAxis">
       <inputslot>ShiftForward</inputslot>
@@ -109,9 +133,21 @@
     </virtualdevice>
     
        <virtualdevice type="de.jreality.toolsystem.virtual.VirtualMergedAxis">
+      <inputslot>AltForward</inputslot>
+      <inputslot>AltBackward</inputslot>
+      <outputslot>AltForwardBackwardAxis</outputslot>
+    </virtualdevice>
+    
+       <virtualdevice type="de.jreality.toolsystem.virtual.VirtualMergedAxis">
       <inputslot>ShiftRight</inputslot>
       <inputslot>ShiftLeft</inputslot>
       <outputslot>ShiftLeftRightAxis</outputslot>
+    </virtualdevice>
+    
+        <virtualdevice type="de.jreality.toolsystem.virtual.VirtualMergedAxis">
+      <inputslot>AltRight</inputslot>
+      <inputslot>AltLeft</inputslot>
+      <outputslot>AltLeftRightAxis</outputslot>
     </virtualdevice>
     
     
