@@ -7,3 +7,5 @@
 /release
 /docs
 /test_logging.properties
+/lib/
+/..bfg-report/

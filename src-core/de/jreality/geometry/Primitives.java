@@ -370,6 +370,7 @@ public class Primitives {
 		int n = pts.length;
 		PointSet ps = new PointSet(n);
 		ps.setVertexCountAndAttributes(Attribute.COORDINATES,StorageModel.DOUBLE_ARRAY.array(pts[0].length).createReadOnly(pts));
+		if (label != null) ps.setVertexAttributes(Attribute.LABELS,StorageModel.STRING_ARRAY.array(pts[0].length).createReadOnly(label));
 		return ps;
 	}
 	
@@ -687,6 +688,9 @@ public class Primitives {
 		qmf.update();
 		return qmf.getIndexedFaceSet();
 	}
+		
+		
+
 	/**
 	 * @return {@link #arrow(double, double, double, double, double, boolean)} with final parameter false.
 	 */
