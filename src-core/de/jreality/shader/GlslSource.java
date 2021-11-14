@@ -66,6 +66,7 @@ public class GlslSource implements Serializable {
 
   private String[] vertexProgs;
   private String[] fragmentProgs;
+  private String[] TCSProgs, TESProgs;
   
   private transient final HashMap<String, UniformParameter> uniforms = new HashMap<String, UniformParameter>();
   private transient final HashMap<String, AttributeParameter> attribs = new HashMap<String, AttributeParameter>();
@@ -80,22 +81,40 @@ public class GlslSource implements Serializable {
 		  );
   
   public GlslSource(Input vertexProgram, Input fragmentProgram) throws IOException {
+      this(vertexProgram, null, null, fragmentProgram);
+  }
+  
+  public GlslSource(Input vertexProgram, Input TCSProgram, Input TESProgram, Input fragmentProgram) throws IOException {
       vertexProgs = vertexProgram == null ? null : new String[]{readString(vertexProgram)};
+      TCSProgs = TCSProgram == null ? null : new String[]{readString(TCSProgram)};
+      TESProgs = TESProgram == null ? null : new String[]{readString(TESProgram)};
       fragmentProgs = fragmentProgram == null ? null : new String[]{readString(fragmentProgram)};
       extractParams();
   }
   
   public GlslSource(String vertexProgram, String fragmentProgram) {
-    this.vertexProgs = vertexProgram == null ? null : new String[]{new String(vertexProgram)};
-    this.fragmentProgs = fragmentProgram == null ? null : new String[]{new String(fragmentProgram)};
-    extractParams();
-  }
+	    this(vertexProgram, null, null, fragmentProgram);
+	  }
+  
+  public GlslSource(String vertexProgram, String TCSProgram, String TESProgram, String fragmentProgram) {
+	    this.vertexProgs = vertexProgram == null ? null : new String[]{new String(vertexProgram)};
+	    this.TCSProgs = TCSProgram == null ? null : new String[]{new String(TCSProgram)};
+	    this.TESProgs = TESProgram == null ? null : new String[]{new String(TESProgram)};
+	    this.fragmentProgs = fragmentProgram == null ? null : new String[]{new String(fragmentProgram)};
+	    extractParams();
+	  }
 
   public GlslSource(String[] vertexProgram, String[] fragmentProgram) {
-    this.vertexProgs = vertexProgram;
-    this.fragmentProgs = fragmentProgram;
-    extractParams();
-  }
+	    this(vertexProgram, null, null, fragmentProgram);
+	  }
+  
+  public GlslSource(String[] vertexProgram, String[] TCSProgram, String[] TESProgram, String[] fragmentProgram) {
+	    this.vertexProgs = vertexProgram;
+	    this.TCSProgs = TCSProgram;
+	    this.TESProgs = TESProgram;
+	    this.fragmentProgs = fragmentProgram;
+	    extractParams();
+	  }
   
   private void extractParams() {
     if (vertexProgs != null) for (int i = 0; i < vertexProgs.length; i++) {
@@ -103,6 +122,16 @@ public class GlslSource implements Serializable {
       extractAttribs(vertexProgs[i]);
 //      System.err.println(vertexProgs[i]);
     }
+    if (TCSProgs != null) for (int i = 0; i < TCSProgs.length; i++) {
+        extractUniforms(TCSProgs[i]);
+        extractAttribs(TCSProgs[i]);
+//        System.err.println(vertexProgs[i]);
+      }
+    if (TESProgs != null) for (int i = 0; i < TESProgs.length; i++) {
+        extractUniforms(TESProgs[i]);
+        extractAttribs(TESProgs[i]);
+//        System.err.println(vertexProgs[i]);
+      }
     if (fragmentProgs != null) for (int i = 0; i < fragmentProgs.length; i++) {
       extractUniforms(fragmentProgs[i]);
       extractAttribs(fragmentProgs[i]);
@@ -162,9 +191,17 @@ public class GlslSource implements Serializable {
   }
   
   public String[] getVertexProgram() {
-    return vertexProgs;
-  }
-  
+	    return vertexProgs;
+	  }
+	  
+  public String[] getTCSProgram() {
+	    return TCSProgs;
+	  }
+	  
+  public String[] getTESProgram() {
+	    return TESProgs;
+	  }
+	  
   public String[] getFragmentProgram() {
     return fragmentProgs;
   }

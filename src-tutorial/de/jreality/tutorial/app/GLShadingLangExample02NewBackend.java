@@ -1,14 +1,17 @@
 package de.jreality.tutorial.app;
 
 import de.jreality.geometry.SphereUtility;
+import de.jreality.jogl.plugin.InfoOverlay;
 import de.jreality.math.MatrixBuilder;
 import de.jreality.plugin.JRViewer;
 import de.jreality.scene.Appearance;
 import de.jreality.scene.SceneGraphComponent;
+import de.jreality.scene.Viewer;
 import de.jreality.shader.CommonAttributes;
 import de.jreality.shader.DefaultGeometryShader;
 import de.jreality.shader.GlslProgram;
 import de.jreality.shader.ShaderUtility;
+import de.jreality.ui.viewerapp.ViewerSwitch;
 import de.jreality.util.SceneGraphUtility;
 
 /**
@@ -66,7 +69,15 @@ public class GLShadingLangExample02NewBackend {
 			ap.setAttribute("polygonShader.MortarPct", mortarPct);
 			ap.setAttribute("polygonShader.LightPosition", lightPosition);			
 			world.addChild(c);
+			
+
 		}
-		JRViewer.display(world);
+		Viewer viewer = JRViewer.display(world);
+		if (viewer instanceof ViewerSwitch && (((ViewerSwitch) viewer).getCurrentViewer()) instanceof de.jreality.jogl.JOGLViewer) {
+			InfoOverlay io =InfoOverlay.perfInfoOverlayFor();
+			io.setInstrumentedViewer((de.jreality.jogl.JOGLViewer)(((ViewerSwitch) viewer).getCurrentViewer()));
+			io.setVisible(true);
+		}
+
 	}
 }

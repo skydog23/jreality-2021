@@ -3,14 +3,17 @@ package de.jreality.tutorial.app;
 import java.io.IOException;
 
 import de.jreality.geometry.SphereUtility;
+import de.jreality.jogl.plugin.InfoOverlay;
 import de.jreality.math.MatrixBuilder;
 import de.jreality.plugin.JRViewer;
 import de.jreality.scene.Appearance;
 import de.jreality.scene.SceneGraphComponent;
+import de.jreality.scene.Viewer;
 import de.jreality.shader.CommonAttributes;
 import de.jreality.shader.DefaultGeometryShader;
 import de.jreality.shader.GlslProgram;
 import de.jreality.shader.ShaderUtility;
+import de.jreality.ui.viewerapp.ViewerSwitch;
 import de.jreality.util.Input;
 import de.jreality.util.SceneGraphUtility;
 
@@ -71,6 +74,11 @@ public class GLShadingLangExample02 {
 			brickProg.setUniform("LightPosition", lightPosition);			
 			world.addChild(c);
 		}
-		JRViewer.display(world);
+		Viewer viewer = JRViewer.display(world);
+		if (viewer instanceof ViewerSwitch && (((ViewerSwitch) viewer).getCurrentViewer()) instanceof de.jreality.jogl3.JOGL3Viewer) {
+			InfoOverlay io =InfoOverlay.perfInfoOverlayFor();
+			io.setInstrumentedViewer((de.jreality.jogl3.JOGL3Viewer)(((ViewerSwitch) viewer).getCurrentViewer()));
+			io.setVisible(true);
+		}
 	}
 }

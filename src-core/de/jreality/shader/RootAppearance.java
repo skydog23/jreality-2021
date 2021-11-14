@@ -53,6 +53,7 @@ public interface RootAppearance extends AttributeEntity {
   public final static double FOG_DENSITY_DEFAULT = 0.1;
   public final static double FOG_BEGIN_DEFAULT = .1;
   public final static double FOG_END_DEFAULT = 2.0;
+  public final static int FOG_MODE_DEFAULT = 0;
   public final static boolean RENDER_S3_DEFAULT = false;
   public final static boolean USE_GLSL_DEFAULT = false;
 
@@ -77,6 +78,9 @@ public interface RootAppearance extends AttributeEntity {
   
   Double getFogEnd();
   void setFogEnd(Double end);
+  
+  Integer getFogMode();
+  void setFogMode(Integer end);
   
   Boolean getRenderS3();
   void setRenderS3(Boolean b);

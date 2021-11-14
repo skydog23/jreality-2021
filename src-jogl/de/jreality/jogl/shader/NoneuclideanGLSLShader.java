@@ -9,15 +9,18 @@ import de.jreality.shader.EffectiveAppearance;
 import de.jreality.shader.ShaderUtility;
 
 public class NoneuclideanGLSLShader extends StandardGLSLShader {
-	boolean poincareModel = false, needsRendered = true;
+	boolean poincareModel = false, azimuthProjection = false;
 	SceneGraphPath poincarePath;
 	public static final String POINCARE_MODEL = "poincareModel";
+	public static final String AZIMUTH_PROJECTION = "azimuthProjection";
 	public static final String POINCARE_PATH = "poincarePath";
 	public void setFromEffectiveAppearance(EffectiveAppearance eap, String name) {
 		super.setFromEffectiveAppearance(eap, name);
 		poincareModel = eap.getAttribute(
 				ShaderUtility.nameSpace(name, POINCARE_MODEL), false);
-		if (poincareModel) {
+		azimuthProjection = eap.getAttribute(
+				ShaderUtility.nameSpace(name, AZIMUTH_PROJECTION), false);
+		if (poincareModel || azimuthProjection) {
 			
 			poincarePath = (SceneGraphPath) eap.getAttribute(
 					ShaderUtility.nameSpace(name, POINCARE_PATH),
@@ -51,17 +54,18 @@ public class NoneuclideanGLSLShader extends StandardGLSLShader {
 //			glslProgram.setUniform("Nw", 1.0);
 			glslProgram.setUniform("useNormals4", jrs.normals4d);
 			glslProgram.setUniform("poincareModel", poincareModel);
+			glslProgram.setUniform("azimuthProjection", azimuthProjection);
 			if (poincarePath != null) {
-				double[] H2Cam = Rn.times(null, jrs.worldToCamera,
-						poincarePath.getMatrix(null)), cam2H = Rn.inverse(null,
-						H2Cam);
-				double[] H2NDC = Rn.times(null, jrs.cameraToNDC, H2Cam);
+				double[] world2cam = Rn.times(null, jrs.worldToCamera,
+						poincarePath.getMatrix(null)), 
+						cam2world = Rn.inverse(null,world2cam);
+				double[] H2NDC = Rn.times(null, jrs.cameraToNDC, world2cam);
 //				 System.err.println("c2p = "+Rn.matrixToString(H2NDC));
 				glslProgram
-						.setUniform("cam2H", Rn.convertDoubleToFloatArray(Rn
-								.transpose(null, cam2H)));
-				glslProgram.setUniform("H2Cam", Rn.convertDoubleToFloatArray(Rn
-						.transpose(null,  Rn.inverse(null, cam2H))));
+						.setUniform("cam2world", Rn.convertDoubleToFloatArray(Rn
+								.transpose(null, cam2world)));
+				glslProgram.setUniform("world2cam", Rn.convertDoubleToFloatArray(Rn
+						.transpose(null, world2cam)));
 			}
 		}
 		super.render(jr);

@@ -84,7 +84,9 @@ import de.jreality.scene.Appearance;
     public final static String FOG_DENSITY = "fogDensity";
     public final static String FOG_BEGIN = "fogBegin";
     public final static String FOG_END = "fogEnd";
+    public final static String FOG_MODE = "fogMode";
     public final static double FOG_DENSITY_DEFAULT = 0.1; 
+    public final static double FOG_MODE_DEFAULT = 0; 
     // rendering hints that have to be in the root appearance to take effect
 	public static final String ONE_TEXTURE2D_PER_IMAGE = "oneTexture2DPerImage";	// allows optimizing performance if true; default: false
 	public static final String CLEAR_COLOR_BUFFER = "clearColorBuffer";

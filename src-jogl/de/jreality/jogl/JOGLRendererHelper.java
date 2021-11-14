@@ -49,6 +49,8 @@ import java.util.logging.Level;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GL2ES1;
+import com.jogamp.opengl.fixedfunc.GLLightingFunc;
+import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
 
 import de.jreality.backends.label.LabelUtility;
 import de.jreality.geometry.GeometryUtility;
@@ -105,7 +107,7 @@ public class JOGLRendererHelper {
 			topAp = pseudoAp;
 		// return;
 		for (int i = 0; i < 6; ++i) {
-			gl.glDisable(i + GL2.GL_CLIP_PLANE0);
+			gl.glDisable(i + GL2ES1.GL_CLIP_PLANE0);
 		}
 		if (topAp != null)
 			bgo = topAp.getAttribute(CommonAttributes.BACKGROUND_COLOR);
@@ -207,8 +209,8 @@ public class JOGLRendererHelper {
 				}
 				// gl.glPushAttrib(GL.GL_ENABLE_BIT);
 				// gl.glDisable(GL.GL_DEPTH_TEST);
-				gl.glDisable(GL2.GL_LIGHTING);
-				gl.glShadeModel(GL2.GL_SMOOTH);
+				gl.glDisable(GLLightingFunc.GL_LIGHTING);
+				gl.glShadeModel(GLLightingFunc.GL_SMOOTH);
 				gl.glBegin(GL2.GL_POLYGON);
 				// gl.glScalef(.5f, .5f, 1.0f);
 				for (int q = 0; q < 4; ++q) {
@@ -225,27 +227,34 @@ public class JOGLRendererHelper {
 				// values)
 				// gl.glPopAttrib();
 				gl.glEnable(GL.GL_DEPTH_TEST);
-				gl.glEnable(GL2.GL_LIGHTING);
+				gl.glEnable(GLLightingFunc.GL_LIGHTING);
 				if (hasTexture) {
 					gl.glDisable(GL.GL_TEXTURE_2D);
-					gl.glMatrixMode(GL2.GL_PROJECTION);
+					gl.glMatrixMode(GLMatrixFunc.GL_PROJECTION);
 					gl.glPopAttrib();
 				}
 			}
 		}
+		int[] fogmodes = {GL.GL_LINEAR, GL2ES1.GL_EXP, GL2ES1.GL_EXP2};
+		
 		bgo = topAp.getAttribute(CommonAttributes.FOG_ENABLED);
 		boolean doFog = CommonAttributes.FOG_ENABLED_DEFAULT;
 		if (bgo instanceof Boolean)
 			doFog = ((Boolean) bgo).booleanValue();
 		jr.renderingState.fogEnabled = doFog;
 		if (doFog) {
-			gl.glEnable(GL2.GL_FOG);
+			gl.glEnable(GL2ES1.GL_FOG);
 			bgo = topAp.getAttribute(CommonAttributes.FOG_COLOR);
 			float[] fogColor = backgroundColor;
 			if (bgo != null && bgo instanceof Color) {
 				fogColor = ((Color) bgo).getRGBComponents(null);
 			}
-			gl.glFogi(GL2.GL_FOG_MODE, GL2.GL_EXP2);
+			bgo = topAp.getAttribute(CommonAttributes.FOG_MODE);
+			int mode = 0;
+			if (bgo != null && bgo instanceof Integer) {
+				mode = (int) bgo;
+			}
+			gl.glFogi(GL2ES1.GL_FOG_MODE, fogmodes[(mode)%3]);
 //			gl.glFogi(GL2.GL_FOG_MODE, GL2.GL_LINEAR);
 			Camera cam = CameraUtility.getCamera(jr.theViewer);
 			float near = (float) (cam.getNear()*2);
@@ -267,7 +276,7 @@ public class JOGLRendererHelper {
 				density = (float) ((Double) bgo).doubleValue();
 			}
 			gl.glFogf(GL2ES1.GL_FOG_DENSITY, density);
-//			System.err.println("jogl fog near, far, density: "+near+" "+far+" "+density);
+			System.err.println("jogl fog near, far, density: "+near+" "+far+" "+density);
 		} else {
 			gl.glDisable(GL2ES1.GL_FOG);
 			gl.glFogf(GL2ES1.GL_FOG_DENSITY, 0f);
@@ -304,7 +313,7 @@ public class JOGLRendererHelper {
 			colorLength = GeometryUtility.getVectorLength(vertexColors);
 			if (openGLState.frontBack != DefaultPolygonShader.FRONT_AND_BACK) {
 				gl.glColorMaterial(DefaultPolygonShader.FRONT_AND_BACK,
-						GL2.GL_DIFFUSE);
+						GLLightingFunc.GL_DIFFUSE);
 				openGLState.frontBack = DefaultPolygonShader.FRONT_AND_BACK;
 			}
 		}
@@ -392,7 +401,7 @@ public class JOGLRendererHelper {
 		if (colorBind != PER_PART) {
 			if (jr.renderingState.frontBack != DefaultPolygonShader.FRONT_AND_BACK) {
 				gl.glColorMaterial(DefaultPolygonShader.FRONT_AND_BACK,
-						GL2.GL_DIFFUSE);
+						GLLightingFunc.GL_DIFFUSE);
 				jr.renderingState.frontBack = DefaultPolygonShader.FRONT_AND_BACK;
 			}
 		}
@@ -501,9 +510,9 @@ public class JOGLRendererHelper {
 		// "+colorBind);
 		if (colorBind != PER_PART) {
 			if (jr.renderingState.frontBack != DefaultPolygonShader.FRONT_AND_BACK) {
-				gl.glEnable(GL2.GL_COLOR_MATERIAL);
+				gl.glEnable(GLLightingFunc.GL_COLOR_MATERIAL);
 				gl.glColorMaterial(DefaultPolygonShader.FRONT_AND_BACK,
-						GL2.GL_DIFFUSE);
+						GLLightingFunc.GL_DIFFUSE);
 				jr.renderingState.frontBack = DefaultPolygonShader.FRONT_AND_BACK;
 			}
 		}
@@ -822,7 +831,7 @@ public class JOGLRendererHelper {
 		GL2 gl = jr.globalGL;
 		gl.glPushAttrib(GL2.GL_ENABLE_BIT);
 		gl.glEnable(GL.GL_BLEND);
-		gl.glDisable(GL2.GL_LIGHTING);
+		gl.glDisable(GLLightingFunc.GL_LIGHTING);
 		gl.glDepthMask(true);
 		JOGLConfiguration.glBlendFunc(gl);
 		gl.glColor3d(1, 1, 1);
@@ -865,7 +874,7 @@ public class JOGLRendererHelper {
 	/**
 	 * 
 	 */
-	final static int clipBase = GL2.GL_CLIP_PLANE0;
+	final static int clipBase = GL2ES1.GL_CLIP_PLANE0;
 
 	public static void processClippingPlanes(JOGLRenderer jr,
 			List<SceneGraphPath> clipPlanes) {
@@ -873,7 +882,7 @@ public class JOGLRendererHelper {
 		jr.renderingState.currentClippingPlane = clipBase;
 		// globalGL.glDisable(GL.GL_CLIP_PLANE0);
 		for (int i = 0; i < n; ++i) {
-			SceneGraphPath lp = (SceneGraphPath) clipPlanes.get(i);
+			SceneGraphPath lp = clipPlanes.get(i);
 			// JOGLConfiguration.theLog.log(Level.INFO,"Light"+i+":
 			// "+lp.toString());
 			SceneGraphNode cp = lp.getLastElement();
