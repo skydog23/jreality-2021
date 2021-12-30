@@ -295,7 +295,7 @@ final public class Quaternion implements Cloneable, Serializable {
 		return makeRotationQuaternionAngle(q, 2*Math.acos(cos), axis);
 	}
 	
-	private static double[] convert44To33(double[] d) {
+	public static double[] convert44To33(double[] d) {
 		double[] d33 = new double[9];
 		d33[0] = d[0];
 		d33[1] = d[1];

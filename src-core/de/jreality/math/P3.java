@@ -872,6 +872,15 @@ public class P3 {
 		if (dst == null) dst = new double[16];
 		if (metric == Pn.EUCLIDEAN)	{
 			// TODO fix the euclidean case; in the meantime punt
+			// at least normalize the first three columns (the ideal points)
+			for (int i = 0; i<3; ++i)	{
+				double[] v = {m[i], m[i+4], m[i+8]};
+				Rn.normalize(v, v);
+				m[i] = v[0];
+				m[i+4] = v[1];
+				m[i+8] = v[2];
+				m[i+12] = 0;
+			}
 			if (dst == m) return dst;
 			System.arraycopy(m, 0, dst, 0, 16);
 			return dst;
