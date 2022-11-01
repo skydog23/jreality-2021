@@ -169,7 +169,7 @@ import de.jreality.scene.Appearance;
     public final static double LINE_WIDTH_DEFAULT = 1.0;
 	public final static String NORMAL_SCALE = 		"normalScale";
 	public final static String LINE_STIPPLE = 		"lineStipple";		// openGL line drawing options
-	public final static String LINE_FACTOR = 		"lineFactor";
+	public final static String LINE_STIPPLE_FACTOR = 		"lineStippleFactor";
 	public final static String LINE_STIPPLE_PATTERN = "lineStipplePattern";
 	public static final Color LINE_DIFFUSE_COLOR_DEFAULT = Color.BLACK;
 	public final static String POINT_SPRITE = "pointSprite";

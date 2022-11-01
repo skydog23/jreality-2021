@@ -92,8 +92,8 @@ public class DefaultLineShader extends AbstractPrimitiveShader implements LineSh
 	private boolean 
 		lineStipple = false;
 	private int 
-		lineFactor = 1,
-		lineStipplePattern = 0x1c47;
+		lineStippleFactor = 1,
+		lineStipplePattern = 0x5555;
 	private boolean 
 		tubeDraw = false,
 		lineLighting = false, 
@@ -156,9 +156,9 @@ public class DefaultLineShader extends AbstractPrimitiveShader implements LineSh
 		lineWidth = eap.getAttribute(
 				ShaderUtility.nameSpace(name, CommonAttributes.LINE_WIDTH),
 				CommonAttributes.LINE_WIDTH_DEFAULT);
-		lineFactor = eap.getAttribute(
-				ShaderUtility.nameSpace(name, CommonAttributes.LINE_FACTOR),
-				lineFactor);
+		lineStippleFactor = eap.getAttribute(
+				ShaderUtility.nameSpace(name, CommonAttributes.LINE_STIPPLE_FACTOR),
+				lineStippleFactor);
 		lineStipplePattern = eap.getAttribute(ShaderUtility.nameSpace(name,
 				CommonAttributes.LINE_STIPPLE_PATTERN), lineStipplePattern);
 		diffuseColor = (Color) eap.getAttribute(
@@ -211,7 +211,7 @@ public class DefaultLineShader extends AbstractPrimitiveShader implements LineSh
 		jrs.lineWidth = lineWidth * jrs.globalAntiAliasingFactor;
 		if (lineStipple) {
 			gl.glEnable(GL2.GL_LINE_STIPPLE);
-			gl.glLineStipple(lineFactor, (short) lineStipplePattern);
+			gl.glLineStipple(lineStippleFactor, (short) lineStipplePattern);
 		} else
 			gl.glDisable(GL2.GL_LINE_STIPPLE);
 

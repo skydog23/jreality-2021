@@ -276,7 +276,7 @@ public class JOGLRendererHelper {
 				density = (float) ((Double) bgo).doubleValue();
 			}
 			gl.glFogf(GL2ES1.GL_FOG_DENSITY, density);
-			System.err.println("jogl fog near, far, density: "+near+" "+far+" "+density);
+//			System.err.println("jogl fog near, far, density: "+near+" "+far+" "+density);
 		} else {
 			gl.glDisable(GL2ES1.GL_FOG);
 			gl.glFogf(GL2ES1.GL_FOG_DENSITY, 0f);
