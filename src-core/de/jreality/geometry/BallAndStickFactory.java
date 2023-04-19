@@ -147,6 +147,9 @@ import de.jreality.util.SceneGraphUtility;
 		theResult.addChild(balls);
 	 }
 
+	 public void setRealSpheres(boolean b) {
+		 realSpheres = b;
+	 }
 	 public void update()	{
 			topAp.setAttribute("metric", metric);
 			sticks.setVisible(showSticks);

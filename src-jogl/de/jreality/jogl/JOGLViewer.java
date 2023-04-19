@@ -73,7 +73,8 @@ public class JOGLViewer extends AbstractViewer {
 	protected void initializeFrom(SceneGraphComponent r, SceneGraphPath p) {
 		setSceneRoot(r);
 		setCameraPath(p);
-		GLCapabilities caps = new GLCapabilities(GLProfile.get("GL2"));
+		GLProfile glProf = GLProfile.get("GL2");
+		GLCapabilities caps = new GLCapabilities(glProf);
 		caps.setAlphaBits(8);
 		caps.setStereo(JOGLConfiguration.quadBufferedStereo);
 		caps.setDoubleBuffered(true);
