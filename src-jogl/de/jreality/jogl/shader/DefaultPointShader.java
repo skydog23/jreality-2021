@@ -340,7 +340,7 @@ public class DefaultPointShader extends AbstractPrimitiveShader implements
 	}
 
 	public int proxyGeometryFor(JOGLRenderingState jrs) {
-		System.err.println("point radius = "+pointRadius);
+//		System.err.println("point radius = "+pointRadius);
 		Geometry original = jrs.currentGeometry;
 		JOGLRenderer jr = jrs.renderer;
 		int sig = jrs.currentMetric;

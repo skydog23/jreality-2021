@@ -226,7 +226,7 @@ abstract public class AbstractViewer implements de.jreality.scene.Viewer,
 		@Override
 		public void componentResized(ComponentEvent e) {
 			Dimension dim = e.getComponent().getSize();
-			System.err.println("window size: "+dim.width+":"+dim.height);
+//			System.err.println("window size: "+dim.width+":"+dim.height);
 		}
 		
 	};
