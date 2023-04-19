@@ -224,7 +224,7 @@ public class SelectionManagerImpl implements SelectionManager {
 			boundingboxApp.setAttribute(CommonAttributes.VERTEX_DRAW,false);
 			boundingboxApp.setAttribute(CommonAttributes.LIGHTING_ENABLED,false);
 			boundingboxApp.setAttribute(CommonAttributes.LINE_SHADER+"."+CommonAttributes.LINE_STIPPLE,true);
-			boundingboxApp.setAttribute(CommonAttributes.LINE_SHADER+"."+CommonAttributes.LINE_FACTOR, 1.0);
+			boundingboxApp.setAttribute(CommonAttributes.LINE_SHADER+"."+CommonAttributes.LINE_STIPPLE_FACTOR, 1.0);
 			boundingboxApp.setAttribute(CommonAttributes.LINE_SHADER+"."+CommonAttributes.LINE_STIPPLE_PATTERN, 0x6666);
 			boundingboxApp.setAttribute(CommonAttributes.LINE_SHADER+"."+CommonAttributes.LINE_WIDTH, 2.0);
 			boundingboxApp.setAttribute(CommonAttributes.LINE_SHADER+"."+CommonAttributes.DEPTH_FUDGE_FACTOR, 1.0);

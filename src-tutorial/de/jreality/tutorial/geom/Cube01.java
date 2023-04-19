@@ -42,11 +42,12 @@ package de.jreality.tutorial.geom;
 
 import de.jreality.geometry.PointSetFactory;
 import de.jreality.plugin.JRViewer;
+import de.jreality.tutorial.util.PrintClassPath;
 
 public class Cube01 {
   
   public static void main(String[] args) {
-    
+    PrintClassPath.printClassPath();
     PointSetFactory psf = new PointSetFactory();
     
     double [][] vertices = new double[][] {

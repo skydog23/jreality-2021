@@ -1,6 +1,15 @@
 package de.jreality.geometry;
 
+import static de.jreality.shader.CommonAttributes.LINE_SHADER;
+import static de.jreality.shader.CommonAttributes.TUBE_RADIUS;
+
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Box;
+import javax.swing.SwingConstants;
 
 import de.jreality.math.Matrix;
 import de.jreality.math.MatrixBuilder;
@@ -17,6 +26,7 @@ import de.jreality.scene.tool.AbstractTool;
 import de.jreality.scene.tool.InputSlot;
 import de.jreality.scene.tool.ToolContext;
 import de.jreality.shader.CommonAttributes;
+import de.jreality.tutorial.util.TextSlider;
 import de.jreality.util.Rectangle3D;
 import de.jreality.util.SceneGraphUtility;
 
@@ -48,7 +58,13 @@ import de.jreality.util.SceneGraphUtility;
 
 	SceneGraphPath clipper = null;
 	double separation = .2;
-	SceneGraphComponent clipPlane1SGC, clipPlane2SGC, clipIcon1, clipIcon2, worldSGC, sliceBoxSGC;
+	SceneGraphComponent 
+	sliceBoxSGC,
+		clipIcon1, 	
+			clipIcon2,
+		clipPlane1SGC, 
+			clipPlane2SGC, 
+				worldSGC;
 	IndexedFaceSetFactory clipIconFactory = new IndexedFaceSetFactory();
 	
 	public SliceBoxFactory(SceneGraphComponent w)	{
@@ -56,7 +72,7 @@ import de.jreality.util.SceneGraphUtility;
 		ClippingPlane clippingPlane1, clippingPlane2;
 		clipIcon1 = SceneGraphUtility.createFullSceneGraphComponent("theClipIcon1");
 		Transformation clipTform = clipIcon1.getTransformation();
-		clipIcon1.getAppearance().setAttribute(CommonAttributes.LINE_SHADER+"."+CommonAttributes.TUBE_RADIUS, .01);
+		clipIcon1.getAppearance().setAttribute(LINE_SHADER+"."+TUBE_RADIUS, .01);
 		clipIcon1.getAppearance().setAttribute("lineShader.polygonShader.diffuseColor", Color.white);
 		clipIcon2 = SceneGraphUtility.createFullSceneGraphComponent("theClipIcon2");
 		MatrixBuilder.euclidean().translate(0,0,-separation).assignTo(clipIcon2);
@@ -83,7 +99,7 @@ import de.jreality.util.SceneGraphUtility;
 		clipIconFactory.setVertexCount(4);
 		clipIconFactory.setFaceCount(1);
 		clipIconFactory.setFaceIndices(new int[][]{{0,1,2,3}});
-		updateClipIcon(0);
+		updateClipIcon(1,2);
 		IndexedFaceSet square = clipIconFactory.getIndexedFaceSet();
 		square.setFaceAttributes(Attribute.COLORS,StorageModel.DOUBLE_ARRAY.array(4).createReadOnly(black));
 		clipIcon1.setGeometry(square);
@@ -99,8 +115,10 @@ import de.jreality.util.SceneGraphUtility;
 		update();
 	}
 	
-	private void updateClipIcon(int i) {
-		int i0 = (i+1)%3, i1 = (i+2)%3;
+	static int[][][] lookup = {{{-1,-1}, {0,2},{0,1}},{{2,1},{-1,-1},{0,1}},{{2,1},{0,2},{-1,-1}}};
+	private void updateClipIcon(int i, int d) {
+//		int i0 = (6-i-d)%3, i1 = i%3;
+		int i0 = lookup[i%3][d%3][0], i1 = lookup[i%3][d%3][1];                          
 		double[] ex = worldBoundingBox.getExtent();
 		double x = ex[i0]/2, y = ex[i1]/2;
 		double[][] vv = { {-x, -y, 0 }, { x, -y, 0 }, { x, y, 0 }, { -x, y, 0 } };
@@ -119,12 +137,14 @@ import de.jreality.util.SceneGraphUtility;
 
 	public void setSeparation(double separation) {
 		this.separation = separation;
+		update();
 	}
 	public void update()	{
 		MatrixBuilder.euclidean().translate(0,0,-separation).reflect(new double[]{0,0,1,0}).assignTo(clipPlane2SGC);
 		MatrixBuilder.euclidean().translate(0,0,-separation).assignTo(clipIcon2);
 	}
-	  private final InputSlot pointerSlot = InputSlot.getDevice("PointerTransformation");
+	  
+	private final InputSlot pointerSlot = InputSlot.getDevice("PointerTransformation");
 	  private final InputSlot activeSlot = InputSlot.getDevice("PrimaryAction");
 	private Rectangle3D worldBoundingBox;
 	  public class SimpleDragTool extends AbstractTool {
@@ -201,17 +221,17 @@ import de.jreality.util.SceneGraphUtility;
 					originald = foo.getEntry(direction, 3);
 					firstTime = false;
 				}
+				updateClipIcon(whichFace, direction);
+//				System.err.println("Dragging on face "+whichFace+" in direction "+direction);
 				double d = -dd[direction];
-				double[] newCP = new double[4];
-				newCP[direction] = -1;
-				newCP[3] = d + originald;
-				if (newCP[3] < (-separation-worldBoundingBox.getExtent()[direction]/2)) {
-					newCP[3] = -separation-worldBoundingBox.getExtent()[direction]/2;
-					d = newCP[3] - originald;
+				double nd =  d + originald;
+				if (nd < (-separation-worldBoundingBox.getExtent()[direction]/2)) {
+					nd = -separation-worldBoundingBox.getExtent()[direction]/2;
+					d = nd - originald;
 				}
-				else if (newCP[3] > (worldBoundingBox.getExtent()[direction]/2)) {
-					newCP[3] = worldBoundingBox.getExtent()[direction]/2;					
-					d = newCP[3] - originald;
+				else if (nd > (worldBoundingBox.getExtent()[direction]/2)) {
+					nd = worldBoundingBox.getExtent()[direction]/2;					
+					d = nd - originald;
 				}
 				Matrix foo = new Matrix();
 				double[] tlate = new double[3];
@@ -224,4 +244,19 @@ import de.jreality.util.SceneGraphUtility;
 			}
 		}
 	  }
+		public Component getInspector() {
+			Box container = Box.createVerticalBox();
+			final TextSlider<Double> aSlider = new TextSlider.Double("clip plane sep",  SwingConstants.HORIZONTAL,0,1,separation);
+			aSlider.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					separation = aSlider.getValue().doubleValue();	
+					update();
+				}
+			});
+			container.add(aSlider);
+			return container;
+		}
+
 }
