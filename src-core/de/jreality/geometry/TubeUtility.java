@@ -187,6 +187,14 @@ public class TubeUtility {
 			}
 		}
 		
+		public static double[][] getNgon(int n) {
+			double[][] xsec = new double[n+1][];
+			for (int i = 0; i<=n; ++i) {
+				double alpha = 2*Math.PI *(i/n);
+				xsec[i] = new double[] {Math.cos(alpha), Math.sin(alpha),0};
+			}
+			return xsec;
+		}
 		/**
 		 * 
 		 * @param ip1

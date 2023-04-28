@@ -11,6 +11,7 @@ import javax.swing.SwingConstants;
 import de.jreality.geometry.BallAndStickFactory;
 import de.jreality.geometry.IndexedLineSetFactory;
 import de.jreality.geometry.PointSetFactory;
+import de.jreality.geometry.TubeUtility;
 import de.jreality.math.MatrixBuilder;
 import de.jreality.plugin.JRViewer;
 import de.jreality.scene.Appearance;
@@ -140,6 +141,8 @@ public class LineShaderExample {
 		
 		// set up the line shader
 		Appearance ap = child.getAppearance();
+		ap.setAttribute("lineShader.xsecN", 9);
+//		ap.setAttribute("lineShader.crossSection", TubeUtility.getNgon(3));
 		dgs = ShaderUtility.createDefaultGeometryShader(ap, true);
 		dgs.setShowPoints(false);
 		dgs.setShowLines(true);

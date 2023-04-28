@@ -306,6 +306,8 @@ public class DefaultLineShader extends AbstractPrimitiveShader implements LineSh
 			factor = CameraUtility.getScalingFactor(o2w,
 					jr.renderingState.currentMetric);
 			factor = 1.0 / factor;
+//			System.err.println("current path is "+jr.renderingState.currentPath.toString());
+//			System.err.println("factor is "+factor);
 		}
 		final double radiusFactor = factor;
 		// if ( !(original instanceof IndexedLineSet)) return -1;

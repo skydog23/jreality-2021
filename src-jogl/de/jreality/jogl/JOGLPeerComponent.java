@@ -388,7 +388,7 @@ public class JOGLPeerComponent extends JOGLPeerNode implements
 				// IllegalStateException("Parent must have effective appearance"+parent.name);
 				theLog.warning("Parent must have effective appearance"
 						+ parent.name);
-				if (thisAp != null)
+				if (eAp != null && thisAp != null)
 					eAp = eAp.create(thisAp);
 				else
 					eAp = EffectiveAppearance.create();

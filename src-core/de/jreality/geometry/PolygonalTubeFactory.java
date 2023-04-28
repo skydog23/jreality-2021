@@ -197,7 +197,7 @@ import de.jreality.util.LoggingSystem;
 			}
 		}
 		if (closed && matchClosedTwist)	{		// copy the last cross section over as the first
-			System.err.println("Closing the tube");
+//			System.err.println("Closing the tube");
 			int m = xsec.length;
 			for (int j = 0; j < m; ++j) {
 				int p = j; //m - j - 1;
