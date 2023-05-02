@@ -274,8 +274,8 @@ import de.jreality.scene.Appearance;
 	public static final String HAPTIC_DYNAMIC_FRICTION = "dynamicFriction";
 	public static final double HAPTIC_DYNAMIC_FRICTION_DEFAULT = 0.3;
 	
-	final static Boolean SHOW_LABELS_DEFAULT = Boolean.TRUE;
-	final static String SHOW_LABELS = "showLabels";
+	public final static Boolean SHOW_LABELS_DEFAULT = Boolean.TRUE;
+	public final static String SHOW_LABELS = "showLabels";
 	
 	
 	public static Object getDefault(String key, Object value){
