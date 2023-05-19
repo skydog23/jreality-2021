@@ -77,7 +77,8 @@ public class MatrixListJOGLPeerComponent extends JOGLPeerComponent {
 	private void readMatrices() {
 		matrices = theDropBox.getMatrixList();
 		matrixIsReflection = new boolean[matrices.length];
-		accepted = new boolean[matrices.length];
+//		accepted = new boolean[matrices.length];
+		accepted = theDropBox.getVisibleList();
 		for (int i = 0; i < matrices.length; ++i) {
 			matrixIsReflection[i] = Rn.determinant(matrices[i]) < 0.0;
 		}
@@ -198,7 +199,6 @@ public class MatrixListJOGLPeerComponent extends JOGLPeerComponent {
 			if (debug)
 				theLog.fine("In renderChildren()" + name);
 			boolean isReflectionBefore = jr.renderingState.negativeDet; // cumulativeIsReflection;
-			int nn = matrices.length;
 			theDropBox.setRendering(true);
 			boolean clipToCamera = theDropBox.isClipToCamera()
 					&& !jr.offscreenMode;
@@ -212,6 +212,10 @@ public class MatrixListJOGLPeerComponent extends JOGLPeerComponent {
 				geometryShader.polygonShader.render(jr.renderingState);
 				jr.renderingState.shadeGeometry = false;
 			}
+			int cutoff = theDropBox.getCutoff();
+			int nn = matrices.length;
+			if (cutoff > 0) nn = cutoff > nn ? nn : cutoff;
+//			System.err.println("rendering "+nn+" of "+matrices.length+" copies");
 			for (int j = 0; j < nn; ++j) {
 				if (clipToCamera) {
 					if (!localVisibleList[j])

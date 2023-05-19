@@ -96,6 +96,7 @@ public class JOGLOffscreenRenderer {
 			double aa, GLAutoDrawable canvas, SceneGraphPath cp) {
 		imageHeight = (int) (h / aa);
 		imageWidth = (int) (w / aa);
+		System.err.println("offscreen render width:height = "+imageWidth+":"+imageHeight);
 		if (useFBO) {
 			if (joglFBOSlow == null)
 				joglFBOSlow = new JOGLFBO(imageWidth, imageHeight);

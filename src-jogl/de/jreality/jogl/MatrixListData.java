@@ -16,7 +16,7 @@ public class MatrixListData extends Geometry {
 	private boolean copycat = true;
 	private boolean clipToCamera = true;
 	private boolean componentDisplayLists = true;
-	private int count;
+	private int count, cutoff;
 	private int delay = 500;
 
 	public double[][] getMatrixList() {
@@ -89,6 +89,14 @@ public class MatrixListData extends Geometry {
 
 	public void setCount(int count) {
 		this.count = count;
+	}
+	
+	public void setCutoff(int c) {
+		cutoff = c;
+	}
+	
+	public int getCutoff() {
+		return cutoff;
 	}
 
 	public int getDelay() {
