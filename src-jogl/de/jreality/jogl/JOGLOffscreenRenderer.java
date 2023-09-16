@@ -125,7 +125,7 @@ public class JOGLOffscreenRenderer {
 
 			double oldaa = jr.renderingState.globalAntiAliasingFactor;
 			jr.renderingState.globalAntiAliasingFactor = aa;
-			// System.err.println("setting global aa factor to "+aa);
+			 System.err.println("setting global aa factor to "+aa);
 			jr.lightsChanged = true;
 			numTiles = Math.max(imageWidth / 1024, imageHeight / 1024);
 			if (numTiles == 0)

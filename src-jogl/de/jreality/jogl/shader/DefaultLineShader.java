@@ -167,6 +167,9 @@ public class DefaultLineShader extends AbstractPrimitiveShader implements LineSh
 		double transp = eap.getAttribute(
 				ShaderUtility.nameSpace(name, CommonAttributes.TRANSPARENCY),
 				CommonAttributes.TRANSPARENCY_DEFAULT);
+		double globalAA = eap.getAttribute(
+				ShaderUtility.nameSpace(name, CommonAttributes.ANTI_ALIASING_FACTOR),
+				CommonAttributes.ANTI_ALIASING_FACTOR_DEFAULT);
 		diffuseColor = ShaderUtility.combineDiffuseColorWithTransparency(
 				diffuseColor, transp, JOGLRenderingState.useOldTransparency);
 		diffuseColorAsFloat = diffuseColor.getRGBComponents(null);
@@ -208,6 +211,7 @@ public class DefaultLineShader extends AbstractPrimitiveShader implements LineSh
 				jr.renderingState.diffuseColor, 0, 4);
 
 		gl.glLineWidth((float) (lineWidth * jrs.globalAntiAliasingFactor));
+		jrs.lineWidth = lineWidth * jrs.globalAntiAliasingFactor;
 		jrs.lineWidth = lineWidth * jrs.globalAntiAliasingFactor;
 		if (lineStipple) {
 			gl.glEnable(GL2.GL_LINE_STIPPLE);

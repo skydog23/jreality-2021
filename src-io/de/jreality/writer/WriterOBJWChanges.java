@@ -61,7 +61,7 @@ import de.jreality.util.SceneGraphUtility;
  * @author schmies
  * 
  */
-public class WriterOBJ {
+public class WriterOBJWChanges {
 
 	public static int write( IndexedFaceSet ifs, OutputStream out, int startVertex, boolean writeEdgesOfFaceSet) {
 		return write( ifs, null, new PrintWriter( out ), startVertex, writeEdgesOfFaceSet);
@@ -128,7 +128,6 @@ public class WriterOBJ {
 		
 		SceneGraphComponent flat = SceneGraphUtility.flatten(sgc, true);
 		out.print("# jreality SGC "+sgc.getName());
-		out.println();
 		int vertex = write( flat.getGeometry(), flat.getName(), out, 0);
 		
 		final int noc = flat.getChildComponentCount();
@@ -136,10 +135,9 @@ public class WriterOBJ {
 		for( int i=0; i<noc; i++ ) {
 			SceneGraphComponent child=flat.getChildComponent(i);
 			out.print("# "+i+" child SGC "+child.getName());
-			out.println();
 			vertex += write( child.getGeometry(), child.getName(), out, vertex, writeEdgesOfFaceSet);
 		}
-		System.err.println("Wrote "+vertex+" vertices");
+		out.print("Wrote "+vertex+" vertices");
 	}
 	
 	static void writeFaceIndex( PrintWriter out, int index, boolean hasTexture, boolean hasNormals ) {
@@ -158,7 +156,6 @@ public class WriterOBJ {
 	
 	static int write( IndexedFaceSet ifs, String groupName, PrintWriter out, int startVertex, boolean writeEdgesOfFaceSet ) {
 		out.print("# writing ifs "+ifs.getNumPoints()+" verts "+ifs.getNumEdges()+" edges "+ifs.getNumFaces()+" faces ");
-		out.println();
 		if( groupName != null ) {
 			out.println();	
 			out.println( "g " + groupName );

@@ -328,7 +328,7 @@ public class AbstractPointSetFactory extends AbstractGeometryFactory {
 		}
 	}
 	
-	static double [] toDoubleArray( Color [] color ) {
+	public static double [] toDoubleArray( Color [] color ) {
 		float [] c = new float[5];
 		double [] array = new double[color.length * 4 ];
 		for( int i=0, j=0; i<array.length; i+=4, j++ ) {

@@ -40,7 +40,6 @@
 
 package de.jreality.geometry;
 
-import de.jreality.geometry.AbstractPointSetFactory.AttributeGenerator;
 import de.jreality.math.Rn;
 import de.jreality.scene.data.Attribute;
 

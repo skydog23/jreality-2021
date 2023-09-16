@@ -141,7 +141,7 @@ public class GeometryMergeFactory {
 	private boolean hasVertexColors=true;// 
 	private boolean hasEdgeColors=true;// 
 	
-
+    private boolean collectInvisible = true;
 	// attribute-values which are set if the named 
 	// attribute is not supported in a geometry. 
 	// will be ignored if no geometry supports them.
@@ -164,6 +164,14 @@ public class GeometryMergeFactory {
 		importantVertexDefaultAttributes.add(Attribute.COLORS);
 	}
 	
+	public boolean isCollectInvisible() {
+		return collectInvisible;
+	}
+
+	public void setCollectInvisible(boolean collectInvisible) {
+		this.collectInvisible = collectInvisible;
+	}
+
 	private static List<Attribute> collectAttributes(List<List<Attribute>> atLists, List<Attribute> defAtt, List<Attribute> impAtt){
 		//	keep in mind unnesscesary defaults 
 		List<Attribute> badDefaults= new LinkedList<Attribute>();
@@ -416,6 +424,8 @@ public class GeometryMergeFactory {
 			SceneGraphComponent cmp,// sgc to handle
 			SceneGraphPath p,
 			EffectiveAppearance parentEA){
+
+		if (!cmp.isVisible() && !isCollectInvisible()) return;
 
 		// manage EApp and SGPath
 		Appearance app =cmp.getAppearance();
