@@ -12,12 +12,12 @@
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
         <javaElement handleIdentifier="=jreality/src-jinput"/>
-        <javaElement handleIdentifier="=jreality/src-core"/>
+        <javaElement handleIdentifier="=jreality/src-core=/org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY=/jreality\/jni\/macosx=/"/>
         <javaElement handleIdentifier="=jreality/src-swing"/>
         <javaElement handleIdentifier="=jreality/src-examples"/>
         <javaElement handleIdentifier="=jreality/src-proxies"/>
         <javaElement handleIdentifier="=jreality/src-soft"/>
-        <javaElement handleIdentifier="=jreality/src-jogl"/>
+        <javaElement handleIdentifier="=jreality/src-jogl=/org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY=/jreality\/jni\/macosx=/"/>
         <javaElement handleIdentifier="=jreality/src-ui"/>
         <javaElement handleIdentifier="=jreality/src-vr"/>
         <javaElement handleIdentifier="=jreality/src-io"/>
