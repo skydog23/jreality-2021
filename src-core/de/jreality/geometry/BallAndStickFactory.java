@@ -109,6 +109,7 @@ import de.jreality.util.SceneGraphUtility;
 	 Appearance ballsAp, sticksAp, arrowsAp, topAp;
 	 Geometry stickGeometry = null, ballGeometry = null;
 	 private static IndexedFaceSet urCone = null;
+	 protected static IndexedFaceSet cyllie = Primitives.cylinder(16, 1, -1, 1, 2*Math.PI);
 	 double[][] crossSection = null;
 	 static double[][] octagonalCrossSection = {{1,0,0}, 
 			{.707, .707, 0}, 
@@ -221,7 +222,8 @@ import de.jreality.util.SceneGraphUtility;
 //						SceneGraphComponent cc = TubeUtility.tubeOneEdge(p1, p2, stickRadius, crossSection, metric);
 						SceneGraphComponent cc = TubeUtility.tubeOneEdge(p1, p2, stickRadius, crossSection, metric);
 						SceneGraphComponent cylSGC = new SceneGraphComponent("cyl");
-						cylSGC.setGeometry(new Cylinder());
+						Primitives.cylinder(16, 0,1, 0, 1);
+						cylSGC.setGeometry(cyllie); //new Cylinder());
 						MatrixBuilder.euclidean().scale(1,1,.5).assignTo(cylSGC);
 						cc.setGeometry(null);
 						cc.addChild(cylSGC);

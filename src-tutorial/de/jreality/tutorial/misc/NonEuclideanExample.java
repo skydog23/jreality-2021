@@ -216,6 +216,7 @@ public class NonEuclideanExample {
 			basf.setBallColor(Color.blue);
 			basf.setBallRadius(ballRadius);
 			basf.setMetric(i-1);
+//			basf.setRealSpheres(true);
 			basf.update();
 			sigs[i].addChild(basf.getSceneGraphComponent());
 			world.addChild(sigs[i]);

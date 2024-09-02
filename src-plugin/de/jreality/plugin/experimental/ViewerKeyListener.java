@@ -275,7 +275,7 @@ public class ViewerKeyListener extends KeyAdapter {
 					viewer.renderAsync();
 					break;
 
-				case KeyEvent.VK_R:		// activate rotation tool
+				case KeyEvent.VK_R:		// toggle use glsl
 					if (e.isShiftDown()) toggleValue("useGLSL");
 					break;
 				

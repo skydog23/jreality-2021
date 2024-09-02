@@ -10,3 +10,5 @@
 /lib/
 /..bfg-report/
 /.gitignore
+.DS_Store
+.DS_Store
