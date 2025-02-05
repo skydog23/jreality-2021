@@ -88,12 +88,12 @@ public class Primitives {
 	{{a,a,a,a},{a,a,-a,a},{a,-a,a,a},{a,-a,-a,a},{-a,a,a,a},{-a,a,-a,a},{-a,-a,a,a},{-a,-a,-a,a}};
 
 	static private int[][] cubeIndices = {
-		{0,2,3,1},
-		{1,5,4,0},
-		{0,4,6,2},
-		{5,7,6,4},
-		{2,6,7,3},
-		{3,7,5,1}};
+			{0,2,3,1},
+			{1,5,4,0},
+			{0,4,6,2},
+			{5,7,6,4},
+			{2,6,7,3},
+			{3,7,5,1}};
 
 	static private int[][] openCubeIndices = {
 		{0,2,3,1},
@@ -232,6 +232,38 @@ public class Primitives {
 
 	public static IndexedFaceSet cube(double width,double height,double depth){
 		return box(width,height,depth,false);
+	}
+
+	static private double[][] octaVerts3 =  
+	{{1,0,0},{-1,0,0},{0,1,0},{0,-1,0},{0,0,1},{0,0,-1}};
+
+
+	static private int[][] octaIndices = {
+			{0,2,4},
+			{2,1,4},
+			{1,3,4},
+			{3,0,4},
+			{2,0,5},
+			{1,2,5},
+			{3,1,5},
+			{0,3,5}};
+
+	/**
+	 * An octahedron. 
+	 * @return
+	 */
+	public static IndexedFaceSet octahedron()	{
+
+		IndexedFaceSetFactory ifsf = new IndexedFaceSetFactory();
+		ifsf.setVertexCount(6);
+		ifsf.setFaceCount(8);
+		ifsf.setVertexCoordinates(octaVerts3);
+		//ifsf.setVertexNormals(icoVerts3);
+		ifsf.setFaceIndices(octaIndices);
+		ifsf.setGenerateEdgesFromFaces(true);
+		ifsf.setGenerateFaceNormals(true);
+		ifsf.update();
+		return ifsf.getIndexedFaceSet();
 	}
 
 	static private double[][] tetrahedronVerts3 =  
