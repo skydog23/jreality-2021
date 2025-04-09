@@ -331,7 +331,8 @@ public class JOGLRendererHelper {
 			if (pointSize != null) {
 				float ps = (float) (jr.renderingState.pointSize * ra
 						.getValueAt(i));
-				gl.glPointSize(ps);
+				if (ps > 0.0) gl.glPointSize(ps);
+				else continue;
 			}
 			if (pointSize != null)
 				gl.glBegin(GL.GL_POINTS);
@@ -382,9 +383,9 @@ public class JOGLRendererHelper {
 		DataList vertexColors = sg.getVertexAttributes(Attribute.COLORS);
 		DataList vertexNormals = sg.getVertexAttributes(Attribute.NORMALS);
 		DataList lineWidth = sg.getVertexAttributes(Attribute.RELATIVE_RADII);
-		DoubleArray ra = null;
+		DoubleArray relRadii = null;
 		if (lineWidth != null)
-			ra = lineWidth.toDoubleArray();
+			relRadii = lineWidth.toDoubleArray();
 		boolean hasNormals = vertexNormals != null;
 		DoubleArray da;
 		if (sg.getEdgeAttributes(Attribute.INDICES) == null)

@@ -400,10 +400,12 @@ public class DefaultPointShader extends AbstractPrimitiveShader implements
 				continue;
 			if (!P3.isValidTranslationVector(transVec, sig))
 				continue;
+			double radius = 1.0;
 			if (ra != null) {
-				double radius = ra.getValueAt(i);
+				radius = ra.getValueAt(i);
 				scale[0] = scale[5] = scale[10] = radiiFactor * pointRadius * radius;
 			}
+			if (radius == 0) continue;
 			gl.glPushMatrix();
 			P3.makeTranslationMatrix(mat, transVec, sig);
 			Rn.times(mat, mat, scale);
