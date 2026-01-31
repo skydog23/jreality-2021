@@ -176,8 +176,8 @@ final public class Rn {
 	}
 
 	/**
-	 * Calculate the adjoint of the square matrix <i>src</i> and put the result
-	 * into <i>dst</i>. The adjoint of a matrix is a same-size matrix, whose
+	 * Calculate the adjugate of the square matrix <i>src</i> and put the result
+	 * into <i>dst</i>. The adjugate of a matrix is a same-size matrix, whose
 	 * (i,j)th entry is the determinant of the sub-matrix of the original matrix
 	 * obtained by deleting the (i)th row and (j)th column. The dimension of the
 	 * input matrix can be no greater than 4.
@@ -188,7 +188,7 @@ final public class Rn {
 	 *            may be = dst
 	 * @return dst
 	 */
-	public static double[] adjoint(double[] dst, double[] src) {
+	public static double[] adjugate(double[] dst, double[] src) {
 		int n = mysqrt(src.length);
 		int sgn = 1;
 		// assert dim checks
@@ -854,8 +854,8 @@ final public class Rn {
 			throw new IllegalArgumentException(
 					"Input matrix has determinant zero");
 		}
-		// adjoint(tmp,src);
-		times(dst, 1.0 / det, transpose(tmp, adjoint(dst, src)));
+		// adjugate(tmp,src);
+		times(dst, 1.0 / det, transpose(tmp, adjugate(dst, src)));
 		return dst;
 	}
 
